@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Hammer, HardHat, Ruler } from "lucide-react";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 
 const ctaImages = [
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
@@ -20,18 +19,10 @@ export default function CTA() {
     return () => clearInterval(timer);
   }, []);
 
-  const pushVariants = {
-    enter: { x: "100%", zIndex: 10 },
-    center: { 
-      x: 0, 
-      zIndex: 10, 
-      transition: { type: "tween", duration: 1, ease: [0.77, 0, 0.175, 1] } 
-    },
-    exit: { 
-      x: "-100%", 
-      zIndex: 10, 
-      transition: { type: "tween", duration: 1, ease: [0.77, 0, 0.175, 1] } 
-    }
+  const pushVariants: Variants = {
+    enter: { x: "100%" },
+    center: { x: 0 },
+    exit: { x: "-100%" }
   };
 
   return (
@@ -44,9 +35,10 @@ export default function CTA() {
             initial="enter"
             animate="center"
             exit="exit"
+            transition={{ type: "tween", duration: 1, ease: [0.77, 0, 0.175, 1] }}
             src={ctaImages[currentImg]} 
             alt="CTA Background" 
-            className="absolute inset-0 w-full h-full object-cover" 
+            className="absolute inset-0 w-full h-full object-cover z-10" 
           />
         </AnimatePresence>
         <div className="absolute inset-0 bg-black/80 backdrop-blur-[2px] z-20 pointer-events-none"></div>
