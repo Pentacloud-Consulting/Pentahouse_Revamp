@@ -34,8 +34,8 @@ export default function Aboutinfo() {
 
   const imageVariants = {
     enter: { y: "100%", zIndex: 10 },
-    center: { y: 0, zIndex: 10, transition: { type: "spring", stiffness: 200, damping: 25 } },
-    exit: { y: "-100%", zIndex: 0, transition: { type: "spring", stiffness: 200, damping: 25 } }
+    center: { y: 0, zIndex: 10 },
+    exit: { y: "-100%", zIndex: 0 }
   };
 
   return (
@@ -59,6 +59,7 @@ export default function Aboutinfo() {
                   initial="enter"
                   animate="center"
                   exit="exit"
+                  transition={{ type: "spring", stiffness: 200, damping: 25 }}
                   src={aboutImages[currentImg]} 
                   alt="Modern Architecture" 
                   className="absolute inset-0 w-full h-full object-cover"
