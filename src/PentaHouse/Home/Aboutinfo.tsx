@@ -32,10 +32,10 @@ export default function Aboutinfo() {
     }
   };
 
-  const imageVariants = {
-    enter: { y: "100%", zIndex: 10 },
-    center: { y: 0, zIndex: 10 },
-    exit: { y: "-100%", zIndex: 0 }
+  const imageVariants: Variants = {
+    enter: { y: "100%" },
+    center: { y: 0 },
+    exit: { y: "-100%" }
   };
 
   return (
@@ -62,7 +62,7 @@ export default function Aboutinfo() {
                   transition={{ type: "spring", stiffness: 200, damping: 25 }}
                   src={aboutImages[currentImg]} 
                   alt="Modern Architecture" 
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover z-10"
                 />
               </AnimatePresence>
             </div>
