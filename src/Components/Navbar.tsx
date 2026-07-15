@@ -14,13 +14,14 @@ export default function Navbar() {
   const [activeLink, setActiveLink] = useState(() => {
     if (pathname === "/about") return "ABOUT";
     if (pathname === "/contact") return "CONTACT";
+    if (pathname === "/projects") return "PROJECTS";
     return "HOME";
   });
   const navLinks = [
     { name: "HOME", href: "/" },
     { name: "ABOUT", href: "/about" },
     { name: "SERVICES", href: "/#services" },
-    { name: "PROJECTS", href: "/#projects" },
+    { name: "PROJECTS", href: "/projects" },
     { name: "PROCESS", href: "/#process" },
     { name: "CONTACT", href: "/contact" }
   ];
@@ -34,10 +35,10 @@ export default function Navbar() {
     // Sync active link on load or path change
     if (pathname === "/about") setActiveLink("ABOUT");
     else if (pathname === "/contact") setActiveLink("CONTACT");
+    else if (pathname === "/projects") setActiveLink("PROJECTS");
     else if (pathname === "/") {
       const hash = window.location.hash;
       if (hash === "#services") setActiveLink("SERVICES");
-      else if (hash === "#projects") setActiveLink("PROJECTS");
       else if (hash === "#process") setActiveLink("PROCESS");
       else setActiveLink("HOME");
     }

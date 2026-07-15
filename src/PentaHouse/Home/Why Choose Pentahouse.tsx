@@ -66,7 +66,7 @@ export default function WhyChoosePentahouse() {
       }
     });
 
-    const cards = cardsRef.current;
+    const cards = cardsRef.current as HTMLDivElement[];
 
     // Set initial hidden states for timeline cards (Cards 2-5)
     gsap.set(cards.slice(1), { opacity: 0, y: 40, scale: 0.95 });
