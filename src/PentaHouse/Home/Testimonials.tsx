@@ -51,9 +51,10 @@ export default function Testimonials() {
           
           {/* Functional Before & After Image Slider */}
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -150 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative aspect-video bg-gray-900 overflow-hidden border border-white/10 group"
           >
             <div className="absolute top-4 left-4 z-20 bg-black/60 backdrop-blur-sm px-4 py-1 text-xs font-bold tracking-widest text-white uppercase border border-white/10 pointer-events-none">Before & After</div>
@@ -100,9 +101,10 @@ export default function Testimonials() {
 
           {/* Testimonial Carousel */}
           <motion.div 
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 150 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="relative p-10 md:p-12 border border-white/5 bg-[#141414] min-h-[450px] flex flex-col justify-between"
           >
             <div>

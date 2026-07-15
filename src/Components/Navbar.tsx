@@ -25,13 +25,13 @@ export default function Navbar() {
         <div className="w-full px-6 lg:px-12 xl:px-16 flex justify-between items-center">
           <div className="flex items-center gap-2 cursor-pointer text-white">
             <Building2 className="text-[#CBA052]" size={36} strokeWidth={1.5} />
-            <div className="flex flex-col">
+            <div className="flex flex-col font-general">
               <span className="text-xl font-bold tracking-widest leading-none">PENTAHOUSE</span>
-              <span className="text-[0.55rem] tracking-[0.2em] text-gray-400 mt-1">CONSTRUCTION & ARCHITECTURE</span>
+              <span className="text-[0.55rem] tracking-[0.2em] text-gray-400 mt-1 font-sans">CONSTRUCTION & ARCHITECTURE</span>
             </div>
           </div>
           
-          <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+          <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide font-general">
             {navLinks.map((link) => (
               <a 
                 key={link}
@@ -66,7 +66,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <button className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-2.5 text-sm font-medium tracking-wider">
+            <button className="font-general border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-2.5 text-sm font-medium tracking-wider">
               GET A QUOTE
             </button>
           </div>
@@ -83,7 +83,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed top-[72px] left-0 w-full bg-[#111111] z-40 md:hidden border-b border-gray-800"
+            className="fixed top-[72px] left-0 w-full bg-[#111111] z-40 md:hidden border-b border-gray-800 font-general font-medium"
           >
             <div className="flex flex-col p-6 space-y-4 text-center">
               <a href="#" className="text-[#CBA052]">HOME</a>

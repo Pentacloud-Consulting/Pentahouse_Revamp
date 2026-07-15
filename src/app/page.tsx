@@ -2,6 +2,7 @@ import Navbar from "@/Components/Navbar";
 import Hero from "@/PentaHouse/Home/Hero";
 import Aboutinfo from "@/PentaHouse/Home/Aboutinfo";
 import OurServices from "@/PentaHouse/Home/OurServices";
+import HorizontalTransition from "@/Components/HorizontalTransition";
 import FeaturedProjects from "@/PentaHouse/Home/Featured Projects";
 import WhyChoosePentahouse from "@/PentaHouse/Home/Why Choose Pentahouse";
 import Trust from "@/PentaHouse/Home/Trust";
@@ -14,8 +15,10 @@ export default function Home() {
     <div className="min-h-screen bg-[#111111] text-white font-sans overflow-x-hidden selection:bg-[#CBA052] selection:text-white">
       <Navbar />
       <Hero />
-      <Aboutinfo />
-      <OurServices />
+      <HorizontalTransition>
+        <Aboutinfo />
+        <OurServices />
+      </HorizontalTransition>
       <FeaturedProjects />
       <WhyChoosePentahouse />
       <Trust />

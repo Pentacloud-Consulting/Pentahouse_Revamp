@@ -1,8 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, Variants, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Trophy, Building2, Users, User } from "lucide-react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const aboutImages = [
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
@@ -11,6 +16,8 @@ const aboutImages = [
 
 export default function Aboutinfo() {
   const [currentImg, setCurrentImg] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftImageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -19,35 +26,43 @@ export default function Aboutinfo() {
     return () => clearInterval(timer);
   }, []);
 
-  const fadeInUp: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%", // Trigger when section is 20% into the viewport from the bottom
+        end: "bottom 20%",
+        toggleActions: "play reverse play reverse",
+      }
+    });
 
-  const staggerContainer: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  };
+    // Left Image Container Animation
+    tl.fromTo(leftImageRef.current, 
+      { x: -100, opacity: 0, scale: 0.95 },
+      { x: 0, opacity: 1, scale: 1, duration: 1.4, ease: "power3.out" }
+    );
 
-  const imageVariants: Variants = {
+    // Right Content Stagger Animation
+    tl.fromTo(".stagger-item",
+      { opacity: 0, y: 35, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power3.out", stagger: 0.15 },
+      "<0.2" // Starts shortly after the image animation starts
+    );
+  }, { scope: sectionRef });
+
+  const imageVariants = {
     enter: { y: "100%" },
     center: { y: 0 },
     exit: { y: "-100%" }
   };
 
   return (
-    <section className="bg-[#f8f9fa] text-black py-24 relative overflow-hidden">
+    <section ref={sectionRef} className="bg-[#f8f9fa] text-black py-24 relative overflow-hidden z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
+          <div 
+            ref={leftImageRef}
             className="relative lg:col-span-5 h-[500px]"
           >
             <div className="absolute inset-0 bg-[#CBA052] translate-x-4 translate-y-4 z-0"></div>
@@ -65,63 +80,66 @@ export default function Aboutinfo() {
                   className="absolute inset-0 w-full h-full object-cover z-10"
                 />
               </AnimatePresence>
-            </div>
-          </motion.div>
 
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="lg:col-span-7 grid md:grid-cols-2 gap-10 items-center"
-          >
+              {/* Logo on top right corner */}
+              <div className="absolute top-6 right-6 z-20 w-24 md:w-28 drop-shadow-xl">
+                <img 
+                  src="/Logo/LOGO-BG.png" 
+                  alt="Pentahouse Logo" 
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 grid md:grid-cols-2 gap-10 items-center">
             {/* Text Content Side */}
             <div>
-              <motion.p variants={fadeInUp} className="text-[#CBA052] font-bold tracking-wider text-xs mb-3 uppercase">About Pentahouse</motion.p>
-              <motion.h2 variants={fadeInUp} className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+              <p className="stagger-item text-[#CBA052] font-bold tracking-wider text-xs mb-3 uppercase">About Pentahouse</p>
+              <h2 className="stagger-item font-general text-3xl lg:text-4xl font-bold mb-6 text-gray-900 leading-tight">
                 Building Dreams <br/> Into Reality
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="text-gray-500 text-sm mb-8 leading-relaxed">
+              </h2>
+              <p className="stagger-item text-gray-500 text-sm mb-8 leading-relaxed">
                 At Pentahouse, we believe every structure we build is more than just concrete and bricks – it's a promise of quality, trust, and a better tomorrow. With 25+ years of expertise, we have delivered iconic residential and commercial projects that stand the test of time.
-              </motion.p>
+              </p>
               
-              <motion.button variants={fadeInUp} className="border border-black hover:bg-black hover:text-white px-6 py-3 text-xs font-bold tracking-widest flex items-center gap-3 transition-all duration-300">
+              <button className="stagger-item font-general border border-black hover:bg-black hover:text-white px-6 py-3 text-xs font-bold tracking-widest flex items-center gap-3 transition-all duration-300">
                 KNOW MORE ABOUT US <ArrowRight size={14} />
-              </motion.button>
+              </button>
             </div>
 
             {/* Stats Grid Side */}
-            <motion.div variants={fadeInUp} className="grid grid-cols-2">
+            <div className="stagger-item grid grid-cols-2">
               <div className="flex flex-col items-center justify-center p-8 border-b border-r border-gray-200">
                 <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }} className="mb-3 text-black">
                   <User size={28} strokeWidth={1.2} />
                 </motion.div>
-                <h4 className="text-3xl font-bold text-gray-900 mb-1">25+</h4>
+                <h4 className="font-general text-3xl font-bold text-gray-900 mb-1">25+</h4>
                 <p className="text-xs text-gray-500 text-center">Years<br/>Experience</p>
               </div>
               <div className="flex flex-col items-center justify-center p-8 border-b border-gray-200">
                 <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }} className="mb-3 text-black">
                   <Building2 size={28} strokeWidth={1.2} />
                 </motion.div>
-                <h4 className="text-3xl font-bold text-gray-900 mb-1">350+</h4>
+                <h4 className="font-general text-3xl font-bold text-gray-900 mb-1">350+</h4>
                 <p className="text-xs text-gray-500 text-center">Projects<br/>Delivered</p>
               </div>
               <div className="flex flex-col items-center justify-center p-8 border-r border-gray-200">
                 <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }} className="mb-3 text-black">
                   <Users size={28} strokeWidth={1.2} />
                 </motion.div>
-                <h4 className="text-3xl font-bold text-gray-900 mb-1">120+</h4>
+                <h4 className="font-general text-3xl font-bold text-gray-900 mb-1">120+</h4>
                 <p className="text-xs text-gray-500 text-center">Team<br/>Experts</p>
               </div>
               <div className="flex flex-col items-center justify-center p-8">
                 <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut", delay: 1.5 }} className="mb-3 text-black">
                   <Trophy size={28} strokeWidth={1.2} />
                 </motion.div>
-                <h4 className="text-3xl font-bold text-gray-900 mb-1">15</h4>
+                <h4 className="font-general text-3xl font-bold text-gray-900 mb-1">15</h4>
                 <p className="text-xs text-gray-500 text-center">Awards<br/>Won</p>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

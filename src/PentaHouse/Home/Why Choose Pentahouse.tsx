@@ -1,51 +1,200 @@
 "use client";
 
-import { cloneElement, ReactElement } from "react";
-import { motion } from "framer-motion";
+import { cloneElement, ReactElement, useRef } from "react";
 import { Search, PenTool, Building2, CheckCircle2, Trophy } from "lucide-react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const steps = [
+  { num: "01", title: "Planning", desc: "Understanding your needs and objectives", icon: <Search /> },
+  { num: "02", title: "Design", desc: "Architectural planning & 3D visualization", icon: <PenTool /> },
+  { num: "03", title: "Construction", desc: "High-quality execution with best materials", icon: <Building2 /> },
+  { num: "04", title: "Inspection", desc: "Quality checks at every critical stage", icon: <CheckCircle2 /> },
+  { num: "05", title: "Delivery", desc: "On-time handover with satisfaction", icon: <Trophy /> }
+];
 
 export default function WhyChoosePentahouse() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftContentRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const bgLineRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // 1. Independent Floating Animation (Subtle hover effect)
+    cardsRef.current.forEach((card, i) => {
+      if (!card) return;
+      gsap.to(card.querySelector('.icon-wrapper'), {
+        y: -3,
+        duration: 2 + i * 0.15, // Offset for organic wave feel
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    });
+
+    // 2. Left Content, BG Line & First Card Entrance Animation
+    const leftElements = leftContentRef.current ? Array.from(leftContentRef.current.children) : [];
+    const entranceElements = [...leftElements, bgLineRef.current, cardsRef.current[0]].filter(Boolean);
+
+    gsap.fromTo(entranceElements,
+      { opacity: 0, y: 40, scale: 0.96 },
+      {
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 15%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // 3. Main Timeline (Scrubbed with Scroll)
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 15%",
+        end: "+=250%", // Pins the section for 2.5x the viewport height
+        pin: true,
+        scrub: 1, // Smooth cinematic scrub
+      }
+    });
+
+    const cards = cardsRef.current;
+
+    // Set initial hidden states for timeline cards (Cards 2-5)
+    gsap.set(cards.slice(1), { opacity: 0, y: 40, scale: 0.95 });
+    gsap.set(lineRef.current, { width: "0%" });
+
+    // Highlight Card 1 instantly in the timeline
+    tl.to(cards[0].querySelector('.icon-wrapper'), {
+      scale: 1.08,
+      boxShadow: "0 0 20px rgba(203, 160, 82, 0.25)",
+      rotate: 5,
+      borderColor: "#CBA052",
+      color: "#CBA052",
+      duration: 0.4,
+      ease: "power2.out"
+    });
+
+    // Animate Line and Reveal subsequent cards sequentially
+    steps.slice(1).forEach((_, i) => {
+      const cardIndex = i + 1; // 1, 2, 3, 4
+      const progress = cardIndex * 25; // 25%, 50%, 75%, 100%
+      
+      // Deactivate previous card (lose glow and scale, but stay gold!)
+      tl.to(cards[cardIndex - 1].querySelector('.icon-wrapper'), {
+        scale: 1,
+        boxShadow: "0 0 0px rgba(203, 160, 82, 0)",
+        rotate: 0,
+        borderColor: "#CBA052", // keep it gold
+        color: "#CBA052",       // keep it gold
+        duration: 0.4,
+        ease: "power2.out"
+      }, "+=0.2"); // Slight scroll pause before moving to the next
+      
+      // Draw line to the next card
+      tl.to(lineRef.current, {
+        width: `${progress}%`,
+        duration: 1,
+        ease: "none"
+      }, "<"); // Start drawing the line as the previous card deactivates
+
+      // Reveal the next card when line reaches it
+      tl.to(cards[cardIndex], {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.6,
+        ease: "power2.out"
+      }, "-=0.4"); // Fade card in slightly before the line finishes
+
+      // Activate the next card
+      tl.to(cards[cardIndex].querySelector('.icon-wrapper'), {
+        scale: 1.08,
+        boxShadow: "0 0 20px rgba(203, 160, 82, 0.25)",
+        rotate: 5,
+        borderColor: "#CBA052",
+        color: "#CBA052",
+        duration: 0.4,
+        ease: "power2.out"
+      }, "<"); 
+    });
+
+    // Settle the final card back to normal state before unpinning (extra scroll distance)
+    tl.to(cards[4].querySelector('.icon-wrapper'), {
+      scale: 1,
+      boxShadow: "0 0 0px rgba(203, 160, 82, 0)",
+      rotate: 0,
+      borderColor: "#CBA052",
+      color: "#CBA052",
+      duration: 0.4,
+      ease: "power2.out"
+    }, "+=0.3");
+
+    // Add tiny bit of padding at the very end
+    tl.to({}, { duration: 0.2 });
+
+  }, { scope: sectionRef });
+
   return (
-    <section className="py-24 bg-[#141414] border-t border-white/5 relative overflow-hidden text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+    <section 
+      ref={sectionRef} 
+      className="py-24 relative overflow-hidden text-white min-h-[80vh] flex items-center bg-[#111]"
+    >
+      {/* Blurred Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1920&q=80" 
+          alt="Luxury House Background" 
+          className="w-full h-full object-cover blur-sm scale-105 opacity-50"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/70 to-[#111111]/40" />
+      </div>
+
+      <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-16 lg:gap-12 items-center">
           
-          <div className="lg:col-span-4">
+          <div ref={leftContentRef} className="lg:col-span-4">
             <p className="text-[#CBA052] font-semibold tracking-widest text-sm mb-3 uppercase">Why Choose Pentahouse</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">From Concept To Creation</h2>
-            <p className="text-gray-400 mb-8 leading-relaxed">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">From Concept <br/>To Creation</h2>
+            <p className="text-gray-400 mb-8 leading-relaxed text-lg">
               We follow a transparent and efficient process to deliver excellence at every step, ensuring your project is completed on time and beyond expectations.
             </p>
-            <button className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-8 py-3 text-sm font-medium tracking-wider">
+            <button className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-all duration-300 px-8 py-3.5 text-sm font-bold tracking-wider">
               GET A QUOTE
             </button>
           </div>
 
-          <div className="lg:col-span-8 relative">
-            <div className="hidden md:block absolute top-[40px] left-[10%] right-[10%] h-px border-t border-dashed border-[#CBA052]/50 z-0" />
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 relative z-10">
-              {[
-                { num: "01", title: "Planning", desc: "Understanding your needs and objectives", icon: <Search /> },
-                { num: "02", title: "Design", desc: "Architectural planning & 3D visualization", icon: <PenTool /> },
-                { num: "03", title: "Construction", desc: "High-quality execution with best materials", icon: <Building2 /> },
-                { num: "04", title: "Inspection", desc: "Quality checks at every critical stage", icon: <CheckCircle2 /> },
-                { num: "05", title: "Delivery", desc: "On-time handover with satisfaction", icon: <Trophy /> }
-              ].map((step, idx) => (
-                <motion.div 
+          <div className="lg:col-span-8 relative pt-12 md:pt-0">
+            {/* Background dashed line */}
+            <div ref={bgLineRef} className="hidden md:block absolute top-[40px] left-[10%] right-[10%] h-[2px] bg-white/10 z-0" />
+            
+            {/* Animated Gold Line */}
+            <div className="hidden md:block absolute top-[40px] left-[10%] right-[10%] h-[2px] z-0 overflow-hidden">
+              <div ref={lineRef} className="h-full bg-[#CBA052] w-0" />
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-4 relative z-10">
+              {steps.map((step, idx) => (
+                <div 
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  ref={(el) => { cardsRef.current[idx] = el; }}
                   className="flex flex-col items-center text-center group"
                 >
-                  <div className="w-20 h-20 rounded-xl border border-white/10 bg-[#111111] group-hover:border-[#CBA052] flex items-center justify-center mb-4 transition-colors duration-300 relative text-gray-400 group-hover:text-[#CBA052]">
-                    <div className="absolute -top-3 bg-[#141414] px-2 text-[#CBA052] font-bold text-sm">{step.num}</div>
+                  <div className="icon-wrapper w-20 h-20 rounded-xl border border-white/10 bg-[#111111] flex items-center justify-center mb-4 transition-colors duration-300 relative text-gray-400">
+                    <div className="step-num absolute -top-3 bg-[#141414] px-2 text-[#CBA052] font-bold text-sm">{step.num}</div>
                     {cloneElement(step.icon as ReactElement<any>, { size: 28, strokeWidth: 1.5 })}
                   </div>
                   <h4 className="font-bold text-white mb-2">{step.title}</h4>
-                  <p className="text-xs text-gray-400">{step.desc}</p>
-                </motion.div>
+                  <p className="text-xs text-gray-400 leading-relaxed">{step.desc}</p>
+                </div>
               ))}
             </div>
           </div>

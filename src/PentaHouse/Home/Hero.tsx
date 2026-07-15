@@ -1,8 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { ArrowRight, Mouse } from "lucide-react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const heroImages = [
   "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2075&q=80",
@@ -14,6 +19,17 @@ const heroImages = [
 export default function Hero() {
   const [currentImg, setCurrentImg] = useState(0);
   const [prevImg, setPrevImg] = useState(-1);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    ScrollTrigger.create({
+      trigger: heroRef.current,
+      start: "bottom bottom",
+      end: "+=100%", // Pin for exactly one viewport height
+      pin: true,
+      pinSpacing: false, // Allows the next section to smoothly scroll over it
+    });
+  }, { scope: heroRef });
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,7 +37,7 @@ export default function Hero() {
         setPrevImg(prev);
         return (prev + 1) % heroImages.length;
       });
-    }, 7000);
+    }, 3000);
     return () => clearInterval(timer);
   }, []);
 
@@ -39,8 +55,8 @@ export default function Hero() {
   };
 
   return (
-    <>
-      <div className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <div ref={heroRef} className="relative w-full">
+      <div className="relative h-screen flex items-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0 bg-black">
           {heroImages.map((src, index) => {
             const isActive = currentImg === index;
@@ -72,7 +88,7 @@ export default function Hero() {
                 animate={{ clipPath, zIndex, scale }}
                 transition={{
                   clipPath: isActive ? { duration: 1.4, ease: [0.77, 0, 0.175, 1] } : { duration: 0 },
-                  scale: isActive ? { duration: 7, ease: "linear" } : { duration: 0 }
+                  scale: isActive ? { duration: 4, ease: "linear" } : { duration: 0 }
                 }}
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -93,7 +109,7 @@ export default function Hero() {
             <motion.p variants={fadeInUp} className="text-[#CBA052] font-semibold tracking-widest text-sm mb-4">
               BUILDING DREAMS INTO REALITY
             </motion.p>
-            <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold leading-[1.1] mb-6">
+            <motion.h1 variants={fadeInUp} className="font-instrument font-normal text-5xl md:text-7xl leading-[1.1] mb-6">
               WE BUILD <br />
               HOMES THAT <br />
               LAST FOR <br />
@@ -103,10 +119,10 @@ export default function Hero() {
               Premium residential & commercial construction with modern architecture, engineering excellence, and uncompromising quality.
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-              <button className="bg-[#CBA052] text-black hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-bold tracking-wider flex items-center gap-2 group">
+              <button className="font-general bg-[#CBA052] text-black hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-bold tracking-wider flex items-center gap-2 group">
                 GET FREE CONSULTATION <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
               </button>
-              <button className="border border-white/30 hover:border-white bg-black/30 backdrop-blur-sm text-white px-8 py-3.5 text-sm font-medium tracking-wider flex items-center gap-2 transition-all">
+              <button className="font-general border border-white/30 hover:border-white bg-black/30 backdrop-blur-sm text-white px-8 py-3.5 text-sm font-medium tracking-wider flex items-center gap-2 transition-all">
                 VIEW PROJECTS <ArrowRight size={16} />
               </button>
             </motion.div>
@@ -145,6 +161,6 @@ export default function Hero() {
           <span className="text-xl md:text-2xl font-bold uppercase">HAVELLS</span>
         </div>
       </div>
-    </>
+    </div>
   );
 }
