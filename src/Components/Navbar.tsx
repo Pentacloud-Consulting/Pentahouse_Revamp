@@ -3,21 +3,47 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Building2, Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const [activeLink, setActiveLink] = useState("HOME");
-  const navLinks = ["HOME", "ABOUT", "SERVICES", "PROJECTS", "PROCESS", "CONTACT"];
+  const [activeLink, setActiveLink] = useState(() => {
+    if (pathname === "/about") return "ABOUT";
+    if (pathname === "/contact") return "CONTACT";
+    return "HOME";
+  });
+  const navLinks = [
+    { name: "HOME", href: "/" },
+    { name: "ABOUT", href: "/about" },
+    { name: "SERVICES", href: "/#services" },
+    { name: "PROJECTS", href: "/#projects" },
+    { name: "PROCESS", href: "/#process" },
+    { name: "CONTACT", href: "/contact" }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
+    
+    // Sync active link on load or path change
+    if (pathname === "/about") setActiveLink("ABOUT");
+    else if (pathname === "/contact") setActiveLink("CONTACT");
+    else if (pathname === "/") {
+      const hash = window.location.hash;
+      if (hash === "#services") setActiveLink("SERVICES");
+      else if (hash === "#projects") setActiveLink("PROJECTS");
+      else if (hash === "#process") setActiveLink("PROCESS");
+      else setActiveLink("HOME");
+    }
+
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <>
@@ -33,18 +59,18 @@ export default function Navbar() {
           
           <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide font-general">
             {navLinks.map((link) => (
-              <a 
-                key={link}
-                href="#" 
-                onClick={(e) => { e.preventDefault(); setActiveLink(link); }}
-                className={`relative transition-colors duration-300 z-10 ${activeLink === link ? "text-[#CBA052]" : "text-gray-300 hover:text-white"}`}
+              <Link 
+                key={link.name}
+                href={link.href} 
+                onClick={() => setActiveLink(link.name)}
+                className={`relative transition-colors duration-300 z-10 ${activeLink === link.name ? "text-[#CBA052]" : "text-gray-300 hover:text-white"}`}
               >
-                {link === "PROJECTS" ? (
+                {link.name === "PROJECTS" ? (
                   <span className="flex items-center gap-1 relative z-10">PROJECTS <ChevronDown size={14}/></span>
                 ) : (
-                  <span className="relative z-10">{link}</span>
+                  <span className="relative z-10">{link.name}</span>
                 )}
-                {activeLink === link && (
+                {activeLink === link.name && (
                   <motion.div
                     layoutId="camera-focus"
                     className="absolute -inset-x-3 -inset-y-2 pointer-events-none z-0"
@@ -61,7 +87,7 @@ export default function Navbar() {
                     <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-[#CBA052]" />
                   </motion.div>
                 )}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -86,12 +112,16 @@ export default function Navbar() {
             className="fixed top-[72px] left-0 w-full bg-[#111111] z-40 md:hidden border-b border-gray-800 font-general font-medium"
           >
             <div className="flex flex-col p-6 space-y-4 text-center">
-              <a href="#" className="text-[#CBA052]">HOME</a>
-              <a href="#" className="text-gray-300">ABOUT</a>
-              <a href="#" className="text-gray-300">SERVICES</a>
-              <a href="#" className="text-gray-300">PROJECTS</a>
-              <a href="#" className="text-gray-300">PROCESS</a>
-              <a href="#" className="text-gray-300">CONTACT</a>
+              {navLinks.map(link => (
+                <Link 
+                  key={link.name} 
+                  href={link.href} 
+                  className={activeLink === link.name ? "text-[#CBA052]" : "text-gray-300"} 
+                  onClick={() => { setActiveLink(link.name); setMobileMenuOpen(false); }}
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
           </motion.div>
         )}
