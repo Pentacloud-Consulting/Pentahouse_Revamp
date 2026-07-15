@@ -66,11 +66,7 @@ export default function Navbar() {
                 onClick={() => setActiveLink(link.name)}
                 className={`relative transition-colors duration-300 z-10 ${activeLink === link.name ? "text-[#CBA052]" : "text-gray-300 hover:text-white"}`}
               >
-                {link.name === "PROJECTS" ? (
-                  <span className="flex items-center gap-1 relative z-10">PROJECTS <ChevronDown size={14}/></span>
-                ) : (
-                  <span className="relative z-10">{link.name}</span>
-                )}
+                <span className="relative z-10">{link.name}</span>
                 {activeLink === link.name && (
                   <motion.div
                     layoutId="camera-focus"
