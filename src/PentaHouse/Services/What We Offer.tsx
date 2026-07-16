@@ -12,12 +12,12 @@ export default function WhatWeOffer() {
     gsap.registerPlugin(ScrollTrigger);
     let ctx = gsap.context(() => {
       gsap.fromTo(".offer-header > *", 
-        { y: 30, autoAlpha: 0 },
-        { scrollTrigger: { trigger: containerRef.current, start: "top 85%" }, y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+        { y: 20, autoAlpha: 0 },
+        { scrollTrigger: { trigger: containerRef.current, start: "top 98%", toggleActions: "play reverse play reverse" }, y: 0, autoAlpha: 1, duration: 0.2, stagger: 0.02, ease: "power2.out" }
       );
       gsap.fromTo(".offer-card", 
-        { y: 50, autoAlpha: 0 },
-        { scrollTrigger: { trigger: containerRef.current, start: "top 75%" }, y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+        { y: 20, autoAlpha: 0 },
+        { scrollTrigger: { trigger: containerRef.current, start: "top 95%", toggleActions: "play reverse play reverse" }, y: 0, autoAlpha: 1, duration: 0.2, stagger: 0.02, ease: "power2.out" }
       );
     }, containerRef);
     return () => ctx.revert();

@@ -2,19 +2,44 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function OurServices() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     let ctx = gsap.context(() => {
       gsap.fromTo(".hero-text > *", 
         { y: 40, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: "power3.out", delay: 0.1 }
+        { 
+          y: 0, 
+          autoAlpha: 1, 
+          duration: 1, 
+          stagger: 0.1, 
+          ease: "power3.out", 
+          delay: 0.1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "play reverse play reverse"
+          }
+        }
       );
       gsap.fromTo(".hero-img", 
         { x: 40, autoAlpha: 0 },
-        { x: 0, autoAlpha: 1, duration: 1.2, ease: "power3.out", delay: 0.2 }
+        { 
+          x: 0, 
+          autoAlpha: 1, 
+          duration: 1.2, 
+          ease: "power3.out", 
+          delay: 0.2,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "play reverse play reverse"
+          }
+        }
       );
     }, containerRef);
     return () => ctx.revert();

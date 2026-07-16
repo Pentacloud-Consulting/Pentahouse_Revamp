@@ -13,11 +13,11 @@ export default function WhoWeDo() {
     let ctx = gsap.context(() => {
       gsap.fromTo(".do-header > *", 
         { y: 30, autoAlpha: 0 },
-        { scrollTrigger: { trigger: containerRef.current, start: "top 85%" }, y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+        { scrollTrigger: { trigger: containerRef.current, start: "top 85%", toggleActions: "play reverse play reverse" }, y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
       );
       gsap.fromTo(".do-item", 
         { scale: 0.8, autoAlpha: 0 },
-        { scrollTrigger: { trigger: containerRef.current, start: "top 80%" }, scale: 1, autoAlpha: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)" }
+        { scrollTrigger: { trigger: containerRef.current, start: "top 80%", toggleActions: "play reverse play reverse" }, scale: 1, autoAlpha: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)" }
       );
     }, containerRef);
     return () => ctx.revert();

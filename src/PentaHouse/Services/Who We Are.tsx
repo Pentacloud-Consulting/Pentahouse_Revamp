@@ -13,15 +13,15 @@ export default function WhoWeAre() {
     let ctx = gsap.context(() => {
       gsap.fromTo(".who-text > *", 
         { y: 40, autoAlpha: 0 },
-        { scrollTrigger: { trigger: containerRef.current, start: "top 80%" }, y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+        { scrollTrigger: { trigger: containerRef.current, start: "top 80%", toggleActions: "play reverse play reverse" }, y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
       );
       gsap.fromTo(".who-bg", 
         { scale: 0.9, autoAlpha: 0 },
-        { scrollTrigger: { trigger: containerRef.current, start: "top 75%" }, scale: 1, autoAlpha: 1, duration: 1.2, ease: "power3.out" }
+        { scrollTrigger: { trigger: containerRef.current, start: "top 75%", toggleActions: "play reverse play reverse" }, scale: 1, autoAlpha: 1, duration: 1.2, ease: "power3.out" }
       );
       gsap.fromTo(".who-fg", 
         { y: 60, autoAlpha: 0 },
-        { scrollTrigger: { trigger: containerRef.current, start: "top 60%" }, y: 0, autoAlpha: 1, duration: 1, ease: "power3.out" }
+        { scrollTrigger: { trigger: containerRef.current, start: "top 60%", toggleActions: "play reverse play reverse" }, y: 0, autoAlpha: 1, duration: 1, ease: "power3.out" }
       );
     }, containerRef);
     return () => ctx.revert();
