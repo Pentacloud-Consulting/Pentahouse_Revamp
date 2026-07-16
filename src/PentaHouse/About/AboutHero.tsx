@@ -15,7 +15,8 @@ export default function AboutHero() {
         >
           <source src="/Videos/PentaHouse_Video_main.mp4" type="video/mp4" />
         </video>
-        {/* Removed black gradient overlay */}
+        {/* Top black gradient overlay for navbar legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent pointer-events-none" />
       </div>
 
       <div className="w-full relative z-10">

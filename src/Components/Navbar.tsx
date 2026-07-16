@@ -6,6 +6,64 @@ import { Building2, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+function LuxurySweepButton({ children, onClick, className }: any) {
+  const [clicked, setClicked] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const handleClick = (e: any) => {
+    setClicked(true);
+    setTimeout(() => setClicked(false), 600);
+    if (onClick) onClick(e);
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`relative overflow-hidden ${className}`}
+    >
+      <span className="relative z-10">{children}</span>
+      
+      {/* Click Sweep */}
+      <AnimatePresence>
+        {clicked && (
+          <motion.div
+            initial={{ x: "-150%" }}
+            animate={{ x: "150%" }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: [0.0, 0.0, 0.2, 1] }}
+            className="absolute inset-0 w-full pointer-events-none z-0 bg-gradient-to-r from-[#CBA052] via-[#FFF3D6] to-[#CBA052]"
+            style={{
+              WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 50%, transparent 100%)",
+              maskImage: "linear-gradient(90deg, transparent 0%, black 50%, transparent 100%)",
+              transform: "scale(1.2) skewX(-20deg)"
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Hover Sweep */}
+      <AnimatePresence>
+        {hovered && !clicked && (
+          <motion.div
+            initial={{ x: "-200%" }}
+            animate={{ x: "200%" }}
+            transition={{ duration: 1.2, ease: "linear", repeat: Infinity, repeatDelay: 0.4 }}
+            className="absolute inset-0 w-1/2 pointer-events-none z-0 bg-gradient-to-r from-[#CBA052] via-[#FFF3D6] to-[#CBA052] opacity-60"
+            style={{
+              WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 50%, transparent 100%)",
+              maskImage: "linear-gradient(90deg, transparent 0%, black 50%, transparent 100%)",
+              transform: "scale(1.2) skewX(-20deg)"
+            }}
+          />
+        )}
+      </AnimatePresence>
+    </button>
+  );
+}
+
+
 export default function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -69,19 +127,20 @@ export default function Navbar() {
                 <span className="relative z-10">{link.name}</span>
                 {activeLink === link.name && (
                   <motion.div
-                    layoutId="camera-focus"
-                    className="absolute -inset-x-3 -inset-y-2 pointer-events-none z-0"
+                    layoutId="active-nav-pill"
+                    className="absolute -inset-x-4 -inset-y-2 pointer-events-none z-0"
                     initial={false}
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   >
-                    {/* Top Left */}
-                    <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[#CBA052]" />
-                    {/* Top Right */}
-                    <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-[#CBA052]" />
-                    {/* Bottom Left */}
-                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-[#CBA052]" />
-                    {/* Bottom Right */}
-                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-[#CBA052]" />
+                    {/* Glassmorphism Pill Background */}
+                    <div className="absolute inset-0 rounded-full bg-[#CBA052]/10 border border-[#CBA052]/20 backdrop-blur-md" />
+                    
+                    {/* Glowing Top Highlight */}
+                    <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-8 h-[2px] bg-gradient-to-r from-transparent via-[#CBA052] to-transparent blur-[1px]" />
+                    <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-2 h-[2px] bg-[#FFF3D6] rounded-full shadow-[0_0_8px_rgba(255,243,214,0.8)]" />
+
+                    {/* Subtle Bottom Reflection */}
+                    <div className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-12 h-[1px] bg-gradient-to-r from-transparent via-[#CBA052]/50 to-transparent" />
                   </motion.div>
                 )}
               </Link>
@@ -89,9 +148,9 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <button className="font-general border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-2.5 text-sm font-medium tracking-wider">
+            <LuxurySweepButton className="font-general border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-2.5 text-sm font-medium tracking-wider">
               GET A QUOTE
-            </button>
+            </LuxurySweepButton>
           </div>
 
           <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
