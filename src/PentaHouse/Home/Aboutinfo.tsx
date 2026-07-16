@@ -32,7 +32,7 @@ export default function Aboutinfo() {
         trigger: sectionRef.current,
         start: "top 80%", // Trigger when section is 20% into the viewport from the bottom
         end: "bottom 20%",
-        toggleActions: "play reverse play reverse",
+        toggleActions: "play none none reverse",
       }
     });
 
@@ -57,8 +57,8 @@ export default function Aboutinfo() {
   };
 
   return (
-    <section ref={sectionRef} className="bg-[#f8f9fa] text-black py-24 relative overflow-hidden z-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="bg-[#f8f9fa] text-black pt-40 pb-16 relative overflow-hidden z-20 min-h-screen flex items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           <div 

@@ -17,20 +17,24 @@ export default function HorizontalTransition({ children }: { children: React.Rea
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top", // when the top of the container hits the top of the viewport
-        end: "+=150%", // scrub distance
+        end: "+=350%", // Increased scrub distance to accommodate both hold times
         scrub: true,
         pin: true,
       }
     });
 
-    // 2nd section (Outgoing)
+    // 1. Hold the first section perfectly still for a bit
+    tl.to({}, { duration: 0.8 });
+
+    // 2. Outgoing section slides left
     tl.to(section1Ref.current, {
       xPercent: -100,
       scale: 0.98,
-      ease: "none"
-    }, 0);
+      ease: "none",
+      duration: 1
+    }, "slide");
 
-    // 3rd section (Incoming)
+    // 3. Incoming section slides in
     tl.fromTo(section2Ref.current, {
       xPercent: 100,
       scale: 1.02,
@@ -39,8 +43,12 @@ export default function HorizontalTransition({ children }: { children: React.Rea
       xPercent: 0,
       scale: 1,
       opacity: 1,
-      ease: "none"
-    }, 0);
+      ease: "none",
+      duration: 1
+    }, "slide");
+
+    // 4. Hold the second section perfectly still for a bit before unpinning
+    tl.to({}, { duration: 0.8 });
   }, { scope: containerRef });
 
   return (

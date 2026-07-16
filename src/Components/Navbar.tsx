@@ -15,14 +15,14 @@ export default function Navbar() {
     if (pathname === "/about") return "ABOUT";
     if (pathname === "/contact") return "CONTACT";
     if (pathname === "/projects") return "PROJECTS";
+    if (pathname === "/services") return "SERVICES";
     return "HOME";
   });
   const navLinks = [
     { name: "HOME", href: "/" },
     { name: "ABOUT", href: "/about" },
-    { name: "SERVICES", href: "/#services" },
+    { name: "SERVICES", href: "/services" },
     { name: "PROJECTS", href: "/projects" },
-    { name: "PROCESS", href: "/#process" },
     { name: "CONTACT", href: "/contact" }
   ];
 
@@ -36,10 +36,10 @@ export default function Navbar() {
     if (pathname === "/about") setActiveLink("ABOUT");
     else if (pathname === "/contact") setActiveLink("CONTACT");
     else if (pathname === "/projects") setActiveLink("PROJECTS");
+    else if (pathname === "/services") setActiveLink("SERVICES");
     else if (pathname === "/") {
       const hash = window.location.hash;
       if (hash === "#services") setActiveLink("SERVICES");
-      else if (hash === "#process") setActiveLink("PROCESS");
       else setActiveLink("HOME");
     }
 

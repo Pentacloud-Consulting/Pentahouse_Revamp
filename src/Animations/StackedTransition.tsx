@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Building } from "lucide-react";
-import AboutHero from "./AboutHero";
-import OurValues from "./OurValues";
-import OurApproach from "./OurApproach";
+import AboutHero from "../PentaHouse/About/AboutHero";
+import OurValues from "../PentaHouse/About/OurValues";
+import OurApproach from "../PentaHouse/About/OurApproach";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +23,7 @@ export default function StackedTransition() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=350%", // 150% curtain + 100% values + 100% approach
+          end: "+=450%", // Increased to accommodate the pause for Our Approach
           scrub: 1, 
           pin: true,
           anticipatePin: 1
@@ -38,7 +38,10 @@ export default function StackedTransition() {
         .to(valuesRef.current, { y: "0%", ease: "none" }, 1)
         
       // 3. Our Approach layer slides up
-        .to(approachRef.current, { y: "0%", ease: "none" }, 2);
+        .to(approachRef.current, { y: "0%", ease: "none" }, 2)
+
+      // 4. Hold the "Our Approach" section on screen before unpinning
+        .to({}, { duration: 1.5 });
         
     }, containerRef);
 

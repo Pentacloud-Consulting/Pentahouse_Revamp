@@ -2,7 +2,7 @@ import Navbar from "@/Components/Navbar";
 import Hero from "@/PentaHouse/Home/Hero";
 import Aboutinfo from "@/PentaHouse/Home/Aboutinfo";
 import OurServices from "@/PentaHouse/Home/OurServices";
-import HorizontalTransition from "@/Components/HorizontalTransition";
+import HorizontalTransition from "@/Animations/HorizontalTransition";
 import FeaturedProjects from "@/PentaHouse/Home/Featured Projects";
 import WhyChoosePentahouse from "@/PentaHouse/Home/Why Choose Pentahouse";
 import Trust from "@/PentaHouse/Home/Trust";
