@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
   return (
     <div className="font-sans">
       {/* Hero Section */}
-      <section className="relative pt-40 pb-32 border-b border-white/5 overflow-hidden">
+      <section className="relative pt-28 pb-20 md:pt-40 md:pb-32 border-b border-white/5 overflow-hidden">
         {/* Full Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="w-full max-w-2xl space-y-6">
             <h3 className="text-[#CBA052] font-bold tracking-widest text-xs uppercase">LEGAL</h3>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg">
               Privacy Policy
             </h1>
             <p className="text-gray-300 text-sm md:text-base leading-relaxed drop-shadow-md">
@@ -66,13 +66,13 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* Content Section */}
-      <section className="py-20">
+      <section className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
             
             {/* Sidebar */}
-            <div className="lg:col-span-4 space-y-8">
-              <div className="bg-[#111111] border border-white/5 p-8 rounded-sm sticky top-32">
+            <div className="lg:col-span-4 space-y-6 md:space-y-8">
+              <div className="bg-[#111111] border border-white/5 p-6 md:p-8 rounded-sm sticky top-24 md:top-32">
                 <h4 className="text-[#CBA052] text-xs font-bold uppercase tracking-widest mb-6">ON THIS PAGE</h4>
                 <ul className="space-y-4">
                   {sections.map(section => (
@@ -100,9 +100,9 @@ export default function PrivacyPolicy() {
             {/* Main Content */}
             <div className="lg:col-span-8 space-y-4">
               {sections.map(section => (
-                <div key={section.id} id={section.id} className="bg-[#111111] border border-white/5 rounded-sm p-6 lg:p-7 scroll-mt-32 hover:border-white/10 transition-colors">
-                  <div className="flex flex-col sm:flex-row items-start gap-5">
-                    <div className="w-12 h-12 shrink-0 rounded-lg border border-[#CBA052]/30 flex items-center justify-center text-[#CBA052] bg-[#CBA052]/5">
+                <div key={section.id} id={section.id} className="bg-[#111111] border border-white/5 rounded-sm p-5 md:p-6 lg:p-7 scroll-mt-24 md:scroll-mt-32 hover:border-white/10 transition-colors">
+                  <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-5">
+                    <div className="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-lg border border-[#CBA052]/30 flex items-center justify-center text-[#CBA052] bg-[#CBA052]/5">
                       {section.icon}
                     </div>
                     <div>

@@ -11,7 +11,7 @@ export default function ServicesPage() {
       <div className="font-sans overflow-hidden">
         <CinematicSequence />
         
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-24 lg:space-y-32 py-24 lg:py-32">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 lg:space-y-32 py-10 lg:py-32">
           <WhoWeDo />
         </div>
       </div>
