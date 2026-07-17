@@ -72,28 +72,33 @@ export default function WorkedProjects() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="project-card bg-[#111111] rounded-2xl overflow-hidden border border-white/5 group cursor-pointer transition-all duration-500 ease-out hover:border-[#CBA052]/50 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(203,160,82,0.15)] relative will-change-transform"
+              transition={{ 
+                opacity: { duration: 0.3 },
+                layout: { type: "spring", bounce: 0.2, duration: 0.6 }
+              }}
+              className="h-full"
             >
-              <div className="relative h-64 overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out will-change-transform" 
-                />
-              </div>
-              <div className="p-6 relative z-20">
-                <p className="text-[#CBA052] font-bold tracking-widest text-[10px] mb-2 uppercase">{project.category}</p>
-                <h3 className="text-xl font-bold text-white mb-4">{project.title}</h3>
-                <div className="flex flex-col gap-2.5">
-                  <div className="flex items-center gap-2 text-gray-400 text-sm">
-                    <MapPin size={16} className="text-[#CBA052]" />
-                    {project.location}
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-400 text-sm">
-                    <Square size={16} className="text-[#CBA052]" />
-                    {project.area}
+              <div className="project-card bg-[#111111] h-full rounded-2xl overflow-hidden border border-white/5 group cursor-pointer transition-all duration-500 ease-out hover:border-[#CBA052]/50 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(203,160,82,0.15)] relative">
+                <div className="relative h-64 overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
+                  />
+                </div>
+                <div className="p-6 relative z-20">
+                  <p className="text-[#CBA052] font-bold tracking-widest text-[10px] mb-2 uppercase">{project.category}</p>
+                  <h3 className="text-xl font-bold text-white mb-4">{project.title}</h3>
+                  <div className="flex flex-col gap-2.5">
+                    <div className="flex items-center gap-2 text-gray-400 text-sm">
+                      <MapPin size={16} className="text-[#CBA052]" />
+                      {project.location}
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-400 text-sm">
+                      <Square size={16} className="text-[#CBA052]" />
+                      {project.area}
+                    </div>
                   </div>
                 </div>
               </div>
