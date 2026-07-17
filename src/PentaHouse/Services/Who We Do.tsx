@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { LayoutDashboard, FileSignature, Construction, Clock, ShieldCheck, Users, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -30,9 +31,9 @@ export default function WhoWeDo() {
           <h3 className="text-[#CBA052] font-bold tracking-widest text-xs uppercase">This is what we do!</h3>
           <h2 className="text-3xl md:text-4xl font-bold leading-tight">Choose Us for Unmatched<br/>Expertise and Quality</h2>
         </div>
-        <button className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all px-8 py-3 text-sm font-bold tracking-widest flex items-center gap-2">
+        <Link href="/projects" className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all px-8 py-3 text-sm font-bold tracking-widest flex items-center gap-2">
           VIEW ALL PROJECTS <ArrowRight size={16} />
-        </button>
+        </Link>
       </div>
       
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center pt-8">

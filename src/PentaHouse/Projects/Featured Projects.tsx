@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { MapPin, Square, Calendar, Home, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 const featuredProjects = [
@@ -124,9 +125,9 @@ export default function FeaturedProjects() {
               </div>
             </div>
 
-            <button className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-colors duration-300 px-8 py-3 rounded text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-3 w-fit">
+            <Link href="/projects" className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-colors duration-300 px-8 py-3 rounded text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-3 w-fit">
               View Project <ArrowRight size={16} />
-            </button>
+            </Link>
           </motion.div>
         </AnimatePresence>
       </div>

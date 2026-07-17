@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Trophy, Building2, Users, User } from "lucide-react";
+import Link from "next/link";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -103,9 +104,9 @@ export default function Aboutinfo() {
                 At Pentahouse, we believe every structure we build is more than just concrete and bricks – it's a promise of quality, trust, and a better tomorrow. With 25+ years of expertise, we have delivered iconic residential and commercial projects that stand the test of time.
               </p>
               
-              <button className="stagger-item font-general border border-black hover:bg-black hover:text-white px-6 py-3 text-xs font-bold tracking-widest flex items-center gap-3 transition-all duration-300">
+              <Link href="/about" className="stagger-item font-general border border-black hover:bg-black hover:text-white px-6 py-3 text-xs font-bold tracking-widest flex items-center gap-3 transition-all duration-300 inline-flex w-fit">
                 KNOW MORE ABOUT US <ArrowRight size={14} />
-              </button>
+              </Link>
             </div>
 
             {/* Stats Grid Side */}

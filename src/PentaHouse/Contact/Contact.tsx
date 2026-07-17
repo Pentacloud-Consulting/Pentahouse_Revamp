@@ -46,9 +46,9 @@ export default function ContactSample() {
 
             <div className="space-y-6">
               {[
-                { icon: Phone, title: "Call Us", details: "+91 98765 43210" },
-                { icon: Mail, title: "Email Us", details: "info@pentahouse.com" },
-                { icon: MapPin, title: "Visit Us", details: "No. 45, Prestige Tech Park,\nWhitefield, Bangalore – 560066,\nKarnataka, India" }
+                { icon: Phone, title: "Call Us", details: "+91-7411146608" },
+                { icon: Mail, title: "Email Us", details: "admin@pentahouse.in" },
+                { icon: MapPin, title: "Visit Us", details: "RT Nagar, Bangalore 560032" }
               ].map((item, idx) => (
                 <motion.div 
                   key={idx}
@@ -173,7 +173,7 @@ export default function ContactSample() {
               <div className="space-y-4">
                 <div className="border-b border-white/5 pb-4">
                   <p className="text-gray-400 text-sm mb-1">Monday – Saturday</p>
-                  <p className="text-white font-medium">9:00 AM – 6:00 PM</p>
+                  <p className="text-white font-medium">9:00 AM – 5:00 PM</p>
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">Sunday</p>

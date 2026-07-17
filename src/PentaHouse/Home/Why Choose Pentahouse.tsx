@@ -2,6 +2,7 @@
 
 import { cloneElement, ReactElement, useRef } from "react";
 import { Search, PenTool, Building2, CheckCircle2, Trophy } from "lucide-react";
+import Link from "next/link";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -167,9 +168,9 @@ export default function WhyChoosePentahouse() {
             <p className="text-gray-400 mb-8 leading-relaxed text-lg">
               We follow a transparent and efficient process to deliver excellence at every step, ensuring your project is completed on time and beyond expectations.
             </p>
-            <button className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-all duration-300 px-8 py-3.5 text-sm font-bold tracking-wider">
+            <Link href="/contact" className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-all duration-300 px-8 py-3.5 text-sm font-bold tracking-wider inline-flex w-fit">
               GET A QUOTE
-            </button>
+            </Link>
           </div>
 
           <div className="lg:col-span-8 relative pt-12 md:pt-0">

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { ArrowRight, Mouse } from "lucide-react";
+import Link from "next/link";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -119,12 +120,12 @@ export default function Hero() {
               Premium residential & commercial construction with modern architecture, engineering excellence, and uncompromising quality.
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-              <button className="font-general bg-[#CBA052] text-black hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-bold tracking-wider flex items-center gap-2 group">
+              <Link href="/contact" className="font-general bg-[#CBA052] text-black hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-bold tracking-wider flex items-center gap-2 group">
                 GET FREE CONSULTATION <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
-              </button>
-              <button className="font-general border border-white/30 hover:border-white bg-black/30 backdrop-blur-sm text-white px-8 py-3.5 text-sm font-medium tracking-wider flex items-center gap-2 transition-all">
+              </Link>
+              <Link href="/projects" className="font-general border border-white/30 hover:border-white bg-black/30 backdrop-blur-sm text-white px-8 py-3.5 text-sm font-medium tracking-wider flex items-center gap-2 transition-all">
                 VIEW PROJECTS <ArrowRight size={16} />
-              </button>
+              </Link>
             </motion.div>
           </motion.div>
 

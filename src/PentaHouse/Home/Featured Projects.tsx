@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -50,9 +51,9 @@ export default function FeaturedProjects() {
             <p className="text-[#CBA052] font-semibold tracking-widest text-sm mb-3 uppercase">Featured Projects</p>
             <h2 className="text-3xl md:text-4xl font-bold">Our Latest Creations</h2>
           </div>
-          <button className="border border-white/20 hover:border-[#CBA052] hover:bg-[#CBA052] text-white hover:text-black px-6 py-2.5 text-sm font-medium tracking-wider flex items-center gap-2 transition-all duration-300">
+          <Link href="/projects" className="border border-white/20 hover:border-[#CBA052] hover:bg-[#CBA052] text-white hover:text-black px-6 py-2.5 text-sm font-medium tracking-wider flex items-center gap-2 transition-all duration-300">
             VIEW ALL PROJECTS <ArrowRight size={16} />
-          </button>
+          </Link>
         </div>
 
         {/* Outer wrapper allows bleeding to the right edge of the screen */}

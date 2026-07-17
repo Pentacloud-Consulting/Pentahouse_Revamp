@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Building } from "lucide-react";
+import Link from "next/link";
 import AboutHero from "../PentaHouse/About/AboutHero";
 import OurValues from "../PentaHouse/About/OurValues";
 import OurApproach from "../PentaHouse/About/OurApproach";
@@ -71,9 +72,9 @@ export default function StackedTransition() {
             <p className="text-gray-400 mb-8 lg:mb-10 leading-relaxed text-sm md:text-base">
               With a strong focus on innovation, craftsmanship, and client satisfaction, we transform ideas into exceptional spaces.
             </p>
-            <button className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-colors duration-300 px-8 py-3.5 rounded text-sm font-bold tracking-widest uppercase flex items-center gap-3">
+            <Link href="/services" className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-colors duration-300 px-8 py-3.5 rounded text-sm font-bold tracking-widest uppercase flex items-center gap-3 w-fit">
               Our Story <ArrowRight size={16} />
-            </button>
+            </Link>
           </div>
         </div>
 

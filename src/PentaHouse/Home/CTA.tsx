@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const ctaImages = [
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
@@ -72,12 +73,12 @@ export default function CTA() {
             transition={{ delay: 0.2 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button className="bg-[#CBA052] text-black hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-bold tracking-wider w-full sm:w-auto">
+            <Link href="/contact" className="bg-[#CBA052] text-black hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-bold tracking-wider w-full sm:w-auto text-center">
               GET A FREE QUOTE
-            </button>
-            <button className="border border-white hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-medium tracking-wider w-full sm:w-auto">
+            </Link>
+            <Link href="/contact" className="border border-white hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-medium tracking-wider w-full sm:w-auto text-center">
               SCHEDULE A MEETING
-            </button>
+            </Link>
           </motion.div>
         </div>
 

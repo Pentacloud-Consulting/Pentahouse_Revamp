@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Building2, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function LuxurySweepButton({ children, onClick, className }: any) {
   const [clicked, setClicked] = useState(false);
@@ -66,6 +66,7 @@ function LuxurySweepButton({ children, onClick, className }: any) {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -108,13 +109,9 @@ export default function Navbar() {
     <>
       <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-[#0a0a0a]/95 backdrop-blur-md py-4 shadow-lg shadow-black/50" : "bg-transparent py-6"}`}>
         <div className="w-full px-6 lg:px-12 xl:px-16 flex justify-between items-center">
-          <div className="flex items-center gap-2 cursor-pointer text-white">
-            <Building2 className="text-[#CBA052]" size={36} strokeWidth={1.5} />
-            <div className="flex flex-col font-general">
-              <span className="text-xl font-bold tracking-widest leading-none">PENTAHOUSE</span>
-              <span className="text-[0.55rem] tracking-[0.2em] text-gray-400 mt-1 font-sans">CONSTRUCTION & ARCHITECTURE</span>
-            </div>
-          </div>
+          <Link href="/" className="flex items-center gap-2 cursor-pointer text-white">
+            <img src="/Logo/Pentahouse-main-Logo-withoutBG.png" alt="Pentahouse Logo" className="h-12 sm:h-14 w-auto object-contain" />
+          </Link>
           
           <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide font-general">
             {navLinks.map((link) => (
@@ -148,7 +145,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <LuxurySweepButton className="font-general border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-2.5 text-sm font-medium tracking-wider">
+            <LuxurySweepButton onClick={() => router.push('/contact')} className="font-general border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-2.5 text-sm font-medium tracking-wider">
               GET A QUOTE
             </LuxurySweepButton>
           </div>
