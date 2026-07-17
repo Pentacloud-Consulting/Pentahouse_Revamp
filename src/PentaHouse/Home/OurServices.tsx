@@ -8,7 +8,7 @@ export default function OurServices() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-[#111111] relative border-t border-white/5">
+    <section className="pt-16 pb-8 md:py-24 bg-[#111111] relative border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-[#CBA052] font-semibold tracking-widest text-sm mb-3 uppercase">Our Services</p>

@@ -47,7 +47,7 @@ export default function FeaturedProjects() {
   return (
     <section 
       ref={sectionRef} 
-      className="py-16 md:py-24 bg-[#111111] relative border-t border-white/5 overflow-hidden"
+      className="pt-8 pb-12 md:pb-24 md:pt-32 lg:pt-40 bg-[#111111] relative border-t border-white/5 overflow-hidden"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-white w-full">
         <div className="flex flex-row justify-between items-end mb-8 md:mb-12 gap-2 sm:gap-6">

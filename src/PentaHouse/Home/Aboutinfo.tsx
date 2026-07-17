@@ -110,34 +110,34 @@ export default function Aboutinfo() {
             </div>
 
             {/* Stats Grid Side */}
-            <div className="stagger-item grid grid-cols-2 border border-gray-200 sm:border-none rounded-xl sm:rounded-none overflow-hidden">
-              <div className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 border-b border-r border-gray-200">
-                <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }} className="mb-2 sm:mb-3 text-black">
-                  <User className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" strokeWidth={1.2} />
+            <div className="stagger-item grid grid-cols-4 sm:grid-cols-2 border border-gray-200 sm:border-none rounded-lg sm:rounded-none overflow-hidden bg-white sm:bg-transparent">
+              <div className="flex flex-col items-center justify-center p-2 sm:p-6 md:p-8 border-r border-gray-200 sm:border-b sm:border-b-gray-200">
+                <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }} className="mb-1 sm:mb-3 text-black">
+                  <User className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7" strokeWidth={1.2} />
                 </motion.div>
-                <h4 className="font-general text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1">25+</h4>
-                <p className="text-[10px] sm:text-xs text-gray-500 text-center leading-tight">Years<br className="hidden sm:block"/> <span className="sm:hidden"> </span>Experience</p>
+                <h4 className="font-general text-xs sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0.5">25+</h4>
+                <p className="text-[7px] sm:text-xs text-gray-500 text-center leading-tight">Years<br className="hidden sm:block"/> <span className="sm:hidden"> </span>Experience</p>
               </div>
-              <div className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 border-b border-gray-200">
-                <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }} className="mb-2 sm:mb-3 text-black">
-                  <Building2 className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" strokeWidth={1.2} />
+              <div className="flex flex-col items-center justify-center p-2 sm:p-6 md:p-8 border-r border-gray-200 sm:border-b sm:border-b-gray-200">
+                <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }} className="mb-1 sm:mb-3 text-black">
+                  <Building2 className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7" strokeWidth={1.2} />
                 </motion.div>
-                <h4 className="font-general text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1">350+</h4>
-                <p className="text-[10px] sm:text-xs text-gray-500 text-center leading-tight">Projects<br className="hidden sm:block"/> <span className="sm:hidden"> </span>Delivered</p>
+                <h4 className="font-general text-xs sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0.5">350+</h4>
+                <p className="text-[7px] sm:text-xs text-gray-500 text-center leading-tight">Projects<br className="hidden sm:block"/> <span className="sm:hidden"> </span>Delivered</p>
               </div>
-              <div className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 border-r border-gray-200 sm:border-b-0">
-                <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }} className="mb-2 sm:mb-3 text-black">
-                  <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" strokeWidth={1.2} />
+              <div className="flex flex-col items-center justify-center p-2 sm:p-6 md:p-8 border-r border-gray-200 sm:border-r-gray-200 sm:border-b-0">
+                <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }} className="mb-1 sm:mb-3 text-black">
+                  <Users className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7" strokeWidth={1.2} />
                 </motion.div>
-                <h4 className="font-general text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1">120+</h4>
-                <p className="text-[10px] sm:text-xs text-gray-500 text-center leading-tight">Team<br className="hidden sm:block"/> <span className="sm:hidden"> </span>Experts</p>
+                <h4 className="font-general text-xs sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0.5">120+</h4>
+                <p className="text-[7px] sm:text-xs text-gray-500 text-center leading-tight">Team<br className="hidden sm:block"/> <span className="sm:hidden"> </span>Experts</p>
               </div>
-              <div className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-                <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut", delay: 1.5 }} className="mb-2 sm:mb-3 text-black">
-                  <Trophy className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" strokeWidth={1.2} />
+              <div className="flex flex-col items-center justify-center p-2 sm:p-6 md:p-8">
+                <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut", delay: 1.5 }} className="mb-1 sm:mb-3 text-black">
+                  <Trophy className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7" strokeWidth={1.2} />
                 </motion.div>
-                <h4 className="font-general text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1">15</h4>
-                <p className="text-[10px] sm:text-xs text-gray-500 text-center leading-tight">Awards<br className="hidden sm:block"/> <span className="sm:hidden"> </span>Won</p>
+                <h4 className="font-general text-xs sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0.5">15</h4>
+                <p className="text-[7px] sm:text-xs text-gray-500 text-center leading-tight">Awards<br className="hidden sm:block"/> <span className="sm:hidden"> </span>Won</p>
               </div>
             </div>
           </div>
