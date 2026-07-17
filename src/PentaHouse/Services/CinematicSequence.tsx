@@ -220,6 +220,7 @@ export default function CinematicSequence() {
                 src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" 
                 alt="Interior Design" 
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             {/* Foreground Image Overlapping */}
@@ -228,6 +229,7 @@ export default function CinematicSequence() {
                 src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80" 
                 alt="Happy clients in home" 
                 className="w-full h-full object-cover border-[2px] lg:border-[4px] border-[#0a0a0a]"
+                loading="lazy"
               />
             </div>
           </div>
@@ -253,6 +255,7 @@ export default function CinematicSequence() {
                   src={activeIndex === null ? "/Images/About-PentaHouse.jpg" : reasons[activeIndex].image} 
                   alt={activeIndex === null ? "Construction Background" : reasons[activeIndex].title} 
                   className="w-full h-full object-cover opacity-50 mix-blend-luminosity" 
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-[#111111]/20" />
               </motion.div>
@@ -359,6 +362,7 @@ export default function CinematicSequence() {
               src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80" 
               alt="Modern House" 
               className="w-full h-[250px] md:h-[500px] object-cover rounded-sm"
+              fetchPriority="high"
             />
           </div>
         </div>

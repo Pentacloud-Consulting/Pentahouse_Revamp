@@ -6,11 +6,13 @@ const instrumentSerif = Instrument_Serif({
   weight: "400",
   variable: "--font-instrument-serif",
   subsets: ["latin"],
+  preload: false,
 });
 
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {

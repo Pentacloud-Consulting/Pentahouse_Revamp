@@ -109,7 +109,7 @@ export default function Navbar() {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-[#0a0a0a]/95 backdrop-blur-md py-3 sm:py-4 shadow-lg shadow-black/50" : "bg-transparent py-4 sm:py-6"}`}>
       <div className="w-full px-4 sm:px-6 lg:px-12 xl:px-16 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2 cursor-pointer text-white">
-          <img src="/Logo/Pentahouse-main-Logo-withoutBG.png" alt="Pentahouse Logo" className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-all duration-300" />
+          <img src="/Logo/Pentahouse-main-Logo-withoutBG.png" alt="Pentahouse Logo" className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-all duration-300" fetchPriority="high" />
         </Link>
         
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide font-general">
