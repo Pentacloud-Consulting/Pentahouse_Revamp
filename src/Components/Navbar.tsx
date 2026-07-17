@@ -106,55 +106,53 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <>
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-[#0a0a0a]/95 backdrop-blur-md py-4 shadow-lg shadow-black/50" : "bg-transparent py-6"}`}>
-        <div className="w-full px-6 lg:px-12 xl:px-16 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 cursor-pointer text-white">
-            <img src="/Logo/Pentahouse-main-Logo-withoutBG.png" alt="Pentahouse Logo" className="h-12 sm:h-14 w-auto object-contain" />
-          </Link>
-          
-          <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide font-general">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name}
-                href={link.href} 
-                onClick={() => setActiveLink(link.name)}
-                className={`relative transition-colors duration-300 z-10 ${activeLink === link.name ? "text-[#CBA052]" : "text-gray-300 hover:text-white"}`}
-              >
-                <span className="relative z-10">{link.name}</span>
-                {activeLink === link.name && (
-                  <motion.div
-                    layoutId="active-nav-pill"
-                    className="absolute -inset-x-4 -inset-y-2 pointer-events-none z-0"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  >
-                    {/* Glassmorphism Pill Background */}
-                    <div className="absolute inset-0 rounded-full bg-[#CBA052]/10 border border-[#CBA052]/20 backdrop-blur-md" />
-                    
-                    {/* Glowing Top Highlight */}
-                    <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-8 h-[2px] bg-gradient-to-r from-transparent via-[#CBA052] to-transparent blur-[1px]" />
-                    <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-2 h-[2px] bg-[#FFF3D6] rounded-full shadow-[0_0_8px_rgba(255,243,214,0.8)]" />
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-[#0a0a0a]/95 backdrop-blur-md py-3 sm:py-4 shadow-lg shadow-black/50" : "bg-transparent py-4 sm:py-6"}`}>
+      <div className="w-full px-4 sm:px-6 lg:px-12 xl:px-16 flex justify-between items-center">
+        <Link href="/" className="flex items-center gap-2 cursor-pointer text-white">
+          <img src="/Logo/Pentahouse-main-Logo-withoutBG.png" alt="Pentahouse Logo" className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-all duration-300" />
+        </Link>
+        
+        <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide font-general">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.name}
+              href={link.href} 
+              onClick={() => setActiveLink(link.name)}
+              className={`relative transition-colors duration-300 z-10 ${activeLink === link.name ? "text-[#CBA052]" : "text-gray-300 hover:text-white"}`}
+            >
+              <span className="relative z-10">{link.name}</span>
+              {activeLink === link.name && (
+                <motion.div
+                  layoutId="active-nav-pill"
+                  className="absolute -inset-x-4 -inset-y-2 pointer-events-none z-0"
+                  initial={false}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                >
+                  {/* Glassmorphism Pill Background */}
+                  <div className="absolute inset-0 rounded-full bg-[#CBA052]/10 border border-[#CBA052]/20 backdrop-blur-md" />
+                  
+                  {/* Glowing Top Highlight */}
+                  <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-8 h-[2px] bg-gradient-to-r from-transparent via-[#CBA052] to-transparent blur-[1px]" />
+                  <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-2 h-[2px] bg-[#FFF3D6] rounded-full shadow-[0_0_8px_rgba(255,243,214,0.8)]" />
 
-                    {/* Subtle Bottom Reflection */}
-                    <div className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-12 h-[1px] bg-gradient-to-r from-transparent via-[#CBA052]/50 to-transparent" />
-                  </motion.div>
-                )}
-              </Link>
-            ))}
-          </div>
-
-          <div className="hidden md:block">
-            <LuxurySweepButton onClick={() => router.push('/contact')} className="font-general border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-2.5 text-sm font-medium tracking-wider">
-              GET A QUOTE
-            </LuxurySweepButton>
-          </div>
-
-          <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+                  {/* Subtle Bottom Reflection */}
+                  <div className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-12 h-[1px] bg-gradient-to-r from-transparent via-[#CBA052]/50 to-transparent" />
+                </motion.div>
+              )}
+            </Link>
+          ))}
         </div>
-      </nav>
+
+        <div className="hidden md:block">
+          <LuxurySweepButton onClick={() => router.push('/contact')} className="font-general border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-2.5 text-sm font-medium tracking-wider">
+            GET A QUOTE
+          </LuxurySweepButton>
+        </div>
+
+        <button className="md:hidden text-white p-1" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
 
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -162,24 +160,43 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed top-[72px] left-0 w-full bg-[#111111] z-40 md:hidden border-b border-gray-800 font-general font-medium"
+            className="absolute top-full left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-xl z-40 md:hidden border-b border-gray-800 font-general font-medium overflow-hidden shadow-2xl"
           >
-            <div className="flex flex-col p-6 space-y-4 text-center">
-              {navLinks.map(link => (
-                <Link 
-                  key={link.name} 
-                  href={link.href} 
-                  className={activeLink === link.name ? "text-[#CBA052]" : "text-gray-300"} 
-                  onClick={() => { setActiveLink(link.name); setMobileMenuOpen(false); }}
+            <div className="flex flex-col p-6 space-y-6 text-center">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link 
+                    href={link.href} 
+                    className={`block text-lg tracking-widest transition-colors duration-300 ${activeLink === link.name ? "text-[#CBA052] font-bold" : "text-gray-300 hover:text-white"}`} 
+                    onClick={() => { setActiveLink(link.name); setMobileMenuOpen(false); }}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.1 }}
+                className="pt-6 mt-4 border-t border-white/10"
+              >
+                <LuxurySweepButton 
+                  onClick={() => { setMobileMenuOpen(false); router.push('/contact'); }} 
+                  className="w-full font-general border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-white transition-all duration-300 px-6 py-3.5 text-sm font-bold tracking-wider"
+                >
+                  GET A QUOTE
+                </LuxurySweepButton>
+              </motion.div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </nav>
   );
 }
 

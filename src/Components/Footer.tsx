@@ -5,18 +5,18 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0a0a0a] pt-20 pb-10 border-t border-white/5 text-white">
+    <footer className="bg-[#0a0a0a] pt-12 md:pt-20 pb-8 md:pb-10 border-t border-white/5 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
           
-          <div>
-            <div className="flex items-center gap-2 mb-6 text-white">
-              <img src="/Logo/Pentahouse-main-Logo-withoutBG.png" alt="Pentahouse Logo" className="h-16 w-auto object-contain" />
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-2 mb-4 md:mb-6 text-white">
+              <img src="/Logo/Pentahouse-main-Logo-withoutBG.png" alt="Pentahouse Logo" className="h-12 md:h-16 w-auto object-contain" />
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-6 max-w-sm">
               Building spaces that inspire and last for generations with trust, quality & innovation.
             </p>
-            <div className="flex items-center gap-4 text-gray-400">
+            <div className="flex items-center gap-3 md:gap-4 text-gray-400">
               <a href="https://www.instagram.com/pentahouse.in?igsh=MWczeGhlczIybnZ2aw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-[#CBA052] transition-colors"><Instagram size={18} /></a>
               <a href="https://api.whatsapp.com/send/?phone=918147897286&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="hover:text-[#CBA052] transition-colors"><Whatsapp size={18} /></a>
               <a href="#" className="hover:text-[#CBA052] transition-colors"><Facebook size={18} /></a>
@@ -25,42 +25,44 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="text-white font-bold mb-6 tracking-wide text-sm uppercase">Quick Links</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link href="/" className="hover:text-[#CBA052] transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-[#CBA052] transition-colors">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-[#CBA052] transition-colors">Services</Link></li>
-              <li><Link href="/projects" className="hover:text-[#CBA052] transition-colors">Projects</Link></li>
-              <li><Link href="/contact" className="hover:text-[#CBA052] transition-colors">Contact</Link></li>
-            </ul>
+          <div className="grid grid-cols-2 gap-4 sm:gap-8 lg:col-span-2">
+            <div>
+              <h4 className="text-white font-bold mb-4 md:mb-6 tracking-wide text-xs md:text-sm uppercase">Quick Links</h4>
+              <ul className="space-y-2.5 md:space-y-3 text-xs md:text-sm text-gray-400">
+                <li><Link href="/" className="hover:text-[#CBA052] transition-colors">Home</Link></li>
+                <li><Link href="/about" className="hover:text-[#CBA052] transition-colors">About Us</Link></li>
+                <li><Link href="/services" className="hover:text-[#CBA052] transition-colors">Services</Link></li>
+                <li><Link href="/projects" className="hover:text-[#CBA052] transition-colors">Projects</Link></li>
+                <li><Link href="/contact" className="hover:text-[#CBA052] transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold mb-4 md:mb-6 tracking-wide text-xs md:text-sm uppercase">Our Services</h4>
+              <ul className="space-y-2.5 md:space-y-3 text-xs md:text-sm text-gray-400">
+                <li><a href="#" className="hover:text-[#CBA052] transition-colors">Residential Construction</a></li>
+                <li><a href="#" className="hover:text-[#CBA052] transition-colors">Commercial Buildings</a></li>
+                <li><a href="#" className="hover:text-[#CBA052] transition-colors">Turnkey Projects</a></li>
+                <li><a href="#" className="hover:text-[#CBA052] transition-colors">Interior Design</a></li>
+                <li><a href="#" className="hover:text-[#CBA052] transition-colors">Architecture Planning</a></li>
+                <li><a href="#" className="hover:text-[#CBA052] transition-colors">Renovation & Remodeling</a></li>
+              </ul>
+            </div>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 tracking-wide text-sm uppercase">Our Services</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-[#CBA052] transition-colors">Residential Construction</a></li>
-              <li><a href="#" className="hover:text-[#CBA052] transition-colors">Commercial Buildings</a></li>
-              <li><a href="#" className="hover:text-[#CBA052] transition-colors">Turnkey Projects</a></li>
-              <li><a href="#" className="hover:text-[#CBA052] transition-colors">Interior Design</a></li>
-              <li><a href="#" className="hover:text-[#CBA052] transition-colors">Architecture Planning</a></li>
-              <li><a href="#" className="hover:text-[#CBA052] transition-colors">Renovation & Remodeling</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-bold mb-6 tracking-wide text-sm uppercase">Contact Us</h4>
-            <ul className="space-y-4 text-sm text-gray-400">
+            <h4 className="text-white font-bold mb-4 md:mb-6 tracking-wide text-xs md:text-sm uppercase">Contact Us</h4>
+            <ul className="space-y-3 md:space-y-4 text-xs md:text-sm text-gray-400">
               <li className="flex items-start gap-3">
-                <Phone size={18} className="text-[#CBA052] shrink-0 mt-0.5" />
+                <Phone size={18} className="text-[#CBA052] shrink-0 mt-0.5 md:mt-0" />
                 <span>+91-7411146608</span>
               </li>
               <li className="flex items-start gap-3">
-                <Mail size={18} className="text-[#CBA052] shrink-0 mt-0.5" />
+                <Mail size={18} className="text-[#CBA052] shrink-0 mt-0.5 md:mt-0" />
                 <span>admin@pentahouse.in</span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="text-[#CBA052] shrink-0 mt-0.5" />
+                <MapPin size={18} className="text-[#CBA052] shrink-0 mt-0.5 md:mt-0" />
                 <span>RT Nagar, Bangalore 560032</span>
               </li>
             </ul>
@@ -68,7 +70,7 @@ export default function Footer() {
 
         </div>
         
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <div className="border-t border-white/10 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-[10px] md:text-xs text-gray-500 text-center md:text-left">
           <p>&copy; 2024 Pentahouse Construction & Architecture. All Rights Reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>

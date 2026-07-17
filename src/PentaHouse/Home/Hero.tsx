@@ -100,35 +100,34 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent z-20 opacity-90 pointer-events-none" />
         </div>
 
-        <div className="w-full px-6 lg:px-12 xl:px-16 relative z-20 flex flex-col lg:flex-row justify-between items-center gap-12 mt-10">
+        <div className="w-full px-5 sm:px-6 lg:px-12 xl:px-16 relative z-20 flex flex-col lg:flex-row justify-between items-center gap-12 mt-4 sm:mt-10">
           <motion.div 
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="max-w-2xl"
+            className="max-w-2xl w-full"
           >
-            <motion.p variants={fadeInUp} className="text-[#CBA052] font-semibold tracking-widest text-sm mb-4">
+            <motion.p variants={fadeInUp} className="text-[#CBA052] font-semibold tracking-widest text-xs sm:text-sm mb-3 sm:mb-4">
               BUILDING DREAMS INTO REALITY
             </motion.p>
-            <motion.h1 variants={fadeInUp} className="font-instrument font-normal text-5xl md:text-7xl leading-[1.1] mb-6">
-              WE BUILD <br />
-              HOMES THAT <br />
-              LAST FOR <br />
-              <span className="text-[#CBA052]">GENERATIONS.</span>
+            <motion.h1 variants={fadeInUp} className="font-instrument font-normal text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] mb-5 sm:mb-6">
+              WE BUILD <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>HOMES THAT <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>LAST FOR <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span><span className="text-[#CBA052]">GENERATIONS.</span>
             </motion.h1>
-            <motion.p variants={fadeInUp} className="text-gray-300 text-lg mb-10 max-w-lg leading-relaxed">
+            <motion.p variants={fadeInUp} className="text-gray-300 text-sm sm:text-base md:text-lg mb-8 sm:mb-10 max-w-lg leading-relaxed">
               Premium residential & commercial construction with modern architecture, engineering excellence, and uncompromising quality.
             </motion.p>
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-              <Link href="/contact" className="font-general bg-[#CBA052] text-black hover:bg-white hover:text-black transition-colors duration-300 px-8 py-3.5 text-sm font-bold tracking-wider flex items-center gap-2 group">
-                GET FREE CONSULTATION <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
+            <motion.div variants={fadeInUp} className="flex flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+              <Link href="/contact" className="font-general bg-[#CBA052] text-black hover:bg-white hover:text-black transition-colors duration-300 px-2 sm:px-8 py-3 sm:py-3.5 text-[9px] min-[375px]:text-[11px] sm:text-sm font-bold tracking-wider flex items-center justify-center gap-1 sm:gap-2 group flex-1 sm:flex-none whitespace-nowrap">
+                GET FREE CONSULTATION <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform flex-shrink-0"/>
               </Link>
-              <Link href="/projects" className="font-general border border-white/30 hover:border-white bg-black/30 backdrop-blur-sm text-white px-8 py-3.5 text-sm font-medium tracking-wider flex items-center gap-2 transition-all">
-                VIEW PROJECTS <ArrowRight size={16} />
+              <Link href="/projects" className="font-general border border-white/30 hover:border-white bg-black/30 backdrop-blur-sm text-white px-2 sm:px-8 py-3 sm:py-3.5 text-[9px] min-[375px]:text-[11px] sm:text-sm font-medium tracking-wider flex items-center justify-center gap-1 sm:gap-2 transition-all flex-1 sm:flex-none whitespace-nowrap">
+                VIEW PROJECTS <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
               </Link>
             </motion.div>
           </motion.div>
-
         </div>
 
         <motion.div 
@@ -152,14 +151,14 @@ export default function Hero() {
         <div className="text-center mb-6">
           <p className="text-[0.65rem] tracking-[0.2em] text-gray-500 uppercase">Trusted By Leading Brands</p>
         </div>
-        <div className="flex items-center justify-center gap-12 md:gap-24 opacity-60 flex-wrap px-4">
-          <span className="text-xl md:text-2xl font-bold tracking-tighter">TATA</span>
-          <span className="text-xl md:text-2xl font-black italic">JSW</span>
-          <span className="text-xl md:text-2xl font-bold uppercase tracking-tight">UltraTech</span>
-          <span className="text-xl md:text-2xl font-bold italic tracking-tighter">Kajaria</span>
-          <span className="text-xl md:text-2xl font-medium tracking-tight">asianpaints</span>
-          <span className="text-xl md:text-2xl font-bold">Schneider</span>
-          <span className="text-xl md:text-2xl font-bold uppercase">HAVELLS</span>
+        <div className="flex items-center justify-center gap-6 sm:gap-12 md:gap-24 opacity-60 flex-wrap px-4">
+          <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-tighter">TATA</span>
+          <span className="text-lg sm:text-xl md:text-2xl font-black italic">JSW</span>
+          <span className="text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-tight">UltraTech</span>
+          <span className="text-lg sm:text-xl md:text-2xl font-bold italic tracking-tighter">Kajaria</span>
+          <span className="text-lg sm:text-xl md:text-2xl font-medium tracking-tight">asianpaints</span>
+          <span className="text-lg sm:text-xl md:text-2xl font-bold">Schneider</span>
+          <span className="text-lg sm:text-xl md:text-2xl font-bold uppercase">HAVELLS</span>
         </div>
       </div>
     </div>

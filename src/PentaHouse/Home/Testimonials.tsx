@@ -45,9 +45,9 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-24 bg-[#111111] relative border-b border-white/5 text-white overflow-hidden">
+    <section className="py-16 md:py-24 bg-[#111111] relative border-b border-white/5 text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           
           {/* Functional Before & After Image Slider */}
           <motion.div 
@@ -55,9 +55,9 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative aspect-video bg-gray-900 overflow-hidden border border-white/10 group"
+            className="relative aspect-video bg-gray-900 overflow-hidden border border-white/10 group rounded-sm lg:rounded-none"
           >
-            <div className="absolute top-4 left-4 z-20 bg-black/60 backdrop-blur-sm px-4 py-1 text-xs font-bold tracking-widest text-white uppercase border border-white/10 pointer-events-none">Before & After</div>
+            <div className="absolute top-3 left-3 md:top-4 md:left-4 z-20 bg-black/60 backdrop-blur-sm px-3 md:px-4 py-1 text-[10px] md:text-xs font-bold tracking-widest text-white uppercase border border-white/10 pointer-events-none">Before & After</div>
             
             <div className="relative w-full h-full">
               {/* After Image (Background) */}
@@ -105,13 +105,13 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="relative p-10 md:p-12 border border-white/5 bg-[#141414] min-h-[450px] flex flex-col justify-between"
+            className="relative p-6 sm:p-8 md:p-12 border border-white/5 bg-[#141414] min-h-[380px] md:min-h-[450px] flex flex-col justify-between rounded-sm lg:rounded-none"
           >
             <div>
-              <p className="text-[#CBA052] font-semibold tracking-widest text-sm mb-8 uppercase">Testimonials</p>
-              <Quote className="text-white/5 absolute top-12 right-12" size={100} />
+              <p className="text-[#CBA052] font-semibold tracking-widest text-xs md:text-sm mb-6 md:mb-8 uppercase">Testimonials</p>
+              <Quote className="text-white/5 absolute top-6 right-6 md:top-12 md:right-12 w-16 h-16 md:w-24 md:h-24" />
               
-              <div className="relative min-h-[140px] z-10">
+              <div className="relative min-h-[160px] md:min-h-[140px] z-10">
                 <AnimatePresence mode="wait">
                   <motion.p 
                     key={currentTestimonial}
@@ -119,14 +119,14 @@ export default function Testimonials() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.4 }}
-                    className="text-lg md:text-2xl font-light leading-relaxed absolute inset-0"
+                    className="text-base sm:text-lg md:text-2xl font-light leading-relaxed absolute inset-0"
                   >
                     "{testimonialsData[currentTestimonial].text}"
                   </motion.p>
                 </AnimatePresence>
               </div>
 
-              <div className="mt-8 relative h-16">
+              <div className="mt-6 md:mt-8 relative h-16">
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={currentTestimonial}
@@ -134,12 +134,12 @@ export default function Testimonials() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="flex items-center gap-4 absolute inset-0"
+                    className="flex items-center gap-3 md:gap-4 absolute inset-0"
                   >
-                    <img src={testimonialsData[currentTestimonial].img} alt={testimonialsData[currentTestimonial].name} className="w-14 h-14 rounded-full object-cover grayscale border border-white/20" />
+                    <img src={testimonialsData[currentTestimonial].img} alt={testimonialsData[currentTestimonial].name} className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover grayscale border border-white/20" />
                     <div>
-                      <h4 className="font-bold text-[#CBA052]">{testimonialsData[currentTestimonial].name}</h4>
-                      <p className="text-sm text-gray-400">{testimonialsData[currentTestimonial].location}</p>
+                      <h4 className="font-bold text-sm md:text-base text-[#CBA052]">{testimonialsData[currentTestimonial].name}</h4>
+                      <p className="text-xs md:text-sm text-gray-400">{testimonialsData[currentTestimonial].location}</p>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -147,7 +147,7 @@ export default function Testimonials() {
             </div>
 
             {/* Navigation & Carousel dots */}
-            <div className="flex items-center justify-between mt-12 border-t border-white/5 pt-6">
+            <div className="flex items-center justify-between mt-8 md:mt-12 border-t border-white/5 pt-4 md:pt-6">
               <div className="flex gap-2">
                 {testimonialsData.map((_, idx) => (
                   <button 
