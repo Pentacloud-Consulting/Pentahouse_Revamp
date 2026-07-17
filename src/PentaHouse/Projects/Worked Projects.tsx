@@ -46,24 +46,30 @@ export default function WorkedProjects() {
   return (
     <div>
       {/* Category Filter */}
-      <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => setActiveCategory(category)}
-            className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-              activeCategory === category
-                ? "bg-transparent text-[#CBA052] border border-[#CBA052]"
-                : "text-gray-400 hover:text-white border border-transparent"
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+      <div className="grid grid-cols-6 md:flex md:flex-wrap items-center justify-center gap-2 lg:gap-4 mb-8 lg:mb-12 px-2 lg:px-0">
+        {categories.map((category, idx) => {
+          let mobileColClass = "col-span-2";
+          if (idx === 3) mobileColClass = "col-start-2 col-span-2";
+          if (idx === 4) mobileColClass = "col-start-4 col-span-2";
+          
+          return (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`${mobileColClass} md:col-auto px-1 py-1.5 lg:px-6 lg:py-2.5 rounded-full text-[9px] sm:text-[10px] lg:text-sm font-medium transition-all duration-300 whitespace-nowrap text-center flex items-center justify-center ${
+                activeCategory === category
+                  ? "bg-transparent text-[#CBA052] border border-[#CBA052]"
+                  : "text-gray-400 hover:text-white border border-white/5 lg:border-transparent"
+              }`}
+            >
+              {category}
+            </button>
+          );
+        })}
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative min-h-[400px]">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6 relative min-h-[200px] lg:min-h-[400px]">
         <AnimatePresence initial={false} mode="popLayout">
           {filteredProjects.map((project) => (
             <motion.div
@@ -78,8 +84,8 @@ export default function WorkedProjects() {
               }}
               className="h-full"
             >
-              <div className="project-card bg-[#111111] h-full rounded-2xl overflow-hidden border border-white/5 group cursor-pointer transition-all duration-500 ease-out hover:border-[#CBA052]/50 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(203,160,82,0.15)] relative">
-                <div className="relative h-64 overflow-hidden">
+              <div className="project-card bg-[#111111] h-full rounded-xl lg:rounded-2xl overflow-hidden border border-white/5 group cursor-pointer transition-all duration-500 ease-out hover:border-[#CBA052]/50 hover:-translate-y-1 lg:hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(203,160,82,0.15)] relative">
+                <div className="relative h-32 sm:h-48 lg:h-64 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                   <img 
                     src={project.image} 
@@ -87,17 +93,17 @@ export default function WorkedProjects() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
                   />
                 </div>
-                <div className="p-6 relative z-20">
-                  <p className="text-[#CBA052] font-bold tracking-widest text-[10px] mb-2 uppercase">{project.category}</p>
-                  <h3 className="text-xl font-bold text-white mb-4">{project.title}</h3>
-                  <div className="flex flex-col gap-2.5">
-                    <div className="flex items-center gap-2 text-gray-400 text-sm">
-                      <MapPin size={16} className="text-[#CBA052]" />
-                      {project.location}
+                <div className="p-3 lg:p-6 relative z-20">
+                  <p className="text-[#CBA052] font-bold tracking-widest text-[8px] lg:text-[10px] mb-1 lg:mb-2 uppercase">{project.category}</p>
+                  <h3 className="text-xs sm:text-sm lg:text-xl font-bold text-white mb-2 lg:mb-4 line-clamp-2 leading-tight">{project.title}</h3>
+                  <div className="flex flex-col gap-1 lg:gap-2.5">
+                    <div className="flex items-center gap-1.5 lg:gap-2 text-gray-400 text-[8px] sm:text-[10px] lg:text-sm">
+                      <MapPin className="w-3 h-3 lg:w-4 lg:h-4 text-[#CBA052] shrink-0" />
+                      <span className="truncate">{project.location}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-400 text-sm">
-                      <Square size={16} className="text-[#CBA052]" />
-                      {project.area}
+                    <div className="flex items-center gap-1.5 lg:gap-2 text-gray-400 text-[8px] sm:text-[10px] lg:text-sm">
+                      <Square className="w-3 h-3 lg:w-4 lg:h-4 text-[#CBA052] shrink-0" />
+                      <span className="truncate">{project.area}</span>
                     </div>
                   </div>
                 </div>

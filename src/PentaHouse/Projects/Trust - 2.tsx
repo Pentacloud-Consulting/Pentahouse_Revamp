@@ -35,42 +35,45 @@ export default function Trust2() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, margin: "-50px" }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="bg-[#111111] rounded-2xl border border-white/5 py-8 px-6 grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/5"
+      className="bg-[#111111] rounded-xl lg:rounded-2xl border border-white/5 py-4 px-2 lg:py-8 lg:px-6 grid grid-cols-4 divide-x divide-white/5 items-center w-full"
     >
-      <div className="flex items-center gap-4 justify-center">
-        <div className="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center text-[#CBA052] shrink-0 bg-white/5">
-          <Building2 size={24} />
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-1.5 lg:gap-4 px-1 lg:px-0">
+        <div className="w-7 h-7 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl border border-white/10 flex items-center justify-center text-[#CBA052] shrink-0 bg-white/5">
+          <Building2 className="w-3.5 h-3.5 lg:w-6 lg:h-6" />
         </div>
-        <div>
-          <p className="text-2xl font-bold text-white"><AnimatedNumber value={100} />+</p>
-          <p className="text-gray-400 text-xs font-medium">Projects Completed</p>
-        </div>
-      </div>
-      <div className="flex items-center gap-4 justify-center">
-        <div className="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center text-[#CBA052] shrink-0 bg-white/5">
-          <Users size={24} />
-        </div>
-        <div>
-          <p className="text-2xl font-bold text-white"><AnimatedNumber value={50} />+</p>
-          <p className="text-gray-400 text-xs font-medium">Happy Clients</p>
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+          <p className="text-[10px] sm:text-xs lg:text-2xl font-bold text-white leading-none mb-0.5 lg:mb-0"><AnimatedNumber value={100} />+</p>
+          <p className="text-gray-400 text-[6px] sm:text-[8px] lg:text-xs font-medium leading-[1.1] uppercase lg:normal-case tracking-wider lg:tracking-normal w-full whitespace-normal lg:whitespace-nowrap">Projects Completed</p>
         </div>
       </div>
-      <div className="flex items-center gap-4 justify-center">
-        <div className="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center text-[#CBA052] shrink-0 bg-white/5">
-          <Clock size={24} />
+
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-1.5 lg:gap-4 px-1 lg:px-0">
+        <div className="w-7 h-7 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl border border-white/10 flex items-center justify-center text-[#CBA052] shrink-0 bg-white/5">
+          <Users className="w-3.5 h-3.5 lg:w-6 lg:h-6" />
         </div>
-        <div>
-          <p className="text-2xl font-bold text-white"><AnimatedNumber value={10} />+</p>
-          <p className="text-gray-400 text-xs font-medium">Years of Experience</p>
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+          <p className="text-[10px] sm:text-xs lg:text-2xl font-bold text-white leading-none mb-0.5 lg:mb-0"><AnimatedNumber value={50} />+</p>
+          <p className="text-gray-400 text-[6px] sm:text-[8px] lg:text-xs font-medium leading-[1.1] uppercase lg:normal-case tracking-wider lg:tracking-normal w-full whitespace-normal lg:whitespace-nowrap">Happy Clients</p>
         </div>
       </div>
-      <div className="flex items-center gap-4 justify-center">
-        <div className="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center text-[#CBA052] shrink-0 bg-white/5">
-          <Globe size={24} />
+
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-1.5 lg:gap-4 px-1 lg:px-0">
+        <div className="w-7 h-7 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl border border-white/10 flex items-center justify-center text-[#CBA052] shrink-0 bg-white/5">
+          <Clock className="w-3.5 h-3.5 lg:w-6 lg:h-6" />
         </div>
-        <div>
-          <p className="text-2xl font-bold text-white"><AnimatedNumber value={3} />+</p>
-          <p className="text-gray-400 text-xs font-medium">Global Offices</p>
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+          <p className="text-[10px] sm:text-xs lg:text-2xl font-bold text-white leading-none mb-0.5 lg:mb-0"><AnimatedNumber value={10} />+</p>
+          <p className="text-gray-400 text-[6px] sm:text-[8px] lg:text-xs font-medium leading-[1.1] uppercase lg:normal-case tracking-wider lg:tracking-normal w-full whitespace-normal lg:whitespace-nowrap">Years of Experience</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-1.5 lg:gap-4 px-1 lg:px-0">
+        <div className="w-7 h-7 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl border border-white/10 flex items-center justify-center text-[#CBA052] shrink-0 bg-white/5">
+          <Globe className="w-3.5 h-3.5 lg:w-6 lg:h-6" />
+        </div>
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+          <p className="text-[10px] sm:text-xs lg:text-2xl font-bold text-white leading-none mb-0.5 lg:mb-0"><AnimatedNumber value={3} />+</p>
+          <p className="text-gray-400 text-[6px] sm:text-[8px] lg:text-xs font-medium leading-[1.1] uppercase lg:normal-case tracking-wider lg:tracking-normal w-full whitespace-normal lg:whitespace-nowrap">Global Offices</p>
         </div>
       </div>
     </motion.div>

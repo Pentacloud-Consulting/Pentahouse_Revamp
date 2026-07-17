@@ -82,7 +82,7 @@ export default function FeaturedProjects() {
       className="bg-[#111111] rounded-3xl overflow-hidden border border-white/5 flex flex-col lg:flex-row shadow-2xl relative"
     >
       {/* Content */}
-      <div className="p-10 lg:p-16 lg:w-1/3 flex flex-col justify-center relative z-20 bg-[#111111] overflow-hidden">
+      <div className="p-6 lg:p-16 lg:w-1/3 flex flex-col justify-center relative z-20 bg-[#111111] overflow-hidden order-2 lg:order-1">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeProject.title}
@@ -91,49 +91,49 @@ export default function FeaturedProjects() {
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-[#CBA052] font-bold tracking-widest text-[10px] mb-4 uppercase">Featured Project</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">{activeProject.title}</h2>
-            <div className="flex items-center gap-2 text-gray-400 text-sm mb-8">
-              <MapPin size={16} className="text-[#CBA052]" />
+            <p className="text-[#CBA052] font-bold tracking-widest text-[10px] mb-2 lg:mb-4 uppercase">Featured Project</p>
+            <h2 className="text-2xl lg:text-4xl font-bold text-white mb-2 lg:mb-4 leading-tight">{activeProject.title}</h2>
+            <div className="flex items-center gap-2 text-gray-400 text-xs lg:text-sm mb-4 lg:mb-8">
+              <MapPin className="text-[#CBA052] w-3 h-3 lg:w-4 lg:h-4" />
               {activeProject.location}
             </div>
-            <p className="text-gray-400 leading-relaxed mb-10 text-sm">
+            <p className="text-gray-400 leading-relaxed mb-6 lg:mb-10 text-[11px] lg:text-sm">
               {activeProject.description}
             </p>
             
-            <div className="grid grid-cols-3 gap-2 mb-12">
+            <div className="grid grid-cols-3 gap-2 mb-8 lg:mb-12">
               <div>
-                <div className="flex items-center gap-1.5 text-[#CBA052] mb-1.5">
-                  <Square size={14} />
-                  <span className="text-xs font-semibold uppercase">Area</span>
+                <div className="flex items-center gap-1.5 text-[#CBA052] mb-1 lg:mb-1.5">
+                  <Square className="w-3 h-3 lg:w-3.5 lg:h-3.5" />
+                  <span className="text-[8px] lg:text-xs font-semibold uppercase">Area</span>
                 </div>
-                <p className="text-white text-sm font-medium">{activeProject.area}</p>
+                <p className="text-white text-[10px] lg:text-sm font-medium">{activeProject.area}</p>
               </div>
               <div>
-                <div className="flex items-center gap-1.5 text-[#CBA052] mb-1.5">
-                  <Calendar size={14} />
-                  <span className="text-xs font-semibold uppercase">Year</span>
+                <div className="flex items-center gap-1.5 text-[#CBA052] mb-1 lg:mb-1.5">
+                  <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5" />
+                  <span className="text-[8px] lg:text-xs font-semibold uppercase">Year</span>
                 </div>
-                <p className="text-white text-sm font-medium">{activeProject.year}</p>
+                <p className="text-white text-[10px] lg:text-sm font-medium">{activeProject.year}</p>
               </div>
               <div>
-                <div className="flex items-center gap-1.5 text-[#CBA052] mb-1.5">
-                  <Home size={14} />
-                  <span className="text-xs font-semibold uppercase">Type</span>
+                <div className="flex items-center gap-1.5 text-[#CBA052] mb-1 lg:mb-1.5">
+                  <Home className="w-3 h-3 lg:w-3.5 lg:h-3.5" />
+                  <span className="text-[8px] lg:text-xs font-semibold uppercase">Type</span>
                 </div>
-                <p className="text-white text-sm font-medium">{activeProject.type}</p>
+                <p className="text-white text-[10px] lg:text-sm font-medium">{activeProject.type}</p>
               </div>
             </div>
 
-            <Link href="/projects" className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-colors duration-300 px-8 py-3 rounded text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-3 w-fit">
-              View Project <ArrowRight size={16} />
+            <Link href="/projects" className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-colors duration-300 px-6 py-2.5 lg:px-8 lg:py-3 rounded text-xs lg:text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2 lg:gap-3 w-fit">
+              View Project <ArrowRight className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
             </Link>
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* Image & Thumbnails */}
-      <div className="lg:w-2/3 relative min-h-[400px] lg:min-h-[600px] overflow-hidden group">
+      <div className="lg:w-2/3 relative min-h-[300px] sm:min-h-[400px] lg:min-h-[600px] overflow-hidden group order-1 lg:order-2">
         <AnimatePresence mode="wait">
           <motion.img 
             key={activeProject.title}

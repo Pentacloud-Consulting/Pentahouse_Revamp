@@ -1,6 +1,6 @@
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
-import StackedTransition from "@/Animations/StackedTransition";
+import StackedTransition from "@/PentaHouse/About/StackedTransition";
 import CTA from "@/PentaHouse/Home/CTA";
 
 export default function AboutPage() {

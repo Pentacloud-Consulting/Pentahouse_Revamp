@@ -16,12 +16,12 @@ export default function Footer() {
             <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-6 max-w-sm">
               Building spaces that inspire and last for generations with trust, quality & innovation.
             </p>
-            <div className="flex items-center gap-3 md:gap-4 text-gray-400">
-              <a href="https://www.instagram.com/pentahouse.in?igsh=MWczeGhlczIybnZ2aw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-[#CBA052] transition-colors"><Instagram size={18} /></a>
-              <a href="https://api.whatsapp.com/send/?phone=918147897286&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="hover:text-[#CBA052] transition-colors"><Whatsapp size={18} /></a>
-              <a href="#" className="hover:text-[#CBA052] transition-colors"><Facebook size={18} /></a>
-              <a href="#" className="hover:text-[#CBA052] transition-colors"><Linkedin size={18} /></a>
-              <a href="#" className="hover:text-[#CBA052] transition-colors"><Youtube size={18} /></a>
+            <div className="flex items-center justify-center lg:justify-start gap-4 md:gap-4 text-gray-400 mt-8 mb-4 lg:my-0">
+              <a href="https://www.instagram.com/pentahouse.in?igsh=MWczeGhlczIybnZ2aw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-[#CBA052] transition-colors"><Instagram size={22} className="md:w-[18px] md:h-[18px]" /></a>
+              <a href="https://api.whatsapp.com/send/?phone=918147897286&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="hover:text-[#CBA052] transition-colors"><Whatsapp size={22} className="md:w-[18px] md:h-[18px]" /></a>
+              <a href="#" className="hover:text-[#CBA052] transition-colors"><Facebook size={22} className="md:w-[18px] md:h-[18px]" /></a>
+              <a href="#" className="hover:text-[#CBA052] transition-colors"><Linkedin size={22} className="md:w-[18px] md:h-[18px]" /></a>
+              <a href="#" className="hover:text-[#CBA052] transition-colors"><Youtube size={22} className="md:w-[18px] md:h-[18px]" /></a>
             </div>
           </div>
 
