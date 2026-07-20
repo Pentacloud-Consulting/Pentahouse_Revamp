@@ -6,15 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const projectsList = [
-  { id: 1, title: "The Ivory Retreat", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "32,500 sq.ft.", image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80" },
-  { id: 2, title: "Vertex Business Park", category: "COMMERCIAL", location: "Bangalore, Karnataka", area: "120,000 sq.ft.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" },
-  { id: 3, title: "Aura Villas", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "26,000 sq.ft.", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" },
-  { id: 4, title: "Timeless Monolith", category: "ARCHITECTURAL", location: "Bangalore, Karnataka", area: "18,000 sq.ft.", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" },
-  { id: 5, title: "Minimalist Luxury", category: "INTERIOR", location: "Bangalore, Karnataka", area: "6,500 sq.ft.", image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" },
-  { id: 6, title: "Nexus Corporate Tower", category: "COMMERCIAL", location: "Bangalore, Karnataka", area: "250,000 sq.ft.", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" },
-  { id: 7, title: "The Green Courtyard", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "22,000 sq.ft.", image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80" },
-  { id: 8, title: "The Urban Pavilion", category: "ARCHITECTURAL", location: "Bangalore, Karnataka", area: "15,000 sq.ft.", image: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=600&q=80" },
-  { id: 9, title: "Executive Workspace", category: "INTERIOR", location: "Bangalore, Karnataka", area: "4,800 sq.ft.", image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=600&q=80" },
+  { id: 1, title: "The Ivory Retreat", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "32,500 sq.ft.", image: "/Houses/House -1.webp", video: "/Houses Videos/1.mp4" },
+  { id: 2, title: "Vertex Business Park", category: "COMMERCIAL", location: "Bangalore, Karnataka", area: "120,000 sq.ft.", image: "/Houses/House -2.webp", video: "/Houses Videos/2.mp4" },
+  { id: 3, title: "Aura Villas", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "26,000 sq.ft.", image: "/Houses/House -3.webp", video: "/Houses Videos/3.mp4" },
+  { id: 4, title: "Timeless Monolith", category: "ARCHITECTURAL", location: "Bangalore, Karnataka", area: "18,000 sq.ft.", image: "/Houses/House -4.webp", video: "/Houses Videos/4.mp4" },
+  { id: 5, title: "Minimalist Luxury", category: "INTERIOR", location: "Bangalore, Karnataka", area: "6,500 sq.ft.", image: "/Houses/House -5.webp", video: "/Houses Videos/5.mp4" },
+  { id: 6, title: "Nexus Corporate Tower", category: "COMMERCIAL", location: "Bangalore, Karnataka", area: "250,000 sq.ft.", image: "/Houses/House -6.webp", video: "/Houses Videos/6.mp4" },
+  { id: 7, title: "The Green Courtyard", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "22,000 sq.ft.", image: "/Houses/House -7.webp", video: "/Houses Videos/7.mp4" },
+  { id: 8, title: "The Urban Pavilion", category: "ARCHITECTURAL", location: "Bangalore, Karnataka", area: "15,000 sq.ft.", image: "/Houses/House -8.webp", video: "/Houses Videos/8.mp4" },
 ];
 
 const categories = ["All Projects", "Residential", "Commercial", "Architectural", "Interior"];
@@ -84,13 +83,33 @@ export default function WorkedProjects() {
               }}
               className="h-full"
             >
-              <div className="project-card bg-[#111111] h-full rounded-xl lg:rounded-2xl overflow-hidden border border-white/5 group cursor-pointer transition-all duration-500 ease-out hover:border-[#CBA052]/50 hover:-translate-y-1 lg:hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(203,160,82,0.15)] relative">
-                <div className="relative h-32 sm:h-48 lg:h-64 overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div 
+                onMouseEnter={(e) => {
+                  const video = e.currentTarget.querySelector('video');
+                  if (video) video.play();
+                }}
+                onMouseLeave={(e) => {
+                  const video = e.currentTarget.querySelector('video');
+                  if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                  }
+                }}
+                className="project-card bg-[#111111] h-full rounded-xl lg:rounded-2xl overflow-hidden border border-white/5 group cursor-pointer transition-all duration-500 ease-out hover:border-[#CBA052]/50 hover:-translate-y-1 lg:hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(203,160,82,0.15)] relative"
+              >
+                <div className="relative h-32 sm:h-48 lg:h-64 overflow-hidden bg-[#1a1a1a]">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-20 pointer-events-none" />
+                  <video
+                    src={project.video}
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out z-0"
+                  />
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-0 z-10" 
                   />
                 </div>
                 <div className="p-3 lg:p-6 relative z-20">

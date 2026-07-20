@@ -59,7 +59,7 @@ export default function OurServices() {
       </div>
       <div className="hero-img w-full lg:w-1/2">
         <img 
-          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80" 
+          src="/Houses/House -2.webp" 
           alt="Modern House" 
           className="w-full h-[400px] md:h-[500px] object-cover rounded-sm"
         />

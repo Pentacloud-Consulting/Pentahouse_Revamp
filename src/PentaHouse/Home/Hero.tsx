@@ -11,10 +11,10 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2075&q=80",
-  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2075&q=80",
-  "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2075&q=80",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2075&q=80"
+  "/Featured Project images/Featured Project -2.webp",
+  "/Featured Project images/Featured Project -3.webp",
+  "/Featured Project images/Featured Project -4.webp",
+  "/Featured Project images/Featured Project -5.webp"
 ];
 
 export default function Hero() {

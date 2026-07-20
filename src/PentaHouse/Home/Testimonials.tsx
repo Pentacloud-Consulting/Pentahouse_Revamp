@@ -62,7 +62,7 @@ export default function Testimonials() {
             <div className="relative w-full h-full">
               {/* After Image (Background) */}
               <img 
-                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" 
+                src="/Testimonial images/After.webp" 
                 alt="After Construction" 
                 className="absolute inset-0 w-full h-full object-cover select-none" 
               />
@@ -73,7 +73,7 @@ export default function Testimonials() {
                 style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" 
+                  src="/Testimonial images/Before.webp" 
                   alt="Before Construction" 
                   className="absolute inset-0 w-full h-full object-cover select-none" 
                 />

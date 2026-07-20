@@ -7,9 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 
 const reasons = [
-  { icon: <Award size={24} />, title: "Proven Expertise", desc: "Years of experience in residential, commercial, and architectural construction.", image: "/sample/Projects.png" },
-  { icon: <Settings size={24} />, title: "Quality & Safety", desc: "We follow the highest standards of quality and safety in every project.", image: "/sample/Services.png" },
-  { icon: <Users size={24} />, title: "Innovative Solutions", desc: "Modern methods and creative thinking to build better, smarter spaces.", image: "/sample/About.png" }
+  { icon: <Award size={24} />, title: "Proven Expertise", desc: "Years of experience in residential, commercial, and architectural construction.", image: "/Houses/House -6.webp" },
+  { icon: <Settings size={24} />, title: "Quality & Safety", desc: "We follow the highest standards of quality and safety in every project.", image: "/Houses/House -7.webp" },
+  { icon: <Users size={24} />, title: "Innovative Solutions", desc: "Modern methods and creative thinking to build better, smarter spaces.", image: "/Houses/House -8.webp" }
 ];
 
 export default function CinematicSequence() {
@@ -217,7 +217,7 @@ export default function CinematicSequence() {
             {/* Background Image */}
             <div className="who-img-container absolute top-0 right-0 w-[80%] h-[200px] sm:h-[300px] lg:h-[400px] overflow-hidden rounded-sm">
               <img 
-                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" 
+                src="/Featured Project images/Featured Project -3.webp" 
                 alt="Interior Design" 
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -226,7 +226,7 @@ export default function CinematicSequence() {
             {/* Foreground Image Overlapping */}
             <div className="who-img-container absolute bottom-0 left-0 w-[70%] h-[180px] sm:h-[250px] lg:h-[350px] overflow-hidden shadow-2xl shadow-black/80 rounded-sm">
               <img 
-                src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80" 
+                src="/Featured Project images/Featured Project -4.webp" 
                 alt="Happy clients in home" 
                 className="w-full h-full object-cover border-[2px] lg:border-[4px] border-[#0a0a0a]"
                 loading="lazy"
@@ -359,7 +359,7 @@ export default function CinematicSequence() {
         <div className="hero-img-col w-full lg:w-1/2 h-auto lg:h-full flex flex-col justify-center items-center lg:items-start bg-[#0a0a0a] relative px-4 sm:px-6 lg:pl-10 pointer-events-auto">
           <div className="hero-img w-full max-w-[650px] lg:pr-8">
             <img 
-              src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80" 
+              src="/Houses/House -2.webp" 
               alt="Modern House" 
               className="w-full h-[250px] md:h-[500px] object-cover rounded-sm"
               fetchPriority="high"

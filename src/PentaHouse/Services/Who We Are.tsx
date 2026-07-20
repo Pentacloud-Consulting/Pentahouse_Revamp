@@ -64,7 +64,7 @@ export default function WhoWeAre() {
         {/* Background Image */}
         <div className="who-bg absolute top-0 right-0 w-[80%] h-[200px] sm:h-[300px] lg:h-[400px]">
           <img 
-            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" 
+            src="/Featured Project images/Featured Project -3.webp" 
             alt="Interior Design" 
             className="w-full h-full object-cover rounded-sm"
           />
@@ -72,7 +72,7 @@ export default function WhoWeAre() {
         {/* Foreground Image Overlapping */}
         <div className="who-fg absolute bottom-0 left-0 w-[70%] h-[180px] sm:h-[250px] lg:h-[350px] shadow-2xl shadow-black/80">
           <img 
-            src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80" 
+            src="/Featured Project images/Featured Project -4.webp" 
             alt="Happy clients in home" 
             className="w-full h-full object-cover rounded-sm border-[2px] lg:border-[4px] border-[#0a0a0a]"
           />

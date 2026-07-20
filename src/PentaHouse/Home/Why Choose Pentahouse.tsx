@@ -194,7 +194,7 @@ export default function WhyChoosePentahouse() {
       {/* Blurred Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1920&q=80" 
+          src="/Featured Project images/Featured Project -5.webp" 
           alt="Luxury House Background" 
           className="w-full h-full object-cover blur-sm scale-105 opacity-50"
         />

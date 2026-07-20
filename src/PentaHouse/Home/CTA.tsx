@@ -5,9 +5,9 @@ import { motion, Variants, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const ctaImages = [
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=80"
+  "/Featured Project images/Featured Project -1.webp",
+  "/Featured Project images/Featured Project -2.webp",
+  "/Featured Project images/Featured Project -3.webp"
 ];
 
 export default function CTA() {

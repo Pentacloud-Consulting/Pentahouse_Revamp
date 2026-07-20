@@ -14,7 +14,7 @@ export default function ContactSample() {
       {/* Right Side Background Image */}
       <div className="hidden lg:block absolute top-0 right-0 w-[40%] h-full z-0">
         <img 
-          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1920&q=80" 
+          src="/Featured Project images/Featured Project -4.webp" 
           alt="Luxury Architecture" 
           className="w-full h-full object-cover" 
         />

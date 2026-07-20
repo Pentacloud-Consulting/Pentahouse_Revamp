@@ -10,61 +10,61 @@ const featuredProjects = [
     title: "Skyline Haven Residences",
     description: "A premium residential development crafted for modern living. Skyline Haven blends luxury, comfort, and thoughtful design in perfect harmony.",
     location: "Bangalore, Karnataka", area: "46,000 sq.ft.", year: "2024", type: "Residential",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -1.webp"
   },
   {
     title: "The Ivory Retreat",
     description: "An exclusive beachfront property offering panoramic ocean views with state-of-the-art smart home integration and sustainable materials.",
     location: "Mumbai, Maharashtra", area: "32,500 sq.ft.", year: "2023", type: "Residential",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -2.webp"
   },
   {
     title: "Vertex Business Park",
     description: "A visionary commercial hub designed to foster innovation, featuring open-plan workspaces and green energy systems.",
     location: "Pune, Maharashtra", area: "120,000 sq.ft.", year: "2024", type: "Commercial",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -3.webp"
   },
   {
     title: "Aura Villas",
     description: "Luxury villas nestled in lush greenery, offering private pools, expansive terraces, and a tranquil escape from the city.",
     location: "Goa, India", area: "26,000 sq.ft.", year: "2022", type: "Residential",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -4.webp"
   },
   {
     title: "Timeless Monolith",
     description: "An architectural masterpiece defined by its brutalist geometry, large concrete facades, and minimalist interior aesthetic.",
     location: "Hyderabad, Telangana", area: "18,000 sq.ft.", year: "2023", type: "Architectural",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -5.webp"
   },
   {
     title: "Minimalist Luxury",
     description: "Award-winning interior design focusing on raw textures, natural light, and bespoke furniture for an elite lifestyle.",
     location: "Delhi, NCR", area: "6,500 sq.ft.", year: "2024", type: "Interior",
-    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -1.webp"
   },
   {
     title: "Nexus Corporate Tower",
     description: "A striking 40-story glass skyscraper redefining the city skyline, built with premium steel and glass architecture.",
     location: "Bangalore, Karnataka", area: "250,000 sq.ft.", year: "2025", type: "Commercial",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -2.webp"
   },
   {
     title: "The Green Courtyard",
     description: "An eco-friendly residential complex designed around a massive central courtyard, bringing nature directly into living spaces.",
     location: "Chennai, Tamil Nadu", area: "22,000 sq.ft.", year: "2022", type: "Residential",
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -3.webp"
   },
   {
     title: "The Urban Pavilion",
     description: "A cultural architectural landmark built to host international exhibitions, featuring a sweeping timber roof.",
     location: "Ahmedabad, Gujarat", area: "15,000 sq.ft.", year: "2024", type: "Architectural",
-    image: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -4.webp"
   },
   {
     title: "Executive Workspace",
     description: "Premium office interiors tailored for high-end corporate clients, balancing sophistication with ergonomic utility.",
     location: "Mumbai, Maharashtra", area: "4,800 sq.ft.", year: "2023", type: "Interior",
-    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80"
+    image: "/Featured Project images/Featured Project -5.webp"
   }
 ];
 
