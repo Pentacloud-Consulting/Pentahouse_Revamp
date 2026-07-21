@@ -12,6 +12,12 @@
   --font-sans: var(--font-manrope), sans-serif;
   --font-instrument: var(--font-instrument-serif), serif;
   --font-general: 'General Sans', sans-serif;
+  --animate-fly: fly 1.5s ease-in-out infinite;
+}
+
+@keyframes fly {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(3px, -3px); }
 }
 
 @media (prefers-color-scheme: dark) {

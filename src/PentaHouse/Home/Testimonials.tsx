@@ -6,22 +6,22 @@ import { ChevronLeft, ChevronRight, Quote, ArrowLeft, ArrowRight } from "lucide-
 
 const testimonialsData = [
   {
-    text: "Pentahouse turned our dream home into a reality. Their attention to detail and commitment to quality is unmatched.",
-    name: "Rohan Mehta",
+    text: "Impressed by the team’s dedication and insight. They understood my vision and turned it into a beautiful living space.",
+    name: "Ethan Carter",
     location: "Bangalore",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80"
+    img: "/Testimonial images/Testimonial - 2.webp"
   },
   {
-    text: "The commercial complex they constructed for our company was completed ahead of schedule without compromising any design aesthetics. Truly a premium experience.",
-    name: "Priya Sharma",
-    location: "Mumbai",
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80"
+    text: "Exceptional service and design truly beyond expectations. Highly recommended!",
+    name: "Liam Anderson",
+    location: "Bangalore",
+    img: "/Testimonial images/Testimonial - 1.webp"
   },
   {
-    text: "From the initial architecture planning to the final turnkey handover, Pentahouse demonstrated exceptional expertise. I highly recommend them for luxury projects.",
-    name: "Anand Verma",
-    location: "Delhi",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80"
+    text: "Impressive.",
+    name: "Noah Bennett",
+    location: "Bangalore",
+    img: "/Testimonial images/Testimonial - 1.webp"
   }
 ];
 

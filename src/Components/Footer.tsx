@@ -63,7 +63,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-[#CBA052] shrink-0 mt-0.5 md:mt-0" />
-                <span>RT Nagar, Bangalore 560032</span>
+                <span>RT Nagar , Bangalore 560032, Karnataka, India.</span>
               </li>
             </ul>
           </div>
