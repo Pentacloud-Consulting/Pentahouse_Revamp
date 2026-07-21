@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-[#0a0a0a] pt-12 md:pt-20 pb-8 md:pb-10 border-t border-white/5 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-5 sm:px-6 lg:px-12 xl:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
           
           <div className="lg:col-span-1">
@@ -71,7 +71,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-white/10 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-[10px] md:text-xs text-gray-500 text-center md:text-left">
-          <p>&copy; 2024 Pentahouse Construction & Architecture. All Rights Reserved.</p>
+          <p>&copy; 2026 Pentahouse Construction & Architecture. All Rights Reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>

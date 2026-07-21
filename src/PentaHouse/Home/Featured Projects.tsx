@@ -25,21 +25,30 @@ export default function FeaturedProjects() {
         return -(trackWidth - containerWidth);
       };
 
-      const tween = gsap.to(trackRef.current, {
-        x: getScrollAmount,
-        ease: "none",
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: () => `+=${Math.abs(getScrollAmount())}`,
+          end: () => `+=${Math.abs(getScrollAmount()) * 1.5}`, // Extended scroll distance to account for delays
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true, // Recalculates start/end on window resize
         }
       });
       
+      // Stick for a short scroll distance at the start
+      tl.to({}, { duration: 0.25 })
+        // Slide the boxes left
+        .to(trackRef.current, {
+          x: getScrollAmount,
+          ease: "none",
+          duration: 1
+        })
+        // Stick for a short scroll distance at the end before unpinning
+        .to({}, { duration: 0.25 });
+      
       return () => {
-        tween.kill();
+        tl.kill();
       };
     });
   }, { scope: sectionRef });

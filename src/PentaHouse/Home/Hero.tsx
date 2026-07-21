@@ -26,7 +26,7 @@ export default function Hero() {
     ScrollTrigger.create({
       trigger: heroRef.current,
       start: "bottom bottom",
-      end: "+=100%", // Pin for exactly one viewport height
+      end: "+=150%", // Pin for longer to allow the sticking effect + overlap
       pin: true,
       pinSpacing: false, // Allows the next section to smoothly scroll over it
     });
@@ -56,8 +56,9 @@ export default function Hero() {
   };
 
   return (
-    <div ref={heroRef} className="relative w-full">
-      <div className="relative h-screen flex items-center pt-20 overflow-hidden">
+    <>
+      <div ref={heroRef} className="relative w-full">
+        <div className="relative h-screen flex items-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0 bg-black">
           {heroImages.map((src, index) => {
             const isActive = currentImg === index;
@@ -151,16 +152,39 @@ export default function Hero() {
         <div className="text-center mb-6">
           <p className="text-[0.65rem] tracking-[0.2em] text-gray-500 uppercase">Trusted By Leading Brands</p>
         </div>
-        <div className="flex items-center justify-center gap-6 sm:gap-12 md:gap-24 opacity-60 flex-wrap px-4">
-          <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-tighter">TATA</span>
-          <span className="text-lg sm:text-xl md:text-2xl font-black italic">JSW</span>
-          <span className="text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-tight">UltraTech</span>
-          <span className="text-lg sm:text-xl md:text-2xl font-bold italic tracking-tighter">Kajaria</span>
-          <span className="text-lg sm:text-xl md:text-2xl font-medium tracking-tight">asianpaints</span>
-          <span className="text-lg sm:text-xl md:text-2xl font-bold">Schneider</span>
-          <span className="text-lg sm:text-xl md:text-2xl font-bold uppercase">HAVELLS</span>
+        <div className="flex w-full overflow-hidden">
+          <motion.div 
+            className="flex items-center opacity-60 whitespace-nowrap min-w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+          >
+            {/* Group 1 */}
+            <div className="flex items-center gap-6 sm:gap-12 md:gap-24 pr-6 sm:pr-12 md:pr-24">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-tighter">TATA</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-black italic">JSW</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-tight">UltraTech</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold italic tracking-tighter">Kajaria</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-medium tracking-tight">asianpaints</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold">Schneider</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold uppercase">HAVELLS</span>
+            </div>
+            {/* Group 2 */}
+            <div className="flex items-center gap-6 sm:gap-12 md:gap-24 pr-6 sm:pr-12 md:pr-24">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-tighter">TATA</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-black italic">JSW</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-tight">UltraTech</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold italic tracking-tighter">Kajaria</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-medium tracking-tight">asianpaints</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold">Schneider</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold uppercase">HAVELLS</span>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>
+      
+    {/* Spacer to keep the marquee visible while pinned before next section overlaps */}
+    <div className="h-[40vh] w-full pointer-events-none opacity-0"></div>
+    </>
   );
 }

@@ -14,7 +14,7 @@ export default function Location() {
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
           className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 lg:mb-24 gap-6 md:gap-10"
         >
@@ -40,38 +40,39 @@ export default function Location() {
 
         <div className="relative group">
           {/* Soft Outer Glow on Hover */}
-          <div className="absolute -inset-1 bg-[#CBA052]/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-2xl pointer-events-none" />
+          <div className="absolute -inset-1 bg-[#CBA052]/30 blur-2xl opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-1000 rounded-2xl pointer-events-none" />
 
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
-            className="relative w-full rounded-2xl p-[1px] overflow-hidden shadow-2xl bg-white/10 group-hover:bg-transparent transition-colors duration-500"
+            className="relative w-full rounded-2xl p-[1px] overflow-hidden shadow-2xl bg-transparent md:bg-white/10 md:group-hover:bg-transparent transition-colors duration-500"
           >
             {/* Animated Moving Border (Conic Gradient) */}
-            <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_340deg,#CBA052_360deg)] opacity-0 group-hover:opacity-100 animate-spin [animation-duration:3s] transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_340deg,#CBA052_360deg)] opacity-100 md:opacity-0 md:group-hover:opacity-100 animate-spin [animation-duration:3s] transition-opacity duration-700 pointer-events-none" />
             
             {/* Inner Content Container */}
-            <div className="relative w-full aspect-square md:aspect-video lg:aspect-[21/9] rounded-[15px] overflow-hidden bg-[#141414] z-10">
-              {/* Map Iframe */}
-              <iframe
-                src="https://maps.google.com/maps?q=RT%20Nagar%20Bangalore%20560032&t=m&z=14&output=embed&iwloc=near"
-                width="100%"
-                height="100%"
-                style={{ border: 0, filter: "grayscale(100%) invert(100%) contrast(83%)" }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 w-full h-full object-cover"
-              ></iframe>
+            <div className="relative flex flex-col md:block w-full md:aspect-video lg:aspect-[21/9] rounded-[15px] overflow-hidden bg-[#141414] z-10">
+              {/* Map Iframe Container */}
+              <div className="relative w-full h-[300px] sm:h-[350px] md:h-full md:absolute md:inset-0">
+                <iframe
+                  src="https://maps.google.com/maps?q=RT%20Nagar%20Bangalore%20560032&t=m&z=14&output=embed&iwloc=near"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: "grayscale(100%) invert(100%) contrast(83%)" }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 w-full h-full object-cover"
+                ></iframe>
+                
+                {/* Glass Overlays */}
+                <div className="absolute inset-0 bg-[#CBA052]/5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 pointer-events-none mix-blend-overlay" />
+              </div>
 
-              {/* Glass Overlays */}
-              <div className="absolute inset-0 bg-[#CBA052]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none mix-blend-overlay" />
-              
-
-              {/* Floating Location Card */}
-              <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-[#0a0a0a]/40 backdrop-blur-xl border border-white/10 p-5 md:p-8 rounded-xl max-w-sm shadow-2xl transition-all duration-700 group-hover:border-[#CBA052]/30 overflow-hidden group/card">
+              {/* Location Card (Below map on mobile, floating on desktop) */}
+              <div className="relative md:absolute w-full md:w-auto md:bottom-10 md:left-10 bg-[#0a0a0a]/60 md:bg-[#0a0a0a]/40 backdrop-blur-xl border-t border-white/5 md:border md:border-white/10 p-5 md:p-8 md:rounded-xl md:max-w-sm shadow-2xl transition-all duration-700 md:group-hover:border-[#CBA052]/30 overflow-hidden group/card z-20">
                 {/* Blurred Background Image */}
                 <div className="absolute inset-0 z-0">
                   <img 
@@ -83,9 +84,9 @@ export default function Location() {
                 </div>
                 
                 {/* Small Logo in Top Right of Card */}
-                <img src="/Logo/LOGO-BG.png" alt="Pentahouse" className="absolute top-5 right-5 h-6 md:h-8 opacity-30 object-contain z-10 pointer-events-none group-hover/card:opacity-60 transition-opacity duration-500" />
+                <img src="/Logo/LOGO-BG.png" alt="Pentahouse" className="absolute top-4 right-4 md:top-5 md:right-5 h-5 md:h-8 opacity-30 object-contain z-10 pointer-events-none group-hover/card:opacity-60 transition-opacity duration-500" />
                 
-                <div className="relative z-10 flex items-start gap-4 mb-5">
+                <div className="relative z-10 flex items-start gap-3 md:gap-4 mb-4 md:mb-5">
                   <div className="w-10 h-10 rounded-full bg-[#CBA052]/10 flex items-center justify-center shrink-0 border border-[#CBA052]/30 group-hover:border-[#CBA052] transition-colors duration-500">
                     <MapPin className="w-5 h-5 text-[#CBA052]" />
                   </div>

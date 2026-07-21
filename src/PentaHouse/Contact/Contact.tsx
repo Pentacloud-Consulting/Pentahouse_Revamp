@@ -27,7 +27,7 @@ export default function ContactSample() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <p className="text-[#CBA052] font-semibold tracking-widest text-[10px] lg:text-xs mb-2 lg:mb-4 uppercase">Get In Touch</p>
@@ -51,7 +51,7 @@ export default function ContactSample() {
                   key={idx}
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.6, delay: idx * 0.15, ease: "easeOut" }}
                   className="flex items-start gap-3 lg:gap-5 group"
                 >
@@ -75,7 +75,7 @@ export default function ContactSample() {
             <motion.div 
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
               className="bg-[#111111]/80 backdrop-blur-md border border-white/5 p-5 lg:p-8 rounded-xl shadow-2xl w-full lg:mb-12 relative z-20"
             >
