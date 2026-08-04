@@ -125,8 +125,8 @@ export default function FeaturedProjects() {
               </div>
             </div>
 
-            <Link href="/projects" className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-colors duration-300 px-6 py-2.5 lg:px-8 lg:py-3 rounded text-xs lg:text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2 lg:gap-3 w-fit">
-              View Project <ArrowRight className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
+            <Link href="/contact" className="border border-[#CBA052] text-[#CBA052] hover:bg-[#CBA052] hover:text-black transition-colors duration-300 px-6 py-2.5 lg:px-8 lg:py-3 rounded text-xs lg:text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2 lg:gap-3 w-fit">
+              Contact Us <ArrowRight className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
             </Link>
           </motion.div>
         </AnimatePresence>
