@@ -20,7 +20,7 @@ export default function ContactSample() {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           
           {/* Left Column: Contact Info */}
           <div className="lg:col-span-4 flex flex-col pt-4 lg:pt-8">
@@ -77,7 +77,7 @@ export default function ContactSample() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-              className="bg-[#111111]/80 backdrop-blur-md border border-white/5 p-5 lg:p-8 rounded-xl shadow-2xl w-full lg:mb-12 relative z-20"
+              className="bg-[#111111]/80 backdrop-blur-md border border-white/5 p-5 lg:p-8 rounded-xl shadow-2xl w-full relative z-20"
             >
               <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
                 <Clock className="w-4 h-4 lg:w-5 lg:h-5 text-[#CBA052]" />
