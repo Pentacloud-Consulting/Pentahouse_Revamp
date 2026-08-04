@@ -14,6 +14,19 @@ const projectsList = [
   { id: 6, title: "Nexus Corporate Tower", category: "COMMERCIAL", location: "Bangalore, Karnataka", area: "250,000 sq.ft.", image: "/Houses/House -6.webp", video: "/Houses Videos/6.mp4" },
   { id: 7, title: "The Green Courtyard", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "22,000 sq.ft.", image: "/Houses/House -7.webp", video: "/Houses Videos/7.mp4" },
   { id: 8, title: "The Urban Pavilion", category: "ARCHITECTURAL", location: "Bangalore, Karnataka", area: "15,000 sq.ft.", image: "/Houses/House -8.webp", video: "/Houses Videos/8.mp4" },
+  { id: 9, title: "Skyline Residency", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "35,000 sq.ft.", image: "/Houses/House -1.webp", video: "/Houses Videos/9.mp4" },
+  { id: 10, title: "Apex Commercial Hub", category: "COMMERCIAL", location: "Bangalore, Karnataka", area: "150,000 sq.ft.", image: "/Houses/House -2.webp", video: "/Houses Videos/10.mp4" },
+  { id: 11, title: "Serene Meadows", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "28,000 sq.ft.", image: "/Houses/House -3.webp", video: "/Houses Videos/11.mp4" },
+  { id: 12, title: "Modernist Enclave", category: "ARCHITECTURAL", location: "Bangalore, Karnataka", area: "20,000 sq.ft.", image: "/Houses/House -4.webp", video: "/Houses Videos/12.mp4" },
+  { id: 13, title: "Elegant Interiors", category: "INTERIOR", location: "Bangalore, Karnataka", area: "8,000 sq.ft.", image: "/Houses/House -5.webp", video: "/Houses Videos/13.mp4" },
+  { id: 14, title: "Pinnacle Towers", category: "COMMERCIAL", location: "Bangalore, Karnataka", area: "300,000 sq.ft.", image: "/Houses/House -6.webp", video: "/Houses Videos/14.mp4" },
+  { id: 15, title: "Oasis Gardens", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "25,000 sq.ft.", image: "/Houses/House -7.webp", video: "/Houses Videos/15.mp4" },
+  { id: 16, title: "Structural Symphony", category: "ARCHITECTURAL", location: "Bangalore, Karnataka", area: "16,500 sq.ft.", image: "/Houses/House -8.webp", video: "/Houses Videos/16.mp4" },
+  { id: 17, title: "Harmony Heights", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "40,000 sq.ft.", image: "/Houses/House -1.webp", video: "/Houses Videos/17.mp4" },
+  { id: 18, title: "Horizon Tech Park", category: "COMMERCIAL", location: "Bangalore, Karnataka", area: "200,000 sq.ft.", image: "/Houses/House -2.webp", video: "/Houses Videos/18.mp4" },
+  { id: 19, title: "Lush Living", category: "RESIDENTIAL", location: "Bangalore, Karnataka", area: "30,000 sq.ft.", image: "/Houses/House -3.webp", video: "/Houses Videos/19.mp4" },
+  { id: 20, title: "Visionary Architecture", category: "ARCHITECTURAL", location: "Bangalore, Karnataka", area: "22,000 sq.ft.", image: "/Houses/House -4.webp", video: "/Houses Videos/20.mp4" },
+  { id: 21, title: "Bespoke Spaces", category: "INTERIOR", location: "Bangalore, Karnataka", area: "9,500 sq.ft.", image: "/Houses/House -5.webp", video: "/Houses Videos/21.mp4" },
 ];
 
 const categories = ["All Projects", "Residential", "Commercial", "Architectural", "Interior"];
