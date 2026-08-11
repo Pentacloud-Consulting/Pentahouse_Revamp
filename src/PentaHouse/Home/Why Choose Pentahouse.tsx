@@ -229,7 +229,7 @@ export default function WhyChoosePentahouse() {
                 <div 
                   key={idx}
                   ref={(el) => { cardsRef.current[idx] = el; }}
-                  className="flex flex-col items-center text-center group"
+                  className={`flex flex-col items-center text-center group ${idx === 4 ? 'col-span-2 sm:col-span-1' : ''}`}
                 >
                   <div className="icon-wrapper w-16 h-16 md:w-20 md:h-20 rounded-xl border border-white/10 bg-[#111111] flex items-center justify-center mb-3 md:mb-4 transition-colors duration-300 relative text-gray-400">
                     <div className="step-num absolute -top-2.5 md:-top-3 bg-[#141414] px-1.5 md:px-2 text-[#CBA052] font-bold text-[10px] md:text-sm">{step.num}</div>
