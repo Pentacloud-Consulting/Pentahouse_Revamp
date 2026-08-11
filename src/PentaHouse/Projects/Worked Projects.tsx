@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MapPin, Square } from "lucide-react";
+import { createPortal } from "react-dom";
+import { MapPin, Square, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -33,6 +34,12 @@ const categories = ["All Projects", "Residential", "Commercial", "Architectural"
 
 export default function WorkedProjects() {
   const [activeCategory, setActiveCategory] = useState("All Projects");
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const filteredProjects = activeCategory === "All Projects"
     ? projectsList
@@ -99,7 +106,12 @@ export default function WorkedProjects() {
               <div 
                 onMouseEnter={(e) => {
                   const video = e.currentTarget.querySelector('video');
-                  if (video) video.play();
+                  if (video) {
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                      playPromise.catch(err => console.log("Video play error:", err));
+                    }
+                  }
                 }}
                 onMouseLeave={(e) => {
                   const video = e.currentTarget.querySelector('video');
@@ -108,6 +120,7 @@ export default function WorkedProjects() {
                     video.currentTime = 0;
                   }
                 }}
+                onClick={() => setSelectedProject(project)}
                 className="project-card bg-[#111111] h-full rounded-xl lg:rounded-2xl overflow-hidden border border-white/5 group cursor-pointer transition-all duration-500 ease-out hover:border-[#CBA052]/50 hover:-translate-y-1 lg:hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(203,160,82,0.15)] relative"
               >
                 <div className="relative h-32 sm:h-48 lg:h-64 overflow-hidden bg-[#1a1a1a]">
@@ -117,12 +130,14 @@ export default function WorkedProjects() {
                     loop
                     muted
                     playsInline
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out z-0"
+                    disablePictureInPicture
+                    disableRemotePlayback
+                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out z-0 pointer-events-none"
                   />
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-0 z-10" 
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-0 z-10 pointer-events-none" 
                   />
                 </div>
                 <div className="p-3 lg:p-6 relative z-20">
@@ -144,6 +159,64 @@ export default function WorkedProjects() {
           ))}
         </AnimatePresence>
       </div>
+
+      {/* Fullscreen Video Modal */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedProject && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:p-10 bg-black/90 backdrop-blur-sm"
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-5xl h-auto aspect-[4/3] sm:aspect-video rounded-xl lg:rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl"
+              >
+                <button 
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-3 right-3 lg:top-6 lg:right-6 z-50 w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 hover:text-[#CBA052] border border-white/10 transition-all"
+                >
+                  <X className="w-4 h-4 lg:w-5 lg:h-5" />
+                </button>
+                
+                <video
+                  src={selectedProject.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  className="w-full h-full object-cover pointer-events-none"
+                />
+                
+                <div className="absolute bottom-0 left-0 w-full p-4 lg:p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                  <p className="text-[#CBA052] font-bold tracking-widest text-[10px] lg:text-xs mb-1 lg:mb-2 uppercase">{selectedProject.category}</p>
+                  <h3 className="text-lg lg:text-3xl font-bold text-white mb-2 lg:mb-4">{selectedProject.title}</h3>
+                  <div className="flex flex-wrap gap-4 lg:gap-6 text-gray-300 text-xs lg:text-base">
+                    <div className="flex items-center gap-1.5 lg:gap-2">
+                      <MapPin className="w-4 h-4 text-[#CBA052]" />
+                      {selectedProject.location}
+                    </div>
+                    <div className="flex items-center gap-1.5 lg:gap-2">
+                      <Square className="w-4 h-4 text-[#CBA052]" />
+                      {selectedProject.area}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 }
