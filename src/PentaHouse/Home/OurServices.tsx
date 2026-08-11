@@ -1,11 +1,46 @@
 "use client";
 
-import { cloneElement, ReactElement, useState } from "react";
+import { cloneElement, ReactElement, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Building2, Wrench, PenTool, Ruler, Settings, ArrowRight } from "lucide-react";
 
 export default function OurServices() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth >= 1024) return; // Only apply auto-focus on mobile/tablet
+
+      const elements = document.querySelectorAll('.service-card');
+      if (elements.length === 0) return;
+
+      let minDistance = Infinity;
+      let closestIndex = -1;
+      const centerY = window.innerHeight / 2;
+
+      elements.forEach((el, idx) => {
+        const rect = el.getBoundingClientRect();
+        const elCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(centerY - elCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = idx;
+        }
+      });
+
+      // Threshold to only focus if it's reasonably near the center
+      if (minDistance < window.innerHeight / 2.5) {
+        setHoveredIndex(closestIndex);
+      } else {
+        setHoveredIndex(null);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <section className="pt-16 pb-8 md:py-24 bg-[#111111] relative border-t border-white/5">
@@ -40,7 +75,7 @@ export default function OurServices() {
                   zIndex: isHovered ? 40 : 10,
                 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="group relative h-52 lg:h-48 xl:h-52 overflow-hidden border border-white/10 hover:border-[#CBA052] transition-colors duration-500 cursor-pointer"
+                className="service-card group relative h-52 lg:h-48 xl:h-52 overflow-hidden border border-white/10 hover:border-[#CBA052] transition-colors duration-500 cursor-pointer"
               >
                 <img 
                   src={service.img} 

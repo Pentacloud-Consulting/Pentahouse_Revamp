@@ -104,7 +104,7 @@ export default function Aboutinfo() {
                 At Pentahouse, we believe every structure we build is more than just concrete and bricks – it's a promise of quality, trust, and a better tomorrow. With 25+ years of expertise, we have delivered iconic residential and commercial projects that stand the test of time.
               </p>
               
-              <Link href="/about" className="stagger-item font-general border border-black hover:bg-black hover:text-white px-6 py-3 text-[10px] sm:text-xs font-bold tracking-widest flex items-center justify-center sm:justify-start gap-2 sm:gap-3 transition-all duration-300 inline-flex w-full sm:w-fit">
+              <Link href="/about" className="stagger-item font-general border border-transparent bg-[#CBA052] text-black hover:bg-black hover:text-[#CBA052] px-6 py-3 text-[10px] sm:text-xs font-bold tracking-widest flex items-center justify-center sm:justify-start gap-2 sm:gap-3 transition-all duration-300 inline-flex w-full sm:w-fit">
                 KNOW MORE ABOUT US <ArrowRight size={14} />
               </Link>
             </div>

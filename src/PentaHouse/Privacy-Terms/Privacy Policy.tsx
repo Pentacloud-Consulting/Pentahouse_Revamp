@@ -7,8 +7,8 @@ import Link from 'next/link';
 export default function PrivacyPolicy() {
   const sections = [
     { id: "01", title: "Information We Collect", icon: <User size={20} />, content: "We collect personal information that you voluntarily provide to us when you contact us, fill out a form, or subscribe to our services. This may include your name, email address, phone number, and project details." },
-    { id: "02", title: "How We Use Your Information", icon: <Settings size={20} />, content: "We use your information to understand your needs, respond to inquiries, provide our services, improve our website, and send you relevant updates about our projects and services." },
-    { id: "03", title: "Sharing Your Information", icon: <Users size={20} />, content: "We do not sell, trade, or rent your personal information. We may share your data with trusted partners or service providers who help us operate our website and conduct our business, strictly for the purpose of providing our services." },
+    { id: "02", title: "How We Use Your Data", icon: <Settings size={20} />, content: "We use your information to understand your needs, respond to inquiries, provide our services, improve our website, and send you relevant updates about our projects and services." },
+    { id: "03", title: "Sharing Your Data", icon: <Users size={20} />, content: "We do not sell, trade, or rent your personal information. We may share your data with trusted partners or service providers who help us operate our website and conduct our business, strictly for the purpose of providing our services." },
     { id: "04", title: "Data Security", icon: <Shield size={20} />, content: "We implement appropriate security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction." },
     { id: "05", title: "Cookies and Tracking", icon: <Cookie size={20} />, content: "Our website uses cookies to enhance your browsing experience, analyze website traffic, and personalize content. You can choose to disable cookies through your browser settings." },
     { id: "06", title: "Your Rights", icon: <UserCheck size={20} />, content: "You have the right to access, update, correct, or delete your personal information. If you wish to exercise any of these rights, please contact us using the details below." },
@@ -74,15 +74,16 @@ export default function PrivacyPolicy() {
             <div className="lg:col-span-4 space-y-6 md:space-y-8">
               <div className="bg-[#111111] border border-white/5 p-6 md:p-8 rounded-sm sticky top-24 md:top-32">
                 <h4 className="text-[#CBA052] text-xs font-bold uppercase tracking-widest mb-6">ON THIS PAGE</h4>
-                <ul className="space-y-4">
+                <ul className="grid grid-cols-2 lg:grid-cols-1 gap-y-4 gap-x-2 sm:gap-x-4">
                   {sections.map(section => (
                     <li key={section.id}>
                       <a 
                         href={`#${section.id}`} 
                         onClick={(e) => handleScroll(e, section.id)}
-                        className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors"
+                        className="flex items-start gap-1.5 sm:gap-3 text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
                       >
-                        <span className="text-[#CBA052] font-medium">{section.id}.</span> {section.title}
+                        <span className="text-[#CBA052] font-medium shrink-0">{section.id}.</span> 
+                        <span className="leading-tight">{section.title}</span>
                       </a>
                     </li>
                   ))}

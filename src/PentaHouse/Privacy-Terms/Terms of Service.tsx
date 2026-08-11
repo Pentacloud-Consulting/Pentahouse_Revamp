@@ -77,15 +77,16 @@ export default function TermsOfService() {
             <div className="lg:col-span-4 space-y-6 md:space-y-8">
               <div className="bg-[#111111] border border-white/5 p-6 md:p-8 rounded-sm sticky top-24 md:top-32">
                 <h4 className="text-[#CBA052] text-xs font-bold uppercase tracking-widest mb-6">ON THIS PAGE</h4>
-                <ul className="space-y-4">
+                <ul className="grid grid-cols-2 lg:grid-cols-1 gap-y-4 gap-x-2 sm:gap-x-4">
                   {sections.map(section => (
                     <li key={section.id}>
                       <a 
                         href={`#${section.id}`} 
                         onClick={(e) => handleScroll(e, section.id)}
-                        className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors"
+                        className="flex items-start gap-1.5 sm:gap-3 text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
                       >
-                        <span className="text-[#CBA052] font-medium">{section.id}.</span> {section.title}
+                        <span className="text-[#CBA052] font-medium shrink-0">{section.id}.</span> 
+                        <span className="leading-tight">{section.title}</span>
                       </a>
                     </li>
                   ))}

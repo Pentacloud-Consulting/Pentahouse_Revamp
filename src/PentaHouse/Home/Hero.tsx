@@ -101,7 +101,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent z-20 opacity-90 pointer-events-none" />
         </div>
 
-        <div className="w-full px-5 sm:px-6 lg:px-12 xl:px-16 relative z-20 flex flex-col lg:flex-row justify-between items-center gap-12 mt-4 sm:mt-10">
+        <div className="w-full px-5 sm:px-6 lg:px-12 xl:px-16 relative z-20 flex flex-col lg:flex-row justify-between items-center gap-12 -mt-16 sm:mt-10">
           <motion.div 
             initial="hidden"
             animate="visible"
