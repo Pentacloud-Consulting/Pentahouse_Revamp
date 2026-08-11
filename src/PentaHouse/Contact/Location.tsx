@@ -57,14 +57,13 @@ export default function Location() {
               {/* Map Iframe Container */}
               <div className="relative w-full h-[300px] sm:h-[350px] md:h-full md:absolute md:inset-0">
                 <iframe
-                  src="https://maps.google.com/maps?q=RT%20Nagar%20Bangalore%20560032&t=m&z=14&output=embed&iwloc=near"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=77.5820%2C13.0060%2C77.6020%2C13.0260&layer=mapnik&marker=13.0160%2C77.5920"
                   width="100%"
                   height="100%"
-                  style={{ border: 0, filter: "grayscale(100%) invert(100%) contrast(83%)" }}
-                  allowFullScreen={true}
+                  style={{ border: 0, filter: "grayscale(80%) contrast(90%) brightness(0.75)" }}
+                  allowFullScreen
                   loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="w-full h-full"
                 ></iframe>
                 
                 {/* Glass Overlays */}

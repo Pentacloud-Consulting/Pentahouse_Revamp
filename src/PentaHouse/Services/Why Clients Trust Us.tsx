@@ -40,97 +40,128 @@ export default function WhyClientsTrustUs() {
   }, []);
 
   return (
-    <section ref={containerRef} className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-0 bg-[#111111] border border-white/5 rounded-sm overflow-hidden min-h-[300px] lg:min-h-[500px]">
-      {/* Left Panel */}
-      <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-white/5 relative overflow-hidden p-5 lg:p-12 flex flex-col justify-end min-h-[220px] lg:min-h-0">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex === null ? 'default' : activeIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="absolute inset-0 z-0"
-          >
-            <img 
-              src={activeIndex === null ? "/Images/About-PentaHouse.jpg" : reasons[activeIndex].image} 
-              alt={activeIndex === null ? "Construction Background" : reasons[activeIndex].title} 
-              className="w-full h-full object-cover opacity-50 mix-blend-luminosity" 
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-[#111111]/20" />
-          </motion.div>
-        </AnimatePresence>
+    <>
+      {/* MOBILE VIEW */}
+      <section className="lg:hidden py-4">
+        <div className="mb-8 text-center px-4">
+          <div className="w-12 h-12 mx-auto mb-4 rounded-full border border-[#CBA052]/20 flex items-center justify-center bg-[#CBA052]/10 text-[#CBA052]">
+            <Building2 size={24} />
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Why Clients Trust Us</h2>
+          <p className="text-gray-400 text-sm max-w-sm mx-auto">We combine experience, innovation, and integrity to deliver spaces that stand the test of time.</p>
+        </div>
+        
+        <div className="flex flex-col gap-5 px-4">
+          {reasons.map((item, idx) => (
+             <div key={idx} className="relative rounded-xl overflow-hidden min-h-[280px] flex flex-col justify-end p-6 border border-white/10 shadow-xl">
+                <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-luminosity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/80 to-[#111]/20" />
+                
+                <div className="relative z-10">
+                   <div className="w-12 h-12 mb-4 rounded-xl border border-[#CBA052]/50 bg-[#CBA052]/20 text-[#CBA052] flex items-center justify-center backdrop-blur-md">
+                     {item.icon}
+                   </div>
+                   <h3 className="text-xl font-bold text-white mb-2 drop-shadow-md">{item.title}</h3>
+                   <p className="text-sm text-gray-300 leading-relaxed drop-shadow-md">{item.desc}</p>
+                </div>
+             </div>
+          ))}
+        </div>
+      </section>
 
-        <div className="discover-left relative z-10 w-full">
+      {/* DESKTOP VIEW */}
+      <section ref={containerRef} className="hidden lg:grid grid-cols-12 gap-0 bg-[#111111] border border-white/5 rounded-sm overflow-hidden min-h-[500px]">
+        {/* Left Panel */}
+        <div className="col-span-4 border-r border-white/5 relative overflow-hidden p-12 flex flex-col justify-end">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex === null ? 'default' : activeIndex}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="space-y-4 lg:space-y-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 z-0"
             >
-              <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-[#CBA052]/20 flex items-center justify-center bg-[#CBA052]/10 text-[#CBA052] backdrop-blur-md">
-                {activeIndex === null ? <Building2 size={24} strokeWidth={1.5} className="lg:w-7 lg:h-7" /> : reasons[activeIndex].icon}
-              </div>
-              <h2 className="text-xl lg:text-3xl font-bold text-white drop-shadow-md">
-                {activeIndex === null ? (
-                  <>Why Clients<br/>Trust Us</>
-                ) : (
-                  <>{reasons[activeIndex].title}</>
-                )}
-              </h2>
-              <p className="text-gray-200 text-xs lg:text-sm leading-relaxed max-w-xs drop-shadow-md">
-                {activeIndex === null 
-                  ? "We combine experience, innovation, and integrity to deliver spaces that stand the test of time." 
-                  : reasons[activeIndex].desc}
-              </p>
+              <img 
+                src={activeIndex === null ? "/Images/About-PentaHouse.jpg" : reasons[activeIndex].image} 
+                alt={activeIndex === null ? "Construction Background" : reasons[activeIndex].title} 
+                className="w-full h-full object-cover opacity-50 mix-blend-luminosity" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-[#111111]/20" />
             </motion.div>
           </AnimatePresence>
+
+          <div className="discover-left relative z-10 w-full">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex === null ? 'default' : activeIndex}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="space-y-6"
+              >
+                <div className="w-14 h-14 rounded-full border border-[#CBA052]/20 flex items-center justify-center bg-[#CBA052]/10 text-[#CBA052] backdrop-blur-md">
+                  {activeIndex === null ? <Building2 size={24} strokeWidth={1.5} className="w-7 h-7" /> : reasons[activeIndex].icon}
+                </div>
+                <h2 className="text-3xl font-bold text-white drop-shadow-md">
+                  {activeIndex === null ? (
+                    <>Why Clients<br/>Trust Us</>
+                  ) : (
+                    <>{reasons[activeIndex].title}</>
+                  )}
+                </h2>
+                <p className="text-gray-200 text-sm leading-relaxed max-w-xs drop-shadow-md">
+                  {activeIndex === null 
+                    ? "We combine experience, innovation, and integrity to deliver spaces that stand the test of time." 
+                    : reasons[activeIndex].desc}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
-      
-      {/* Right Panel */}
-      <div className="lg:col-span-8 p-5 lg:p-12 flex flex-col justify-center">
-        <h3 className="discover-right-header text-base lg:text-xl font-bold mb-4 lg:mb-8">Discover the Reasons</h3>
-        <div className="space-y-3 lg:space-y-6">
-          {reasons.map((item, idx) => (
-            <div 
-              key={idx} 
-              onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
-              className={`discover-item flex items-center gap-3 lg:gap-6 group cursor-pointer border p-3 lg:p-4 -mx-2 lg:-mx-4 rounded-lg transition-all duration-300 ${
-                activeIndex === idx 
-                  ? 'border-[#CBA052]/30 bg-[#CBA052]/5' 
-                  : 'border-transparent hover:border-white/5 hover:bg-white/[0.02]'
-              }`}
-            >
-              <div className={`w-10 h-10 lg:w-16 lg:h-16 shrink-0 rounded-lg border flex items-center justify-center transition-colors ${
-                activeIndex === idx 
-                  ? 'bg-[#CBA052]/20 border-[#CBA052]/50 text-[#CBA052]' 
-                  : 'border-[#CBA052]/30 text-[#CBA052] bg-[#CBA052]/5 group-hover:bg-[#CBA052]/10 group-hover:border-[#CBA052]/50'
-              }`}>
-                {item.icon}
-              </div>
-              <div className="flex-1">
-                <h4 className={`font-bold text-sm lg:text-base mb-0.5 lg:mb-1 transition-colors ${
-                  activeIndex === idx ? 'text-[#CBA052]' : 'text-white group-hover:text-[#CBA052]'
+        
+        {/* Right Panel */}
+        <div className="col-span-8 p-12 flex flex-col justify-center">
+          <h3 className="discover-right-header text-xl font-bold mb-8">Discover the Reasons</h3>
+          <div className="space-y-6">
+            {reasons.map((item, idx) => (
+              <div 
+                key={idx} 
+                onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
+                className={`discover-item flex items-center gap-6 group cursor-pointer border p-4 -mx-4 rounded-lg transition-all duration-300 ${
+                  activeIndex === idx 
+                    ? 'border-[#CBA052]/30 bg-[#CBA052]/5' 
+                    : 'border-transparent hover:border-white/5 hover:bg-white/[0.02]'
+                }`}
+              >
+                <div className={`w-16 h-16 shrink-0 rounded-lg border flex items-center justify-center transition-colors ${
+                  activeIndex === idx 
+                    ? 'bg-[#CBA052]/20 border-[#CBA052]/50 text-[#CBA052]' 
+                    : 'border-[#CBA052]/30 text-[#CBA052] bg-[#CBA052]/5 group-hover:bg-[#CBA052]/10 group-hover:border-[#CBA052]/50'
                 }`}>
-                  {item.title}
-                </h4>
-                <p className="text-gray-400 text-xs lg:text-sm leading-snug lg:leading-normal">{item.desc}</p>
+                  {item.icon}
+                </div>
+                <div className="flex-1">
+                  <h4 className={`font-bold text-base mb-1 transition-colors ${
+                    activeIndex === idx ? 'text-[#CBA052]' : 'text-white group-hover:text-[#CBA052]'
+                  }`}>
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-400 text-sm leading-normal">{item.desc}</p>
+                </div>
+                <div className={`text-[#CBA052] transition-all ${
+                  activeIndex === idx 
+                    ? 'opacity-100 scale-110' 
+                    : 'opacity-50 group-hover:opacity-100 group-hover:scale-110'
+                }`}>
+                  <MousePointerClick size={22} />
+                </div>
               </div>
-              <div className={`text-[#CBA052] transition-all ${
-                activeIndex === idx 
-                  ? 'opacity-100 scale-110' 
-                  : 'opacity-50 group-hover:opacity-100 group-hover:scale-110'
-              }`}>
-                <MousePointerClick size={22} />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

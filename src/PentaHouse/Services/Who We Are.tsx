@@ -60,21 +60,21 @@ export default function WhoWeAre() {
         </div>
       </div>
       
-      <div className="w-full lg:w-7/12 relative h-[300px] sm:h-[400px] lg:h-[500px] mt-4 lg:mt-0">
+      <div className="w-full lg:w-7/12 mt-10 lg:mt-0 grid grid-cols-2 gap-3 sm:gap-6 lg:block lg:relative h-auto lg:h-[500px]">
         {/* Background Image */}
-        <div className="who-bg absolute top-0 right-0 w-[80%] h-[200px] sm:h-[300px] lg:h-[400px]">
+        <div className="who-bg lg:absolute lg:top-0 lg:right-0 w-full lg:w-[80%] h-[180px] sm:h-[280px] lg:h-[400px]">
           <img 
             src="/Featured Project images/Featured Project -3.webp" 
             alt="Interior Design" 
-            className="w-full h-full object-cover rounded-sm"
+            className="w-full h-full object-cover rounded-xl lg:rounded-sm"
           />
         </div>
         {/* Foreground Image Overlapping */}
-        <div className="who-fg absolute bottom-0 left-0 w-[70%] h-[180px] sm:h-[250px] lg:h-[350px] shadow-2xl shadow-black/80">
+        <div className="who-fg lg:absolute lg:bottom-0 lg:left-0 w-full lg:w-[70%] h-[180px] sm:h-[280px] lg:h-[350px] lg:shadow-2xl lg:shadow-black/80 mt-6 sm:mt-12 lg:mt-0">
           <img 
             src="/Featured Project images/Featured Project -4.webp" 
             alt="Happy clients in home" 
-            className="w-full h-full object-cover rounded-sm border-[2px] lg:border-[4px] border-[#0a0a0a]"
+            className="w-full h-full object-cover rounded-xl lg:rounded-sm lg:border-[4px] lg:border-[#0a0a0a]"
           />
         </div>
       </div>
