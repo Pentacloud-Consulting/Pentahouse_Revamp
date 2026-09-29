@@ -5,7 +5,7 @@ import CTA from "@/PentaHouse/Home/CTA";
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans overflow-x-hidden selection:bg-[#CBA052] selection:text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans overflow-x-clip selection:bg-[#CBA052] selection:text-white">
       <Navbar />
       <div className="pt-28 sm:pt-32 pb-12">
         <BlogView />
@@ -17,3 +17,4 @@ export default function BlogPage() {
     </div>
   );
 }
+

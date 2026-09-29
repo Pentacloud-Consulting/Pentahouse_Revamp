@@ -6,6 +6,32 @@
   --foreground: #171717;
 }
 
+/* Lenis Smooth Scroll Optimization Rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+html, body {
+  overflow-x: clip;
+  overscroll-behavior-y: none;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -58,3 +84,4 @@
     scrollbar-width: none; /* Firefox */
   }
 }
+

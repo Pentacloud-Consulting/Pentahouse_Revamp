@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LayoutGrid, Grid, List } from "lucide-react";
+import { Grid, List } from "lucide-react";
 import { LayoutMode } from "./types";
 
 interface BlogBentoGridListProps {
@@ -13,8 +13,7 @@ export default function BlogBentoGridList({
   layoutMode,
   setLayoutMode
 }: BlogBentoGridListProps) {
-  const modes: { id: LayoutMode; label: string; icon: typeof LayoutGrid }[] = [
-    { id: "bento", label: "Bento", icon: LayoutGrid },
+  const modes: { id: LayoutMode; label: string; icon: typeof Grid }[] = [
     { id: "grid", label: "Grid", icon: Grid },
     { id: "list", label: "List", icon: List },
   ];

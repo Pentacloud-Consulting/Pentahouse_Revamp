@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import BlogBentoGridList from "./Blog-Bento-Grid-List";
+import BlogSortDropdown from "./BlogSortDropdown";
 import { LayoutMode, SortOption, CATEGORIES } from "./types";
 
 interface BlogSearchingProps {
@@ -14,6 +15,7 @@ interface BlogSearchingProps {
   setSortBy: (sort: SortOption) => void;
   layoutMode: LayoutMode;
   setLayoutMode: (mode: LayoutMode) => void;
+  categories?: string[];
 }
 
 export default function BlogSearching({
@@ -24,8 +26,10 @@ export default function BlogSearching({
   sortBy,
   setSortBy,
   layoutMode,
-  setLayoutMode
+  setLayoutMode,
+  categories = CATEGORIES as unknown as string[]
 }: BlogSearchingProps) {
+  const categoryList = categories.length > 0 ? categories : CATEGORIES;
   return (
     <div className="bg-[#121212] border border-white/10 rounded-xl p-3.5 sm:p-4 mb-8 shadow-lg">
       {/* Top Search & Controls Row */}
@@ -52,23 +56,11 @@ export default function BlogSearching({
         </div>
 
         {/* Controls Right Group */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          {/* Sort Selector */}
-          <div className="flex items-center gap-1.5 bg-[#0a0a0a] border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-gray-300 hover:border-[#CBA052]/40 transition-colors">
-            <SlidersHorizontal size={13} className="text-[#CBA052]" />
-            <span className="hidden sm:inline text-gray-400 text-[11px]">Sort:</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="bg-transparent text-white text-xs focus:outline-none cursor-pointer"
-            >
-              <option value="newest" className="bg-[#121212]">Newest</option>
-              <option value="popular" className="bg-[#121212]">Popular</option>
-              <option value="readTime" className="bg-[#121212]">Quick Read</option>
-            </select>
-          </div>
+        <div className="flex items-center justify-between sm:justify-end gap-2.5 w-full lg:w-auto">
+          {/* Custom Luxury Sort Dropdown */}
+          <BlogSortDropdown sortBy={sortBy} setSortBy={setSortBy} />
 
-          {/* View Switcher Component (Image 3) */}
+          {/* View Switcher Component */}
           <BlogBentoGridList
             layoutMode={layoutMode}
             setLayoutMode={setLayoutMode}
@@ -78,7 +70,7 @@ export default function BlogSearching({
 
       {/* Category Pill Filters */}
       <div className="flex items-center gap-1.5 overflow-x-auto pt-3 mt-3 border-t border-white/10 no-scrollbar">
-        {CATEGORIES.map(cat => {
+        {categoryList.map(cat => {
           const isActive = selectedCategory === cat;
           return (
             <button

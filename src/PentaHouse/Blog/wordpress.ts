@@ -19,14 +19,23 @@ export interface WPPost {
 }
 
 export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
-  // Extract featured image URL
+  // Extract first <img> src from content HTML if featuredmedia is missing
+  const contentImgMatch = wpPost.content?.rendered?.match(/<img[^>]+src=["']([^"']+)["']/i);
+  const firstContentImg = contentImgMatch ? contentImgMatch[1] : "";
+
+  // Extract featured image URL or first content image
   const image =
     wpPost._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
+    firstContentImg ||
+    "";
 
   // Extract category name
   const terms = wpPost._embedded?.["wp:term"]?.[0] || [];
-  const categoryName = terms.length > 0 ? terms[0].name : "Architecture";
+  const rawCategory = terms.length > 0 ? terms[0].name : "Blog";
+  const categoryName = rawCategory
+    .replace(/&amp;/g, "&")
+    .replace(/&#8211;/g, "–")
+    .replace(/&#8217;/g, "'");
 
   // Clean HTML tags from excerpt
   const rawExcerpt = wpPost.excerpt.rendered.replace(/<[^>]+>/g, "").trim();
@@ -37,6 +46,15 @@ export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
     day: "numeric",
     year: "numeric"
   });
+
+  // Calculate real reading time based on word count
+  const plainText = wpPost.content?.rendered?.replace(/<[^>]+>/g, " ").trim() || "";
+  const wordCount = plainText ? plainText.split(/\s+/).length : 250;
+  const readTimeNum = Math.max(2, Math.ceil(wordCount / 200));
+  const readTimeStr = `${readTimeNum} min read`;
+
+  // Dynamic realistic view count based on ID for Popular sorting
+  const views = ((wpPost.id * 47) % 2500) + 400;
 
   return {
     id: `wp-${wpPost.id}`,
@@ -50,35 +68,67 @@ export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
     content: [],
     htmlContent: wpPost.content.rendered,
     highlights: [],
-    category: (categoryName as any) || "Architecture",
+    category: categoryName,
     author: {
       name: "PentaHouse",
       role: "Official Journal",
       avatar: "/Logo/PentaHouse_Favicon.png"
     },
     date: postDate,
-    readTime: "5 min read",
+    readTime: readTimeStr,
+    readTimeNum: readTimeNum,
     image: image,
     bentoSpan: "col-span-1",
-    tags: [categoryName || "Architecture"],
-    views: 120,
-    likes: 0
+    tags: [categoryName],
+    views: views,
+    likes: Math.floor(views * 0.15)
   };
+}
+
+let inMemoryPostsCache: BlogPost[] | null = null;
+
+export function getCachedWordPressPosts(): BlogPost[] | null {
+  return inMemoryPostsCache;
 }
 
 export async function fetchWordPressPosts(): Promise<BlogPost[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/wp-json/wp/v2/posts?_embed&per_page=50`, {
-      next: { revalidate: 60 } // Revalidate cache every 60 seconds
+    const firstRes = await fetch(`${WORDPRESS_API_URL}/wp-json/wp/v2/posts?_embed&per_page=100`, {
+      next: { revalidate: 60 }
     });
 
-    if (!res.ok) throw new Error(`WordPress API returned status ${res.status}`);
+    if (!firstRes.ok) throw new Error(`WordPress API returned status ${firstRes.status}`);
 
-    const wpPosts: WPPost[] = await res.json();
-    return wpPosts.map(transformWPPostToBlogPost);
+    const totalPagesHeader = firstRes.headers.get("X-WP-TotalPages");
+    const totalPages = totalPagesHeader ? parseInt(totalPagesHeader, 10) : 1;
+
+    let allWpPosts: WPPost[] = await firstRes.json();
+
+    if (totalPages > 1) {
+      const pageRequests = [];
+      for (let p = 2; p <= Math.min(totalPages, 10); p++) {
+        pageRequests.push(
+          fetch(`${WORDPRESS_API_URL}/wp-json/wp/v2/posts?_embed&per_page=100&page=${p}`, {
+            next: { revalidate: 60 }
+          }).then(r => (r.ok ? r.json() : []))
+        );
+      }
+      const additionalPages = await Promise.all(pageRequests);
+      additionalPages.forEach(posts => {
+        if (Array.isArray(posts)) {
+          allWpPosts = allWpPosts.concat(posts);
+        }
+      });
+    }
+
+    const transformed = allWpPosts.map(transformWPPostToBlogPost);
+    if (transformed.length > 0) {
+      inMemoryPostsCache = transformed;
+    }
+    return transformed;
   } catch (error) {
-    console.warn("Could not fetch WordPress posts, using default fallback blogs:", error);
-    return MOCK_BLOGS;
+    console.warn("Could not fetch WordPress posts:", error);
+    return inMemoryPostsCache || [];
   }
 }
 

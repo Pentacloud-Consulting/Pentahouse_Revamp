@@ -20,21 +20,9 @@ export default function BlogPreview({ slug }: BlogPreviewProps) {
 
   useEffect(() => {
     async function loadPost() {
-      // Try WordPress REST API first
+      // Fetch live WordPress REST API post
       const wpPost = await fetchWordPressPostBySlug(slug);
-      if (wpPost) {
-        setPost(wpPost);
-        setLoading(false);
-        return;
-      }
-
-      // Fallback to local mock posts
-      const found = getBlogBySlug(slug);
-      if (found) {
-        setPost(found);
-      } else {
-        setPost(MOCK_BLOGS[0]);
-      }
+      setPost(wpPost);
       setLoading(false);
     }
 

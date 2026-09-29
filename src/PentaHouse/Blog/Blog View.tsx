@@ -2,33 +2,105 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
+import { useLenis } from "lenis/react";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 import { BlogPost, LayoutMode, SortOption, MOCK_BLOGS } from "./types";
 import BlogRecentlyUploaded from "./Blog Recently Uploaded";
 import BlogSearching from "./Blog Searching";
 import BlogArticles from "./Blog Articles";
-import { fetchWordPressPosts } from "./wordpress";
+import BlogSkeleton, { BlogFeaturedSkeleton } from "./BlogSkeleton";
+import { fetchWordPressPosts, getCachedWordPressPosts } from "./wordpress";
 
 export default function BlogView() {
-  const [blogs, setBlogs] = useState<BlogPost[]>(MOCK_BLOGS);
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState<SortOption>("newest");
-  const [layoutMode, setLayoutMode] = useState<LayoutMode>("bento");
+  const [layoutMode, setLayoutMode] = useState<LayoutMode>("grid");
+
+  const [visibleCount, setVisibleCount] = useState(12);
+  const lenis = useLenis();
 
   useEffect(() => {
     async function loadWordPressBlogs() {
+      // 1. Instant load from in-memory cache
+      const memCache = getCachedWordPressPosts();
+      if (memCache && memCache.length > 0) {
+        setBlogs(memCache);
+        setIsLoading(false);
+      } else if (typeof window !== "undefined") {
+        // 2. Instant load from localStorage cache
+        const localCacheStr = localStorage.getItem("pentahouse_blogs_cache");
+        if (localCacheStr) {
+          try {
+            const parsed = JSON.parse(localCacheStr);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              setBlogs(parsed);
+              setIsLoading(false);
+            }
+          } catch (e) {
+            // ignore JSON error
+          }
+        }
+      }
+
+      // 3. Background fresh fetch & update
       const livePosts = await fetchWordPressPosts();
       if (livePosts && livePosts.length > 0) {
         setBlogs(livePosts);
+        if (typeof window !== "undefined") {
+          try {
+            localStorage.setItem("pentahouse_blogs_cache", JSON.stringify(livePosts));
+          } catch (e) {
+            // ignore storage full error
+          }
+        }
       }
+      setIsLoading(false);
     }
     loadWordPressBlogs();
   }, []);
 
+  // Reset pagination count when search, category, or sort option changes
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [searchQuery, selectedCategory, sortBy]);
+
+  // Recalculate Lenis scroll dimensions whenever visible content changes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+      lenis?.resize();
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [blogs.length, visibleCount, isLoading, searchQuery, selectedCategory, lenis]);
+
+
+  // Dynamically derive unique categories from actual WordPress posts including location tags
+  const categories = useMemo(() => {
+    const defaultCats = ["All", "Bangalore", "Thanisandra", "RT Nagar"];
+    const dynamicCats: string[] = [];
+
+    blogs.forEach((blog) => {
+      if (
+        blog.category &&
+        blog.category !== "Blog" &&
+        blog.category !== "Uncategorized" &&
+        !defaultCats.some((d) => d.toLowerCase() === blog.category.toLowerCase())
+      ) {
+        if (!dynamicCats.includes(blog.category)) {
+          dynamicCats.push(blog.category);
+        }
+      }
+    });
+
+    return [...defaultCats, ...dynamicCats];
+  }, [blogs]);
+
   const filteredBlogs = useMemo(() => {
     return blogs.filter(blog => {
-      const matchesCategory = selectedCategory === "All" || blog.category === selectedCategory;
       const query = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !query ||
@@ -38,14 +110,30 @@ export default function BlogView() {
         blog.author.name.toLowerCase().includes(query) ||
         blog.tags.some(tag => tag.toLowerCase().includes(query));
 
-      return matchesCategory && matchesSearch;
+      if (!matchesSearch) return false;
+
+      if (selectedCategory === "All") return true;
+
+      // Robust space-insensitive category & location matching
+      const normCat = selectedCategory.toLowerCase().replace(/\s+/g, "");
+      const normTitle = blog.title.toLowerCase().replace(/\s+/g, "");
+      const normExcerpt = blog.excerpt.toLowerCase().replace(/\s+/g, "");
+      const normBlogCategory = blog.category.toLowerCase().replace(/\s+/g, "");
+
+      const matchesCategory =
+        normBlogCategory.includes(normCat) ||
+        normTitle.includes(normCat) ||
+        normExcerpt.includes(normCat) ||
+        blog.tags.some(tag => tag.toLowerCase().replace(/\s+/g, "").includes(normCat));
+
+      return matchesCategory;
     }).sort((a, b) => {
       if (sortBy === "popular") {
-        return b.likes - a.likes;
+        return b.views - a.views;
       }
       if (sortBy === "readTime") {
-        const timeA = parseInt(a.readTime) || 0;
-        const timeB = parseInt(b.readTime) || 0;
+        const timeA = a.readTimeNum ?? (parseInt(a.readTime) || 5);
+        const timeB = b.readTimeNum ?? (parseInt(b.readTime) || 5);
         return timeA - timeB;
       }
       return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -55,6 +143,14 @@ export default function BlogView() {
   const featuredPost = useMemo(() => {
     return blogs.find(b => b.featured) || blogs[0];
   }, [blogs]);
+
+  // Pagination slicing
+  const displayedBlogs = useMemo(() => {
+    return filteredBlogs.slice(0, visibleCount);
+  }, [filteredBlogs, visibleCount]);
+
+  const hasMore = visibleCount < filteredBlogs.length;
+  const remainingCount = filteredBlogs.length - visibleCount;
 
   return (
     <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
@@ -77,11 +173,13 @@ export default function BlogView() {
         </p>
       </motion.div>
 
-      {/* FEATURED / RECENTLY UPLOADED BLOG ARTICLE */}
-      {!searchQuery && selectedCategory === "All" && featuredPost && (
-        <BlogRecentlyUploaded 
-          post={featuredPost}
-        />
+      {/* FEATURED BLOG SKELETON OR ARTICLE */}
+      {isLoading ? (
+        !searchQuery && selectedCategory === "All" && <BlogFeaturedSkeleton />
+      ) : (
+        !searchQuery && selectedCategory === "All" && featuredPost && (
+          <BlogRecentlyUploaded post={featuredPost} />
+        )
       )}
 
       {/* SEARCH, SORT, CATEGORY & VIEW MODE TOOLBAR */}
@@ -94,17 +192,26 @@ export default function BlogView() {
         setSortBy={setSortBy}
         layoutMode={layoutMode}
         setLayoutMode={setLayoutMode}
+        categories={categories}
       />
 
-      {/* BLOG ARTICLES GRID DISPLAY */}
-      <BlogArticles
-        blogs={filteredBlogs}
-        layoutMode={layoutMode}
-        onSelectBlog={() => {}}
-        searchQuery={searchQuery}
-        selectedCategory={selectedCategory}
-        onResetFilters={() => { setSearchQuery(""); setSelectedCategory("All"); }}
-      />
+      {/* BLOG ARTICLES DISPLAY / SKELETON */}
+      {isLoading ? (
+        <BlogSkeleton layoutMode={layoutMode} />
+      ) : (
+        <BlogArticles
+          blogs={displayedBlogs}
+          layoutMode={layoutMode}
+          onSelectBlog={() => {}}
+          searchQuery={searchQuery}
+          selectedCategory={selectedCategory}
+          onResetFilters={() => { setSearchQuery(""); setSelectedCategory("All"); }}
+          totalCount={filteredBlogs.length}
+          hasMore={hasMore}
+          remainingCount={remainingCount}
+          onLoadMore={() => setVisibleCount(prev => prev + 12)}
+        />
+      )}
     </div>
   );
 }

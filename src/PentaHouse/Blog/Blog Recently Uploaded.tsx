@@ -29,15 +29,23 @@ export default function BlogRecentlyUploaded({
     >
       <div className="grid grid-cols-1 lg:grid-cols-12">
         {/* Left Image Column */}
-        <div className="lg:col-span-7 relative h-56 sm:h-72 lg:h-80 overflow-hidden">
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
+        <div className="lg:col-span-7 relative h-56 sm:h-72 lg:h-80 overflow-hidden bg-gradient-to-br from-[#1c1c1c] via-[#121212] to-[#0a0a0a]">
+          {post.image ? (
+            <img
+              src={post.image}
+              alt={post.title}
+              loading="eager"
+              decoding="async"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform transform-gpu"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-600 font-bold text-lg tracking-widest uppercase">
+              Pentahouse Journal
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#111111]" />
           
-          {/* Featured Ribbon Badge (Image 4) */}
+          {/* Featured Ribbon Badge */}
           <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-[#0a0a0a]/85 backdrop-blur-md px-2.5 py-1 rounded-md border border-[#CBA052]/40 text-[#CBA052] text-[10px] font-bold uppercase tracking-wider">
             <span>FEATURED</span>
           </div>

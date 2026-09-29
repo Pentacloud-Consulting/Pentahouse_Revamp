@@ -1,21 +1,46 @@
 "use client";
 
 import { useEffect } from "react";
-import { ReactLenis } from "lenis/react";
+import { ReactLenis, useLenis } from "lenis/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function LenisProvider({ children }: { children: React.ReactNode }) {
+function ScrollTriggerSync() {
+  useLenis(() => {
+    ScrollTrigger.update();
+  });
+
   useEffect(() => {
-    // Refresh ScrollTrigger on mount to ensure proper calculations
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener("resize", handleResize);
     ScrollTrigger.refresh();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
+  return null;
+}
+
+export default function LenisProvider({ children }: { children: React.ReactNode }) {
   return (
-    <ReactLenis root options={{ lerp: 0.08, duration: 1.5, smoothWheel: true }}>
+    <ReactLenis
+      root
+      options={{
+        lerp: 0.1,
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.5,
+      }}
+    >
+      <ScrollTriggerSync />
       {children}
     </ReactLenis>
   );
 }
+
