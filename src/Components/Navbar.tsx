@@ -71,10 +71,11 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [activeLink, setActiveLink] = useState(() => {
-    if (pathname === "/about") return "ABOUT";
-    if (pathname === "/contact") return "CONTACT";
-    if (pathname === "/projects") return "PROJECTS";
-    if (pathname === "/services") return "SERVICES";
+    if (pathname.startsWith("/about")) return "ABOUT";
+    if (pathname.startsWith("/contact")) return "CONTACT";
+    if (pathname.startsWith("/projects")) return "PROJECTS";
+    if (pathname.startsWith("/services")) return "SERVICES";
+    if (pathname.startsWith("/blog")) return "BLOGS";
     return "HOME";
   });
   const navLinks = [
@@ -82,7 +83,8 @@ export default function Navbar() {
     { name: "ABOUT", href: "/about" },
     { name: "SERVICES", href: "/services" },
     { name: "PROJECTS", href: "/projects" },
-    { name: "CONTACT", href: "/contact" }
+    { name: "CONTACT", href: "/contact" },
+    { name: "BLOGS", href: "/blog" }
   ];
 
   useEffect(() => {
@@ -92,10 +94,11 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     
     // Sync active link on load or path change
-    if (pathname === "/about") setActiveLink("ABOUT");
-    else if (pathname === "/contact") setActiveLink("CONTACT");
-    else if (pathname === "/projects") setActiveLink("PROJECTS");
-    else if (pathname === "/services") setActiveLink("SERVICES");
+    if (pathname.startsWith("/about")) setActiveLink("ABOUT");
+    else if (pathname.startsWith("/contact")) setActiveLink("CONTACT");
+    else if (pathname.startsWith("/projects")) setActiveLink("PROJECTS");
+    else if (pathname.startsWith("/services")) setActiveLink("SERVICES");
+    else if (pathname.startsWith("/blog")) setActiveLink("BLOGS");
     else if (pathname === "/") {
       const hash = window.location.hash;
       if (hash === "#services") setActiveLink("SERVICES");
