@@ -28,11 +28,12 @@ export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
   const contentImgMatch = wpPost.content?.rendered?.match(/<img[^>]+src=["']([^"']+)["']/i);
   const firstContentImg = contentImgMatch ? contentImgMatch[1] : "";
 
-  // Extract featured image URL or first content image
-  const image =
+  // Extract featured image URL or first content image, then rewrite to proxy
+  const rawImage =
     wpPost._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
     firstContentImg ||
     "";
+  const image = rewriteWPImageUrl(rawImage);
 
   // Extract category name
   const terms = wpPost._embedded?.["wp:term"]?.[0] || [];
@@ -71,7 +72,7 @@ export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
     subtitle: rawExcerpt.slice(0, 120) + (rawExcerpt.length > 120 ? "..." : ""),
     excerpt: rawExcerpt,
     content: [],
-    htmlContent: wpPost.content?.rendered || "",
+    htmlContent: rewriteWPContentImages(wpPost.content?.rendered || ""),
     highlights: [],
     category: categoryName,
     author: {
@@ -89,6 +90,40 @@ export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
     likes: Math.floor(views * 0.15)
   };
 }
+
+/**
+ * Rewrites a WordPress image URL to go through the local /api/wp-image proxy.
+ *
+ * Why: WordPress media URLs are https://pentahouse.in/wp-content/uploads/...
+ * but pentahouse.in now points to the VPS (Next.js), not WordPress.
+ * The proxy fetches the image from Hostinger shared hosting via SNI.
+ */
+function rewriteWPImageUrl(url: string): string {
+  if (!url) return url;
+  try {
+    const parsed = new URL(url);
+    // Only proxy /wp-content/ paths — leave external CDN images alone
+    if (parsed.pathname.startsWith("/wp-content/")) {
+      return `/api/wp-image?url=${encodeURIComponent(url)}`;
+    }
+  } catch {
+    // Not a valid URL — return as-is
+  }
+  return url;
+}
+
+/**
+ * Rewrites all <img src="..."> inside a WordPress HTML content string
+ * so inline images also go through the proxy.
+ */
+function rewriteWPContentImages(html: string): string {
+  if (!html) return html;
+  return html.replace(
+    /(<img[^>]+src=["'])([^"']+)(["'])/gi,
+    (_, pre, src, post) => `${pre}${rewriteWPImageUrl(src)}${post}`
+  );
+}
+
 
 /**
  * Direct HTTPS SNI fetcher to Hostinger shared hosting (82.180.142.220).
