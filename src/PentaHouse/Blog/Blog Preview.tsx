@@ -7,27 +7,37 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import CTA from "@/PentaHouse/Home/CTA";
 import BlogHTMLConvert from "./Blog HTML convert";
-import { BlogPost, getBlogBySlug, MOCK_BLOGS } from "./types";
+import { BlogPost, getBlogBySlug } from "./types";
 import { fetchWordPressPostBySlug } from "./wordpress";
 
 interface BlogPreviewProps {
   slug: string;
+  /** Pre-fetched post passed from the server page component (avoids client-side fetch) */
+  initialPost?: BlogPost | null;
 }
 
-export default function BlogPreview({ slug }: BlogPreviewProps) {
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function BlogPreview({ slug, initialPost }: BlogPreviewProps) {
+  const [post, setPost] = useState<BlogPost | null>(initialPost ?? null);
+  const [loading, setLoading] = useState(!initialPost);
 
   useEffect(() => {
+    // Server already provided the post — no client-side fetch needed.
+    // (wp.pentahouse.in has no SSL cert, so browser fetch would fail anyway.)
+    if (initialPost) return;
+
     async function loadPost() {
-      // Fetch live WordPress REST API post
+      // Try mock/static data first
+      const mockPost = getBlogBySlug(slug);
+      if (mockPost) { setPost(mockPost); setLoading(false); return; }
+
+      // Last-resort: client-side fetch (only if server gave no initialPost)
       const wpPost = await fetchWordPressPostBySlug(slug);
       setPost(wpPost);
       setLoading(false);
     }
 
     loadPost();
-  }, [slug]);
+  }, [slug, initialPost]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-[#CBA052] selection:text-white">

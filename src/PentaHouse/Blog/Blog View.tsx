@@ -5,16 +5,21 @@ import { motion } from "framer-motion";
 import { useLenis } from "lenis/react";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-import { BlogPost, LayoutMode, SortOption, MOCK_BLOGS } from "./types";
+import { BlogPost, LayoutMode, SortOption } from "./types";
 import BlogRecentlyUploaded from "./Blog Recently Uploaded";
 import BlogSearching from "./Blog Searching";
 import BlogArticles from "./Blog Articles";
 import BlogSkeleton, { BlogFeaturedSkeleton } from "./BlogSkeleton";
 import { fetchWordPressPosts, getCachedWordPressPosts } from "./wordpress";
 
-export default function BlogView() {
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface BlogViewProps {
+  /** Pre-fetched posts from the server component (avoids client-side fetch on first load) */
+  initialPosts?: BlogPost[];
+}
+
+export default function BlogView({ initialPosts = [] }: BlogViewProps) {
+  const [blogs, setBlogs] = useState<BlogPost[]>(initialPosts);
+  const [isLoading, setIsLoading] = useState(initialPosts.length === 0);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState<SortOption>("newest");
@@ -25,6 +30,13 @@ export default function BlogView() {
 
   useEffect(() => {
     async function loadWordPressBlogs() {
+      // If server already gave us posts, skip any client-side fetching.
+      // The server-side SNI fetcher (82.180.142.220) handles fresh data on each page load.
+      // Attempting client-side fetch hits wp.pentahouse.in which has no SSL cert yet.
+      if (blogs.length > 0) {
+        return;
+      }
+
       // 1. Instant load from in-memory cache
       const memCache = getCachedWordPressPosts();
       if (memCache && memCache.length > 0) {
@@ -61,6 +73,7 @@ export default function BlogView() {
       setIsLoading(false);
     }
     loadWordPressBlogs();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Reset pagination count when search, category, or sort option changes

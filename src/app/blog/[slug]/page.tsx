@@ -12,7 +12,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   
-  // Fetch post details from WordPress or mock data
+  // Fetch post details from WordPress (server-side SNI fetch)
   const post = (await fetchWordPressPostBySlug(slug)) || getBlogBySlug(slug);
 
   if (!post) {
@@ -54,7 +54,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+// Server Component: fetches the WP post via Node.js HTTPS SNI (82.180.142.220).
+// Passes it as initialPost to the client component so it renders immediately.
 export default async function SingleBlogPage({ params }: PageProps) {
   const { slug } = await params;
-  return <BlogPreview slug={slug} />;
+  const initialPost = (await fetchWordPressPostBySlug(slug)) || getBlogBySlug(slug) || null;
+  return <BlogPreview slug={slug} initialPost={initialPost} />;
 }
+
