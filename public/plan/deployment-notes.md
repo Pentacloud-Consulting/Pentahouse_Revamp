@@ -1,100 +1,111 @@
-# PentaHouse — Deployment & DNS Change Log
+# PentaHouse — Deployment & DNS Documentation
 
-**Date:** 29 September 2026  
-**Domain:** https://pentahouse.in  
-**VPS:** srv925209.hstgr.cloud — `31.97.207.239`  
-**Project:** Next.js 16 (Turbopack)
-
----
-
-## How We Deployed
-
-### 1. Build Locally
-Ran the production build on the local machine to verify no errors:
-```
-npm run build
-```
-
-### 2. Upload Files to VPS (via Python SFTP script)
-Used a Python script (`deploy.py`) with `paramiko` to:
-- Connect to VPS via SSH (`root@31.97.207.239`)
-- Upload all files in `src/` and config files (`package.json`, `next.config.ts`, `postcss.config.mjs`, `tsconfig.json`) to `/var/www/pentahouse/` on the server via SFTP
-- Files excluded from upload: `node_modules/`, `.next/`, `.git/`, `.env.local`
-
-### 3. Install Dependencies on Server
-```
-cd /var/www/pentahouse
-npm install --legacy-peer-deps
-```
-
-### 4. Build on Server
-```
-npm run build
-```
-- Compiled successfully in ~14.7s
-- 11 pages generated (10 static, 1 dynamic: `/blog/[slug]`)
-
-### 5. Restart PM2
-```
-pm2 restart pentahouse
-pm2 save
-```
-- PM2 process ID: `11`
-- App runs on port `3060`
-- PM2 process name: `pentahouse`
-
-### Server Stack
-| Component | Detail |
-|-----------|--------|
-| Web server | Nginx (reverse proxy) |
-| App server | PM2 (Node.js process manager) |
-| App port | 3060 |
-| SSL | Certbot / Let's Encrypt |
-| Nginx config | `/etc/nginx/sites-enabled/pentahouse.in` |
-
-Nginx proxies all traffic from `pentahouse.in` → `localhost:3060` (Next.js app).
+**Last Updated:** 30 September 2026  
+**Live Site:** https://pentahouse.in  
+**VPS Server:** `srv925209.hstgr.cloud` (`31.97.207.239`)  
+**Project Framework:** Next.js 16 (Turbopack)  
 
 ---
 
-## DNS Changes Made (Hostinger DNS Panel)
+## 🚀 Quick Deployment Guide (Python SFTP Auto-Deploy)
 
-### 1. Changed ALIAS `@` → A Record
-| Field | From | To |
-|-------|------|----|
-| Type | ALIAS | A |
-| Name | @ | @ |
-| Content | `pentahouse.in.cdn.hstgr.net` | `31.97.207.239` |
+To deploy updates to the live site at any time, run the following command from the project root directory:
 
-### 2. Changed `www` CNAME → A Record
-| Field | From | To |
-|-------|------|----|
-| Type | CNAME | A |
-| Name | www | www |
-| Content | `www.pentahouse.in.cdn.hstgr.net` | `31.97.207.239` |
-
----
-
-## Why These DNS Changes Were Needed
-
-Before the changes, both `pentahouse.in` and `www.pentahouse.in` pointed to Hostinger's shared hosting (WordPress site) via their CDN.
-
-After the changes, both point directly to the VPS IP (`31.97.207.239`), where Nginx receives the request and forwards it to the Next.js app running on port 3060.
-
-```
-BEFORE:
-pentahouse.in → Hostinger CDN → WordPress (shared hosting)
-
-AFTER:
-pentahouse.in → 31.97.207.239 → Nginx → Next.js (port 3060) → PM2
-```
-
----
-
-## Future Deployments
-
-Just run from the project root:
-```
+```bash
 python deploy.py
 ```
 
-This automatically uploads, builds, and restarts the app on the VPS.
+### Prerequisites
+1. **Python 3** installed on your system.
+2. **Paramiko library** installed:
+   ```bash
+   pip install paramiko
+   ```
+
+---
+
+## 📋 What `deploy.py` Does Automatically
+
+1. **SSH Connection:** Connects securely to VPS `31.97.207.239` via SSH / SFTP.
+2. **File Upload:** Uploads modified project files (`src/`, `package.json`, `next.config.ts`, `postcss.config.mjs`, `tsconfig.json`).
+3. **Exclusions:** Automatically skips unnecessary/sensitive files (`node_modules`, `.next`, `.git`, `.env.local`, etc.).
+4. **Dependency Installation:** Executes `npm install --legacy-peer-deps` on the server.
+5. **Next.js Production Build:** Runs `npm run build` directly on the VPS.
+6. **PM2 Server Restart:** Restarts process `pentahouse` via `pm2 restart pentahouse || pm2 start npm --name pentahouse -- start` and saves state (`pm2 save`).
+
+---
+
+## 🤖 Prompt / AI Guide for Future Deployments
+
+> **Copy and paste this prompt into AI assistant when you want to deploy changes in the future:**
+
+```text
+Please deploy the latest code of PentaHouse to the production VPS server.
+
+1. Ensure paramiko is available, then execute the deployment script in the project root:
+   python deploy.py
+
+2. Monitor output and verify:
+   - SFTP file upload completed cleanly.
+   - `npm install --legacy-peer-deps` succeeded.
+   - `npm run build` compiled successfully with exit code 0.
+   - PM2 restarted process "pentahouse".
+
+3. Confirm live website status at https://pentahouse.in.
+```
+
+---
+
+## 🛠 Manual Deployment / SSH Fallback Instructions
+
+If `deploy.py` cannot be used or you need to inspect the server manually:
+
+### 1. SSH into VPS
+```bash
+ssh root@31.97.207.239
+```
+*(Password configured inside `deploy.py`)*
+
+### 2. Navigate to Project Directory
+```bash
+cd /var/www/pentahouse
+```
+
+### 3. Build & Restart PM2
+```bash
+npm install --legacy-peer-deps
+npm run build
+pm2 restart pentahouse
+pm2 save
+```
+
+### 4. PM2 Status & Logs Check
+```bash
+pm2 status
+pm2 logs pentahouse --lines 50
+```
+
+---
+
+## ⚙️ VPS & Server Configuration
+
+| Component | Configuration / Detail |
+|-----------|------------------------|
+| **Server Host** | Hostinger VPS (`31.97.207.239`) |
+| **Web Server** | Nginx (Reverse Proxy `pentahouse.in` -> `localhost:3060`) |
+| **App Manager** | PM2 (`pentahouse` process running Next.js) |
+| **App Port** | `3060` |
+| **Remote Path** | `/var/www/pentahouse` |
+| **SSL Certificate**| Let's Encrypt / Certbot |
+| **Nginx Config** | `/etc/nginx/sites-enabled/pentahouse.in` |
+
+---
+
+## 🌐 DNS Settings (Hostinger Panel)
+
+| Record Type | Name | Target / Content | Status |
+|-------------|------|------------------|--------|
+| **A** | `@` | `31.97.207.239` | Active |
+| **A** | `www` | `31.97.207.239` | Active |
+
+*(Directly points domain traffic to VPS IP, bypassing Hostinger Shared CDN).*
