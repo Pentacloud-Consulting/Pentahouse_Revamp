@@ -74,7 +74,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: `Upstream returned ${status}` }, { status });
     }
 
-    return new NextResponse(body, {
+    // Convert Buffer → Uint8Array for BodyInit compatibility
+    return new NextResponse(new Uint8Array(body), {
       status: 200,
       headers: {
         "Content-Type": contentType,
