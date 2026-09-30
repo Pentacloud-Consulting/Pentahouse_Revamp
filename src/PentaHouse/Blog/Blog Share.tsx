@@ -30,7 +30,9 @@ export default function BlogShare({ post, buttonClassName }: BlogShareProps) {
   };
 
   const shareTitle = post.title;
-  const shareDescription = post.subtitle || post.excerpt;
+  const shareDescription = post.excerpt || post.subtitle || "Read this article on Pentahouse Journal.";
+  // Use raw WP image for the modal preview (imageRaw bypasses the proxy for display)
+  const previewImage = post.imageRaw || post.image;
 
   const handleNativeShare = async () => {
     const url = getShareUrl();
@@ -79,7 +81,7 @@ export default function BlogShare({ post, buttonClassName }: BlogShareProps) {
         </svg>
       ),
       color: "bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold",
-      href: `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareTitle}\n\n${currentUrl}`)}`
+      href: `https://api.whatsapp.com/send?text=${encodeURIComponent(`*${shareTitle}*\n\n${shareDescription}\n\n${currentUrl}`)}`
     },
     {
       name: "LinkedIn",
@@ -99,7 +101,7 @@ export default function BlogShare({ post, buttonClassName }: BlogShareProps) {
         </svg>
       ),
       color: "bg-black hover:bg-neutral-800 text-white border border-white/20 font-bold",
-      href: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`
+      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${shareTitle} — ${shareDescription.slice(0, 100)}`)}&url=${encodedUrl}`
     },
     {
       name: "Facebook",
@@ -115,7 +117,7 @@ export default function BlogShare({ post, buttonClassName }: BlogShareProps) {
       name: "Email",
       icon: Mail,
       color: "bg-white/10 hover:bg-white/20 text-white font-bold border border-white/15",
-      href: `mailto:?subject=${encodedTitle}&body=${encodedSummary}%0A%0A${encodedUrl}`
+      href: `mailto:?subject=${encodedTitle}&body=${encodeURIComponent(`${shareTitle}\n\n${shareDescription}\n\nRead the full article: ${currentUrl}`)}`
     }
   ];
 
@@ -170,7 +172,7 @@ export default function BlogShare({ post, buttonClassName }: BlogShareProps) {
               {/* Article Meta Mini Preview */}
               <div className="bg-[#181818] border border-white/10 rounded-xl p-3 mb-5 flex gap-3 items-center">
                 <img
-                  src={post.image}
+                  src={previewImage}
                   alt={post.title}
                   className="w-14 h-14 rounded-lg object-cover shrink-0 border border-white/10"
                 />

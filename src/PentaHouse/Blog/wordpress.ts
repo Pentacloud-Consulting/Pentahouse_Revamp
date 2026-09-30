@@ -84,6 +84,7 @@ export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
     readTime: readTimeStr,
     readTimeNum: readTimeNum,
     image: image,
+    imageRaw: rawImage || undefined, // original WP URL for OG meta tags
     bentoSpan: "col-span-1",
     tags: [categoryName],
     views: views,

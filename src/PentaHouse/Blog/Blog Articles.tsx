@@ -93,8 +93,8 @@ export default function BlogArticles({
         <div 
           className={
             layoutMode === "grid"
-              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-              : "flex flex-col gap-4"
+              ? "grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4 md:gap-5"
+              : "flex flex-col gap-3 sm:gap-4"
           }
         >
           <AnimatePresence mode="popLayout">
@@ -113,9 +113,9 @@ export default function BlogArticles({
                         window.open(`/blog/${blog.slug}`, '_blank');
                       }
                     }}
-                    className="group bg-[#111111] hover:bg-[#151515] border border-white/10 hover:border-[#CBA052]/40 rounded-xl p-3.5 sm:p-4 transition-colors duration-200 cursor-pointer flex flex-col md:flex-row gap-4 items-center shadow-md hover:shadow-xl transform-gpu"
+                    className="group bg-[#111111] hover:bg-[#151515] border border-white/10 hover:border-[#CBA052]/40 rounded-lg sm:rounded-xl p-3 sm:p-4 transition-colors duration-200 cursor-pointer flex flex-col md:flex-row gap-3 sm:gap-4 items-center shadow-md hover:shadow-xl transform-gpu"
                   >
-                    <div className="w-full md:w-52 h-40 rounded-lg overflow-hidden relative shrink-0 bg-gradient-to-br from-[#1c1c1c] via-[#121212] to-[#0a0a0a]">
+                    <div className="w-full md:w-52 h-36 sm:h-40 rounded-md sm:rounded-lg overflow-hidden relative shrink-0 bg-gradient-to-br from-[#1c1c1c] via-[#121212] to-[#0a0a0a]">
                       {blog.image ? (
                         <img
                           src={blog.image}
@@ -136,24 +136,24 @@ export default function BlogArticles({
 
                     <div className="flex-1 flex flex-col justify-between w-full">
                       <div>
-                        <div className="flex items-center gap-2 text-[11px] text-gray-400 mb-1.5">
+                        <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-gray-400 mb-1">
                           <span className="flex items-center gap-1"><Clock size={11} /> {blog.readTime}</span>
                           <span>•</span>
                           <span className="flex items-center gap-1"><Calendar size={11} /> {blog.date}</span>
                         </div>
 
-                        <h3 className="text-base font-bold text-white group-hover:text-[#CBA052] transition-colors mb-1.5 leading-snug">
+                        <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-[#CBA052] transition-colors mb-1 leading-snug">
                           {blog.title}
                         </h3>
 
-                        <p className="text-gray-400 text-xs line-clamp-2 mb-3 leading-relaxed">
+                        <p className="text-gray-400 text-xs line-clamp-2 mb-2 sm:mb-3 leading-relaxed">
                           {blog.excerpt}
                         </p>
                       </div>
 
-                      <div className="pt-2.5 border-t border-white/10 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <img src="/Logo/PentaHouse_Favicon.png" alt="Pentahouse" loading="lazy" decoding="async" className="w-6 h-6 rounded-full object-contain bg-[#0a0a0a] p-0.5 border border-[#CBA052]/40 shrink-0" />
+                      <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 sm:gap-2">
+                          <img src="/Logo/PentaHouse_Favicon.png" alt="Pentahouse" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 rounded-full object-contain bg-[#0a0a0a] p-0.5 border border-[#CBA052]/40 shrink-0" />
                           <span className="text-xs text-gray-300 font-medium">PentaHouse</span>
                         </div>
 
@@ -181,10 +181,10 @@ export default function BlogArticles({
                       window.open(`/blog/${blog.slug}`, '_blank');
                     }
                   }}
-                  className="group bg-[#111111] hover:bg-[#151515] border border-white/10 hover:border-[#CBA052]/50 rounded-xl overflow-hidden transition-colors duration-200 cursor-pointer col-span-1 flex flex-col justify-between shadow-md hover:shadow-xl transform-gpu"
+                  className="group bg-[#111111] hover:bg-[#151515] border border-white/10 hover:border-[#CBA052]/50 rounded-lg sm:rounded-xl overflow-hidden transition-colors duration-200 cursor-pointer col-span-1 flex flex-col justify-between shadow-md hover:shadow-xl transform-gpu"
                 >
                   {/* Top Image */}
-                  <div className="relative h-40 sm:h-44 w-full overflow-hidden shrink-0 bg-gradient-to-br from-[#1c1c1c] via-[#121212] to-[#0a0a0a]">
+                  <div className="relative h-28 sm:h-44 w-full overflow-hidden shrink-0 bg-gradient-to-br from-[#1c1c1c] via-[#121212] to-[#0a0a0a]">
                     {blog.image ? (
                       <img
                         src={blog.image}
@@ -200,22 +200,22 @@ export default function BlogArticles({
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-80" />
 
-                    <div className="absolute top-2.5 left-2.5">
-                      <span className="bg-[#0a0a0a]/85 backdrop-blur-md px-2.5 py-0.5 rounded text-[10px] font-bold text-[#CBA052] border border-[#CBA052]/30 uppercase tracking-wider">
+                    <div className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5">
+                      <span className="bg-[#0a0a0a]/85 backdrop-blur-md px-1.5 py-0.5 sm:px-2.5 rounded text-[8px] sm:text-[10px] font-bold text-[#CBA052] border border-[#CBA052]/30 uppercase tracking-wider">
                         {blog.category}
                       </span>
                     </div>
 
-                    <div className="absolute bottom-2 left-2.5 text-[10px] text-gray-300 font-medium flex items-center gap-1 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10">
-                      <Clock size={10} className="text-[#CBA052]" />
+                    <div className="absolute bottom-1.5 left-1.5 sm:bottom-2 sm:left-2.5 text-[8px] sm:text-[10px] text-gray-300 font-medium flex items-center gap-1 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded border border-white/10">
+                      <Clock size={9} className="text-[#CBA052] shrink-0" />
                       <span>{blog.readTime}</span>
                     </div>
                   </div>
 
                   {/* Body Content */}
-                  <div className="p-4 flex-1 flex flex-col justify-between">
+                  <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <div className="flex flex-wrap gap-1 mb-2">
+                      <div className="hidden sm:flex flex-wrap gap-1 mb-2">
                         {blog.tags.slice(0, 2).map(tag => (
                           <span key={tag} className="text-[9px] text-gray-400 bg-white/5 px-1.5 py-0.5 rounded border border-white/5">
                             #{tag}
@@ -223,24 +223,24 @@ export default function BlogArticles({
                         ))}
                       </div>
 
-                      <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-[#CBA052] transition-colors leading-snug mb-1.5 line-clamp-2">
+                      <h3 className="text-xs sm:text-base font-bold text-white group-hover:text-[#CBA052] transition-colors leading-snug mb-1 sm:mb-1.5 line-clamp-2">
                         {blog.title}
                       </h3>
 
-                      <p className="text-gray-400 text-xs line-clamp-2 mb-3 leading-relaxed">
+                      <p className="text-gray-400 text-[10px] sm:text-xs line-clamp-2 mb-2 sm:mb-3 leading-relaxed">
                         {blog.excerpt}
                       </p>
                     </div>
 
-                    <div className="pt-2.5 border-t border-white/10 flex items-center justify-between mt-auto">
-                      <div className="flex items-center gap-2">
-                        <img src="/Logo/PentaHouse_Favicon.png" alt="Pentahouse" loading="lazy" decoding="async" className="w-5 h-5 rounded-full object-contain bg-[#0a0a0a] p-0.5 border border-[#CBA052]/40 shrink-0" />
-                        <span className="text-[11px] font-medium text-gray-300 truncate max-w-[100px]">PentaHouse</span>
+                    <div className="pt-2 sm:pt-2.5 border-t border-white/10 flex items-center justify-between mt-auto">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <img src="/Logo/PentaHouse_Favicon.png" alt="Pentahouse" loading="lazy" decoding="async" className="w-4 h-4 sm:w-5 sm:h-5 rounded-full object-contain bg-[#0a0a0a] p-0.5 border border-[#CBA052]/40 shrink-0" />
+                        <span className="text-[10px] sm:text-[11px] font-medium text-gray-300 truncate max-w-[65px] sm:max-w-[100px]">PentaHouse</span>
                       </div>
 
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-5 h-5 rounded-full bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-[#CBA052] group-hover:text-black transition-colors">
-                          <ArrowRight size={11} />
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-[#CBA052] group-hover:text-black transition-colors">
+                          <ArrowRight size={9} className="sm:w-2.5 sm:h-2.5" />
                         </div>
                       </div>
                     </div>

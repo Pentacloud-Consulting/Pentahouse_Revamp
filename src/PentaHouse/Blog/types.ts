@@ -17,6 +17,7 @@ export interface BlogPost {
   readTime: string;
   readTimeNum?: number;
   image: string;
+  imageRaw?: string; // Original WordPress image URL (used for OG meta tags)
   featured?: boolean;
   bentoSpan?: "col-span-1" | "col-span-1 lg:col-span-2";
   tags: string[];

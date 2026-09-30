@@ -42,14 +42,14 @@ export default function BlogSkeleton({ layoutMode }: BlogSkeletonProps) {
       <div
         className={
           layoutMode === "grid"
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-            : "flex flex-col gap-4"
+            ? "grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4 md:gap-5"
+            : "flex flex-col gap-3 sm:gap-4"
         }
       >
         {skeletonItems.map((_, index) => (
           <div
             key={index}
-            className={`bg-[#111111] border border-white/10 rounded-xl overflow-hidden animate-pulse ${
+            className={`bg-[#111111] border border-white/10 rounded-lg sm:rounded-xl overflow-hidden animate-pulse ${
               layoutMode === "list" ? "flex flex-col md:flex-row gap-4 p-4" : "flex flex-col"
             }`}
           >
@@ -58,14 +58,14 @@ export default function BlogSkeleton({ layoutMode }: BlogSkeletonProps) {
               className={`bg-white/10 relative shrink-0 ${
                 layoutMode === "list"
                   ? "w-full md:w-52 h-40 rounded-lg"
-                  : "w-full h-44"
+                  : "w-full h-28 sm:h-44"
               }`}
             >
-              <div className="absolute top-3 left-3 w-20 h-4 bg-white/10 rounded" />
+              <div className="absolute top-2 left-2 w-16 h-3 bg-white/10 rounded" />
             </div>
 
             {/* Content Skeleton */}
-            <div className="p-4 flex-1 flex flex-col justify-between">
+            <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between">
               <div>
                 <div className="flex gap-2 mb-3">
                   <div className="w-16 h-3 bg-white/10 rounded" />

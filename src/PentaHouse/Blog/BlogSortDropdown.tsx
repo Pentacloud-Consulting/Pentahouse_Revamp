@@ -73,7 +73,7 @@ export default function BlogSortDropdown({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.96 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute right-0 top-full mt-2 w-44 bg-[#121212] border border-[#CBA052]/30 rounded-xl p-1.5 shadow-2xl shadow-black/90 backdrop-blur-xl z-50 overflow-hidden"
+            className="absolute left-0 sm:left-auto sm:right-0 top-full mt-2 w-44 bg-[#121212] border border-[#CBA052]/30 rounded-xl p-1.5 shadow-2xl shadow-black/90 backdrop-blur-xl z-50 overflow-hidden"
             role="listbox"
           >
             <div className="text-[10px] uppercase tracking-wider font-semibold text-gray-500 px-2.5 py-1 mb-1 border-b border-white/5">

@@ -22,9 +22,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pentahouse.in";
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://pentahouse.in").replace(/\/+$/, "");
   const postUrl = `${siteUrl}/blog/${post.slug}`;
   const metaDescription = post.subtitle || post.excerpt;
+
+  // For OG/Twitter image: prefer the raw WordPress URL (Hostinger direct) so social
+  // crawlers (Facebook, WhatsApp, Twitter bots) can fetch it without needing our proxy.
+  // Fall back to the absolute proxied URL if rawImage is not available.
+  const ogImageUrl = post.imageRaw
+    ? post.imageRaw  // original https://pentahouse.in/wp-content/uploads/... on Hostinger
+    : post.image
+      ? (post.image.startsWith("http") ? post.image : `${siteUrl}${post.image}`)
+      : `${siteUrl}/Logo/PentaHouse_OG.png`;
 
   return {
     title: `${post.title} | Pentahouse Journal`,
@@ -36,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "Pentahouse Construction",
       images: [
         {
-          url: post.image,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -49,7 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: post.title,
       description: metaDescription,
-      images: [post.image],
+      images: [ogImageUrl],
     },
   };
 }

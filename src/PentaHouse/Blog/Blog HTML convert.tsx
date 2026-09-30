@@ -137,15 +137,34 @@ export default function BlogHTMLConvert({ post, onClose }: BlogHTMLConvertProps)
     });
   }, [post.htmlContent]);
 
-  // Check if post.htmlContent already contains an <img> tag near the top or contains post.image
-  const hasImageInContent =
-    post.htmlContent &&
-    (
-      (post.image && post.htmlContent.includes(post.image)) ||
-      /<img[^>]+src=/i.test(post.htmlContent.slice(0, 400))
-    );
+  // Always show the hero image if post.image exists.
+  // Strip the first figure/img from htmlContent if it matches the hero to avoid duplication.
+  const showHeroImage = Boolean(post.image);
 
-  const showHeroImage = Boolean(post.image) && !hasImageInContent;
+  const cleanedHtmlContent = (() => {
+    if (!post.htmlContent || !post.image) return post.htmlContent || "";
+    // Strip first <figure>...<img src="...">...</figure> if it contains the featured image
+    let html = post.htmlContent.replace(
+      /<figure[\s\S]*?<\/figure>/i,
+      (match: string) => {
+        const imgMatch = match.match(/<img[^>]+src=["']([^"']+)["']/i);
+        if (imgMatch) {
+          const src = imgMatch[1];
+          if (src === post.image || post.image!.includes(encodeURIComponent(src))) return "";
+        }
+        return match;
+      }
+    );
+    // Also strip a bare <img> near the start that matches the hero image
+    html = html.replace(
+      /<img[^>]+src=["']([^"']+)["'][^>]*\/?>/i,
+      (match: string, src: string) => {
+        if (src === post.image || post.image!.includes(encodeURIComponent(src))) return "";
+        return match;
+      }
+    );
+    return html;
+  })();
 
   // Check if subtitle duplicates title
   const isSubtitleDuplicate =
@@ -321,7 +340,7 @@ export default function BlogHTMLConvert({ post, onClose }: BlogHTMLConvertProps)
           </h1>
           {!isSubtitleDuplicate && (
             <p className="text-gray-300 text-sm sm:text-base italic leading-relaxed mb-6">
-              "{post.subtitle}"
+              &quot;{post.subtitle}&quot;
             </p>
           )}
 
@@ -338,7 +357,7 @@ export default function BlogHTMLConvert({ post, onClose }: BlogHTMLConvertProps)
           </div>
         </div>
 
-        {/* HERO IMAGE (Only rendered if not already embedded in post HTML) */}
+        {/* HERO IMAGE — always shown if post.image exists */}
         {showHeroImage && (
           <div className="relative rounded-2xl overflow-hidden aspect-[16/9] border border-white/10 shadow-xl my-6">
             <img
@@ -368,8 +387,8 @@ export default function BlogHTMLConvert({ post, onClose }: BlogHTMLConvertProps)
 
         {/* RENDERED HTML / WORDPRESS CONTENT BODY */}
         <div className="wp-blog-body prose prose-invert max-w-none text-gray-300 text-sm sm:text-base leading-relaxed space-y-6">
-          {post.htmlContent ? (
-            <div dangerouslySetInnerHTML={{ __html: post.htmlContent }} />
+          {cleanedHtmlContent ? (
+            <div dangerouslySetInnerHTML={{ __html: cleanedHtmlContent }} />
           ) : (
             post.content.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
