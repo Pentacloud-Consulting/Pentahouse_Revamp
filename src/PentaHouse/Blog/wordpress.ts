@@ -19,24 +19,27 @@ export interface WPPost {
 }
 
 export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
-  const wpBaseUrl = (
-    process.env.NEXT_PUBLIC_WORDPRESS_URL || "https://cyan-shrew-737321.hostingersite.com"
-  ).replace(/\/+$/, "");
-
   // Extract first <img> src from content HTML if featuredmedia is missing
   const contentImgMatch = wpPost.content?.rendered?.match(/<img[^>]+src=["']([^"']+)["']/i);
   const firstContentImg = contentImgMatch ? contentImgMatch[1] : "";
 
-  // Extract featured image URL or first content image
-  let image =
+  // Extract raw image URL
+  let rawImage =
     wpPost._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
     firstContentImg ||
     "";
 
-  // Resolve relative image URLs to absolute Hostinger domain URLs
-  if (image && !image.startsWith("http://") && !image.startsWith("https://")) {
-    image = `${wpBaseUrl}${image.startsWith("/") ? "" : "/"}${image}`;
+  // Clean raw image path
+  if (rawImage.startsWith("http://") || rawImage.startsWith("https://")) {
+    try {
+      rawImage = new URL(rawImage).pathname;
+    } catch {}
   }
+
+  // Format image URL as clean pentahouse.in proxy URL (/api/wp-image)
+  const image = rawImage
+    ? `/api/wp-image?url=${encodeURIComponent(rawImage)}`
+    : "";
 
   // Extract category name
   const terms = wpPost._embedded?.["wp:term"]?.[0] || [];
@@ -65,12 +68,18 @@ export function transformWPPostToBlogPost(wpPost: WPPost): BlogPost {
   // Dynamic realistic view count based on ID for Popular sorting
   const views = ((wpPost.id * 47) % 2500) + 400;
 
-  // Resolve relative image srcs in HTML body
+  // Transform embedded HTML body images to use clean /api/wp-image proxy
   let htmlContent = wpPost.content?.rendered || "";
   if (htmlContent) {
+    // 1. Replace absolute hostinger URLs in img src with clean /api/wp-image proxy
     htmlContent = htmlContent.replace(
-      /src=["']\/(wp-content\/[^"']+)["']/g,
-      `src="${wpBaseUrl}/$1"`
+      /src=["']https?:\/\/[^\/]+\/(wp-content\/[^"']+)["']/gi,
+      (_match, path) => `src="/api/wp-image?url=${encodeURIComponent("/" + path)}"`
+    );
+    // 2. Replace relative /wp-content/ URLs in img src with clean /api/wp-image proxy
+    htmlContent = htmlContent.replace(
+      /src=["']\/(wp-content\/[^"']+)["']/gi,
+      (_match, path) => `src="/api/wp-image?url=${encodeURIComponent("/" + path)}"`
     );
   }
 

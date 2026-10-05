@@ -1,90 +1,55 @@
 import { NextRequest, NextResponse } from "next/server";
-import https from "https";
 
 /**
- * /api/wp-image?url=https://pentahouse.in/wp-content/uploads/...
+ * /api/wp-image?url=/wp-content/uploads/2026/10/Home-Construction-Cost-in-Thanisandra.png
  *
- * Proxies WordPress media from Hostinger shared hosting (82.180.142.220)
- * via HTTPS+SNI (Host: pentahouse.in), since the main domain now points
- * to the VPS (Next.js) and /wp-content/ no longer exists there.
+ * Proxies WordPress media directly from Hostinger WP backend
+ * so all images appear cleanly under https://pentahouse.in without exposing external domains.
  */
-
-const HOSTINGER_WP_IP = "82.180.142.220";
-const HOSTINGER_WP_HOST = "pentahouse.in";
-
-function fetchImageFromHostinger(path: string): Promise<{ body: Buffer; contentType: string; status: number }> {
-  return new Promise((resolve, reject) => {
-    const req = https.request(
-      {
-        host: HOSTINGER_WP_IP,
-        servername: HOSTINGER_WP_HOST,
-        port: 443,
-        method: "GET",
-        path: path,
-        headers: {
-          Host: HOSTINGER_WP_HOST,
-          "User-Agent": "PentahouseApp/1.0",
-        },
-        rejectUnauthorized: false,
-        timeout: 15000,
-      },
-      (res) => {
-        const chunks: Buffer[] = [];
-        res.on("data", (chunk: Buffer) => chunks.push(chunk));
-        res.on("end", () => {
-          resolve({
-            body: Buffer.concat(chunks),
-            contentType: res.headers["content-type"] || "image/jpeg",
-            status: res.statusCode || 200,
-          });
-        });
-      }
-    );
-    req.on("error", reject);
-    req.on("timeout", () => { req.destroy(); reject(new Error("Image proxy timeout")); });
-    req.end();
-  });
-}
-
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const imageUrl = searchParams.get("url");
+  const rawPath = searchParams.get("url") || searchParams.get("path");
 
-  if (!imageUrl) {
+  if (!rawPath) {
     return NextResponse.json({ error: "Missing url parameter" }, { status: 400 });
   }
 
-  // Only allow proxying WordPress content paths from pentahouse.in
-  let path: string;
-  try {
-    const parsed = new URL(imageUrl);
-    // Security: only allow /wp-content/ paths from pentahouse.in
-    if (!parsed.pathname.startsWith("/wp-content/")) {
-      return NextResponse.json({ error: "Forbidden path" }, { status: 403 });
+  let imagePath = rawPath;
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    try {
+      imagePath = new URL(imagePath).pathname;
+    } catch {
+      return NextResponse.json({ error: "Invalid URL" }, { status: 400 });
     }
-    path = parsed.pathname + (parsed.search || "");
-  } catch {
-    return NextResponse.json({ error: "Invalid url" }, { status: 400 });
   }
 
-  try {
-    const { body, contentType, status } = await fetchImageFromHostinger(path);
+  if (!imagePath.startsWith("/")) {
+    imagePath = "/" + imagePath;
+  }
 
-    if (status < 200 || status >= 400) {
-      return NextResponse.json({ error: `Upstream returned ${status}` }, { status });
+  // Target Hostinger WordPress backend
+  const targetUrl = `https://cyan-shrew-737321.hostingersite.com${imagePath}`;
+
+  try {
+    const res = await fetch(targetUrl, { next: { revalidate: 86400 } });
+
+    if (!res.ok) {
+      return NextResponse.json({ error: `Upstream returned ${res.status}` }, { status: res.status });
     }
 
-    // Convert Buffer → Uint8Array for BodyInit compatibility
-    return new NextResponse(new Uint8Array(body), {
+    const contentType = res.headers.get("content-type") || "image/png";
+    const arrayBuffer = await res.arrayBuffer();
+
+    return new NextResponse(new Uint8Array(arrayBuffer), {
       status: 200,
       headers: {
         "Content-Type": contentType,
         "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
-        "X-Proxy-Source": "hostinger-wp",
+        "X-Proxy-Source": "pentahouse-wp-proxy",
       },
     });
   } catch (err: any) {
-    console.error("[WP-Image-Proxy] Error:", err?.message || err);
+    console.error("[WP-Image-Proxy] Fetch error:", err?.message || err);
     return NextResponse.json({ error: "Proxy fetch failed" }, { status: 502 });
   }
 }
